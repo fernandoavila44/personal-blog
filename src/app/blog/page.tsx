@@ -39,21 +39,6 @@ export default function BlogPage() {
 
                 {/*FILTROS */}
                 <div className={styles.filters}>
-                    {/* <button onClick={() => { setSelectedCategory('Todos'); setCurrentPage(1) }}>
-                        Todos
-                    </button>
-                    <button onClick={() => { setSelectedCategory('Tutorial'); setCurrentPage(1) }}>
-                        Tutorial
-                    </button>
-                    <button onClick={() => { setSelectedCategory('Conceptos'); setCurrentPage(1) }}>
-                        Conceptos
-                    </button>
-                    <button onClick={() => { setSelectedCategory('React'); setCurrentPage(1) }}>
-                        React
-                    </button>
-                    <button onClick={() => { setSelectedCategory('Performance'); setCurrentPage(1) }}>
-                        Performance
-                    </button> */}
                     {['Todos', 'Tutorial', 'Conceptos', 'React', 'Performance'].map((cat) => (
                         <button
                             key={cat}

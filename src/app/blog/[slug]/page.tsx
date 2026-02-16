@@ -1,65 +1,111 @@
-import { notFound } from 'next/navigation';
-import postsData from '@/data/posts.json';
-// import styles from './page.module.scss';
+// import { notFound } from 'next/navigation';
+// import postsData from '@/data/posts.json';
+// // import styles from './page.module.scss';
 
-/* 
- * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
- * 
- * CONCEPTOS A APRENDER:
- * - generateStaticParams: Pre-renderiza páginas estáticas en build time
- * - Dynamic routes: [slug] para rutas dinámicas
- * - notFound(): Manejo de páginas no encontradas
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Implementar generateStaticParams()
- *    Esta función le dice a Next.js qué páginas generar estáticamente
- *    Debe retornar un array de objetos con los slugs de todos los posts
- *    Ejemplo: [{ slug: 'post-1' }, { slug: 'post-2' }]
- * 
- * 2. Implementar la función del componente
- *    - Recibe params con el slug del post
- *    - Buscar el post en postsData usando el slug
- *    - Si no existe, llamar notFound()
- *    - Si existe, renderizar el contenido del post
- * 
- * 3. Crear el JSX para mostrar:
- *    - Título del post
- *    - Metadata (fecha, categoría, tiempo de lectura, autor)
- *    - Contenido del post
- *    - Botón para volver al blog
- *    - BONUS: Agregar CommentSection component (otro ejercicio)
- * 
- * 4. Crear estilos en page.module.scss
- *    - Estilos para el artículo
- *    - Tipografía legible
- *    - Espaciado adecuado
- */
+// /* 
+//  * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
+//  * 
+//  * CONCEPTOS A APRENDER:
+//  * - generateStaticParams: Pre-renderiza páginas estáticas en build time
+//  * - Dynamic routes: [slug] para rutas dinámicas
+//  * - notFound(): Manejo de páginas no encontradas
+//  * 
+//  * PASOS A SEGUIR:
+//  * 
+//  * 1. Implementar generateStaticParams()
+//  *    Esta función le dice a Next.js qué páginas generar estáticamente
+//  *    Debe retornar un array de objetos con los slugs de todos los posts
+//  *    Ejemplo: [{ slug: 'post-1' }, { slug: 'post-2' }]
+//  * 
+//  * 2. Implementar la función del componente
+//  *    - Recibe params con el slug del post
+//  *    - Buscar el post en postsData usando el slug
+//  *    - Si no existe, llamar notFound()
+//  *    - Si existe, renderizar el contenido del post
+//  * 
+//  * 3. Crear el JSX para mostrar:
+//  *    - Título del post
+//  *    - Metadata (fecha, categoría, tiempo de lectura, autor)
+//  *    - Contenido del post
+//  *    - Botón para volver al blog
+//  *    - BONUS: Agregar CommentSection component (otro ejercicio)
+//  * 
+//  * 4. Crear estilos en page.module.scss
+//  *    - Estilos para el artículo
+//  *    - Tipografía legible
+//  *    - Espaciado adecuado
+//  */
 
-// TODO: Implementar generateStaticParams
-// export async function generateStaticParams() {
-//   // Tu código aquí
-//   // Pista: Mapear postsData para obtener solo los slugs
+// // TODO: Implementar generateStaticParams
+// // export async function generateStaticParams() {
+// //   // Tu código aquí
+// //   // Pista: Mapear postsData para obtener solo los slugs
+// // }
+
+// // TODO: Implementar el componente de la página
+// export default function PostPage({ params }: { params: { slug: string } }) {
+//     // TODO: Buscar el post usando params.slug
+//     // const post = postsData.find(p => p.slug === params.slug);
+
+//     // TODO: Si no existe el post, llamar notFound()
+//     // if (!post) {
+//     //   notFound();
+//     // }
+
+//     return (
+//         <div>
+//             <h1>TODO: Implementar página de post</h1>
+//             <p>Slug: {params.slug}</p>
+//             {/* TODO: Agregar el contenido del post aquí */}
+//         </div>
+//     );
 // }
 
-// TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
-    // TODO: Buscar el post usando params.slug
-    // const post = postsData.find(p => p.slug === params.slug);
+import { notFound } from 'next/navigation'
+import postsData from '@/data/posts.json'
 
-    // TODO: Si no existe el post, llamar notFound()
-    // if (!post) {
-    //   notFound();
-    // }
-
-    return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
-    );
+/*
+   SSG - generateStaticParams
+*/
+export async function generateStaticParams() {
+  return postsData.map((post) => ({
+    slug: post.slug,
+  }))
 }
+
+/*
+   Página dinámica del post
+*/
+export default function PostPage({ params }: { params: { slug: string } }) {
+
+  // Buscar el post por slug
+  const post = postsData.find((p) => p.slug === params.slug)
+
+  // Si no existe → mostrar 404
+  if (!post) {
+    notFound()
+  }
+
+  return (
+    <article>
+      <h1>{post.title}</h1>
+
+      <div>
+        <time>{new Date(post.date).toLocaleDateString()}</time>
+        <span> | {post.category}</span>
+        <span> | {post.readTime}</span>
+        <span> | {post.author}</span>
+      </div>
+
+      <hr />
+
+      <div>
+        <p>{post.content}</p>
+      </div>
+    </article>
+  )
+}
+
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

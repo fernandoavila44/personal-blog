@@ -1,13 +1,13 @@
 {
-    "name": "Tu Nombre",
+    "name": "Elkin Mario Ortiz Lopez",
     "role": "Desarrollador Full Stack",
     "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
+    "email": "elkinmariool@gmail.com",
+    "location": "Alban - Nariño, Colombia",
     "avatar": "/images/avatar.jpg",
     "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
+        "github": "https://github.com/ElkinOrtizLopez",
+        "linkedin": "https://github.com/ElkinOrtizLopez",
         "twitter": "https://twitter.com/tuusuario"
     },
     "skills": [
@@ -18,6 +18,6 @@
         "SCSS",
         "PostgreSQL"
     ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    "experience": "1+ años de experiencia en desarrollo web",
+    "education": "Ingeniería electrónica"
 }

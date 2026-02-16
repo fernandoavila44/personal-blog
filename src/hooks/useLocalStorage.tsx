@@ -1,84 +1,125 @@
-// import { useState, useEffect } from 'react';
+// // import { useState, useEffect } from 'react';
 
-/* 
- * EJERCICIO: Crear custom hook useLocalStorage
- * 
- * CONCEPTOS A APRENDER:
- * - Custom Hooks: Reutilizar lógica de hooks
- * - useState y useEffect combinados
- * - localStorage API
- * - Generics en TypeScript
- * 
- * OBJETIVO:
- * Crear un hook que funcione como useState pero que persista
- * el valor en localStorage automáticamente.
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Crear la función useLocalStorage con generics
- *    - Parámetros: key (string), initialValue (T)
- *    - Retorno: [value, setValue] como useState
- * 
- * 2. Implementar useState para el valor
- *    - Valor inicial: leer de localStorage o usar initialValue
- *    - Manejar errores de parsing JSON
- * 
- * 3. Implementar useEffect para guardar en localStorage
- *    - Ejecutar cuando cambie el valor
- *    - Convertir a JSON antes de guardar
- * 
- * 4. Retornar el valor y la función setter
- */
+// /* 
+//  * EJERCICIO: Crear custom hook useLocalStorage
+//  * 
+//  * CONCEPTOS A APRENDER:
+//  * - Custom Hooks: Reutilizar lógica de hooks
+//  * - useState y useEffect combinados
+//  * - localStorage API
+//  * - Generics en TypeScript
+//  * 
+//  * OBJETIVO:
+//  * Crear un hook que funcione como useState pero que persista
+//  * el valor en localStorage automáticamente.
+//  * 
+//  * PASOS A SEGUIR:
+//  * 
+//  * 1. Crear la función useLocalStorage con generics
+//  *    - Parámetros: key (string), initialValue (T)
+//  *    - Retorno: [value, setValue] como useState
+//  * 
+//  * 2. Implementar useState para el valor
+//  *    - Valor inicial: leer de localStorage o usar initialValue
+//  *    - Manejar errores de parsing JSON
+//  * 
+//  * 3. Implementar useEffect para guardar en localStorage
+//  *    - Ejecutar cuando cambie el valor
+//  *    - Convertir a JSON antes de guardar
+//  * 
+//  * 4. Retornar el valor y la función setter
+//  */
 
-// TODO: Implementar el custom hook
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-    // TODO: Implementar useState con valor inicial desde localStorage
-    // const [storedValue, setStoredValue] = useState<T>(() => {
-    //   try {
-    //     const item = window.localStorage.getItem(key);
-    //     return item ? JSON.parse(item) : initialValue;
-    //   } catch (error) {
-    //     console.error(error);
-    //     return initialValue;
-    //   }
-    // });
+// // TODO: Implementar el custom hook
+// export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+//     // TODO: Implementar useState con valor inicial desde localStorage
+//     // const [storedValue, setStoredValue] = useState<T>(() => {
+//     //   try {
+//     //     const item = window.localStorage.getItem(key);
+//     //     return item ? JSON.parse(item) : initialValue;
+//     //   } catch (error) {
+//     //     console.error(error);
+//     //     return initialValue;
+//     //   }
+//     // });
 
-    // TODO: Implementar función setValue que también guarde en localStorage
-    // const setValue = (value: T) => {
-    //   try {
-    //     setStoredValue(value);
-    //     window.localStorage.setItem(key, JSON.stringify(value));
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+//     // TODO: Implementar función setValue que también guarde en localStorage
+//     // const setValue = (value: T) => {
+//     //   try {
+//     //     setStoredValue(value);
+//     //     window.localStorage.setItem(key, JSON.stringify(value));
+//     //   } catch (error) {
+//     //     console.error(error);
+//     //   }
+//     // };
 
-    // TODO: Retornar el valor y la función setter
-    // return [storedValue, setValue];
+//     // TODO: Retornar el valor y la función setter
+//     // return [storedValue, setValue];
 
-    // Placeholder temporal
-    throw new Error('TODO: Implementar useLocalStorage');
+//     // Placeholder temporal
+//     throw new Error('TODO: Implementar useLocalStorage');
+// }
+
+// /* EJEMPLO DE USO:
+//  * 
+//  * function MyComponent() {
+//  *   const [name, setName] = useLocalStorage('userName', 'Guest');
+//  *   
+//  *   return (
+//  *     <div>
+//  *       <input 
+//  *         value={name} 
+//  *         onChange={(e) => setName(e.target.value)} 
+//  *       />
+//  *       <p>Hola, {name}!</p>
+//  *     </div>
+//  *   );
+//  * }
+//  * 
+//  * El valor de 'name' se guardará automáticamente en localStorage
+//  * y se recuperará al recargar la página.
+//  */
+'use client';
+
+import { useState, useEffect } from 'react';
+
+export function useLocalStorage<T>(
+    key: string,
+    initialValue: T
+): [T, (value: T) => void] {
+
+    const [storedValue, setStoredValue] = useState<T>(() => {
+        // Verificar que estamos en el cliente
+        if (typeof window === 'undefined') {
+            return initialValue;
+        }
+
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) as T : initialValue;
+        } catch (error) {
+            console.error(error);
+            return initialValue;
+        }
+    });
+
+    // Guardar en localStorage cuando cambie el valor
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        try {
+            window.localStorage.setItem(key, JSON.stringify(storedValue));
+        } catch (error) {
+            console.error(error);
+        }
+    }, [key, storedValue]);
+
+    const setValue = (value: T) => {
+        setStoredValue(value);
+    };
+
+    return [storedValue, setValue];
 }
-
-/* EJEMPLO DE USO:
- * 
- * function MyComponent() {
- *   const [name, setName] = useLocalStorage('userName', 'Guest');
- *   
- *   return (
- *     <div>
- *       <input 
- *         value={name} 
- *         onChange={(e) => setName(e.target.value)} 
- *       />
- *       <p>Hola, {name}!</p>
- *     </div>
- *   );
- * }
- * 
- * El valor de 'name' se guardará automáticamente en localStorage
- * y se recuperará al recargar la página.
- */
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

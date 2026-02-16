@@ -33,4 +33,77 @@
     }
 }
 
+/* FILTROS */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-3xl;
+
+    button {
+        padding: $spacing-sm $spacing-lg;
+        border-radius: 50px;
+        border: 1px solid $border-color;
+        background: transparent;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: $primary-color;
+            color: white;
+            border-color: $primary-color;
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.active {
+    background: $primary-color !important;
+    color: white !important;
+    border-color: $primary-color !important;
+}
+
+/* PAGINACIÓN */
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-xl;
+    margin-top: $spacing-3xl;
+
+    button {
+        padding: $spacing-sm $spacing-lg;
+        border-radius: 8px;
+        border: none;
+        background: $primary-color;
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    span {
+        font-weight: 500;
+        color: $text-secondary;
+    }
+}
+
+
 /* TODO para estudiantes: Agregar estilos para filtros y paginación */

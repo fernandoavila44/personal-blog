@@ -64,6 +64,85 @@ a {
     }
 }
 
+// Listas
+ul,
+ol {
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-lg;
+    color: $text-secondary;
+
+    li {
+        margin-bottom: $spacing-sm;
+        line-height: 1.6;
+    }
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+// Blockquotes
+blockquote {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $primary-color;
+    background-color: rgba($primary-color, 0.05);
+    font-style: italic;
+    color: $text-primary;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+// Código inline
+code {
+    font-family: $font-family-base;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+// Bloques de código
+pre {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    padding: $spacing-md;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: $spacing-lg;
+
+    code {
+        background: none;
+        padding: 0;
+        color: inherit;
+    }
+}
+// Utilidades de texto
+.text-sm {
+    font-size: $font-size-sm;
+}
+
+.text-base {
+    font-size: $font-size-base;
+}
+
+.text-lg {
+    font-size: $font-size-lg;
+}
+
+.text-xl {
+    font-size: $font-size-xl;
+}
+
+.text-2xl {
+    font-size: $font-size-2xl;
+}
+
+
 // TODO para estudiantes:
 // 1. Agregar estilos para listas (ul, ol)
 // 2. Agregar estilos para blockquotes

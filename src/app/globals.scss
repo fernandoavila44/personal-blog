@@ -79,6 +79,55 @@ body.dark {
   background-color: #111;
   color: white;
 }
+/* ========================= */
+/* THEME TOGGLE */
+/* ========================= */
+
+.themeToggle {
+  position: relative;
+  width: 70px;
+  height: 35px;
+  background: #e4e4e4;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+}
+
+.themeToggle.dark {
+  background: #1f2937;
+}
+
+.themeToggle .icon {
+  font-size: 14px;
+  z-index: 2;
+  width: 50%;
+  text-align: center;
+}
+
+.themeToggle .slider {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: white;
+  border-radius: 50%;
+  top: 3.5px;
+  left: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.themeToggle.dark .slider {
+  left: 38px;
+}
+
+.themeToggle:hover .slider {
+  transform: scale(1.05);
+}
+
 /* TODO para estudiantes: 
  * 1. Agregar estilos para tema oscuro usando CSS variables
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)

@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import styles from './BlogCard.module.scss';
+import Image from 'next/image';
+
 
 interface BlogCardProps {
     title: string;
@@ -8,11 +10,28 @@ interface BlogCardProps {
     date: string;
     category: string;
     readTime: string;
+    image: string;
 }
 
-export default function BlogCard({ title, excerpt, slug, date, category, readTime }: BlogCardProps) {
+
+export default function BlogCard({ title, excerpt, slug, date, category, readTime,image }: BlogCardProps) {
     return (
         <article className={styles.card}>
+
+            {image && (
+                <div className={styles.imageWrapper}>
+                    <Link href={`/blog/${slug}`}>
+                        <Image
+                            src={image}
+                            alt={title}
+                            width={600}
+                            height={300}
+                            className={styles.image}
+                        />
+                    </Link>
+                </div>
+            )}
+
             <div className={styles.header}>
                 <span className={styles.category}>{category}</span>
                 <span className={styles.readTime}>{readTime}</span>

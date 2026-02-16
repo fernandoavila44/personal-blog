@@ -1,110 +1,9 @@
 'use client';
 
-// import { useState } from 'react';
-//import styles from './CommentSection.module.scss';
+import { useState, useEffect} from 'react';
+import styles from './CommentSection.module.scss';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-/* 
- * EJERCICIO: Implementar sección de comentarios con React Hooks
- * 
- * CONCEPTOS A APRENDER:
- * - 'use client': Directiva para Client Components
- * - useState: Hook para manejar estado local
- * - Manejo de formularios en React
- * - Renderizado condicional
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Crear el estado para los comentarios
- *    - Usar useState con un array de comentarios
- *    - Cada comentario debe tener: id, author, text, date
- * 
- * 2. Crear el estado para el formulario
- *    - Estado para el nombre del autor
- *    - Estado para el texto del comentario
- * 
- * 3. Implementar función para agregar comentario
- *    - Validar que los campos no estén vacíos
- *    - Crear nuevo comentario con ID único
- *    - Agregar al array de comentarios
- *    - Limpiar el formulario
- * 
- * 4. Crear el JSX:
- *    - Formulario para agregar comentario
- *    - Lista de comentarios existentes
- *    - Mensaje si no hay comentarios
- * 
- * 5. Crear estilos en CommentSection.module.scss
- */
-
-// interface Comment {
-//     id: number;
-//     author: string;
-//     text: string;
-//     date: string;
-// }
-
-// export default function CommentSection() {
-    // TODO: Implementar useState para comentarios
-    // const [comments, setComments] = useState<Comment[]>([]);
-
-    // TODO: Implementar useState para el formulario
-    // const [author, setAuthor] = useState('');
-    // const [text, setText] = useState('');
-
-    // TODO: Implementar función handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   // Validar campos
-    //   // Crear nuevo comentario
-    //   // Agregar a la lista
-    //   // Limpiar formulario
-    // };
-
-    // return (
-    //     <div>
-    //         <h3>Comentarios</h3>
-    //         <p>TODO: Implementar sección de comentarios</p>
-
-            //{/* TODO: Agregar formulario */}
-//             {/* 
-//       <form onSubmit={handleSubmit}>
-//         <input 
-//           type="text" 
-//           placeholder="Tu nombre"
-//           value={author}
-//           onChange={(e) => setAuthor(e.target.value)}
-//         />
-//         <textarea 
-//           placeholder="Tu comentario"
-//           value={text}
-//           onChange={(e) => setText(e.target.value)}
-//         />
-//         <button type="submit">Agregar comentario</button>
-//       </form>
-//       */}
-
-//             {/* TODO: Mostrar lista de comentarios */}
-//             {/* 
-//       <div>
-//         {comments.length === 0 ? (
-//           <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-//         ) : (
-//           comments.map(comment => (
-//             <div key={comment.id}>
-//               <strong>{comment.author}</strong>
-//               <p>{comment.text}</p>
-//               <small>{comment.date}</small>
-//             </div>
-//           ))
-//         )}
-//       </div>
-//       */}
-//         </div>
-//     );
-// }
-
-
-import { useState } from 'react';
 
 interface Comment {
   id: number;
@@ -116,11 +15,23 @@ interface Comment {
 export default function CommentSection() {
 
   //Estado de comentarios
-  const [comments, setComments] = useState<Comment[]>([]);
+  // const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useLocalStorage<Comment[]>(
+    'blog-comments',
+    []
+  );
 
   //Estado del formulario
   const [author, setAuthor] = useState('');
   const [text, setText] = useState('');
+
+  //Estado de montaje
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
 
   //Función para agregar comentario
   const handleSubmit = (e: React.FormEvent) => {
@@ -140,51 +51,69 @@ export default function CommentSection() {
     setText('');
   };
 
+  const handleDelete = (id: number) => {
+    const updatedComments = comments.filter(comment => comment.id !== id);
+    setComments(updatedComments);
+  };
+
+  if (!isMounted) return null;
+
   return (
-    <div>
-      <h3>Comentarios</h3>
+    <div className={styles.container}>
+      <h3 className={styles.title}>Comentarios</h3>
 
       {/* Formulario */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           placeholder="Tu nombre"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
+          className={styles.input}
         />
-
-        <br /><br />
 
         <textarea
           placeholder="Tu comentario"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          className={styles.textarea}
         />
 
-        <br /><br />
-
-        <button type="submit">Agregar comentario</button>
+        <button type="submit" className={styles.button}>
+          Agregar comentario
+        </button>
       </form>
 
-      <hr />
-
       {/* Lista de comentarios */}
-      <div>
+      <div className={styles.commentList}>
         {comments.length === 0 ? (
           <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
         ) : (
           comments.map((comment) => (
-            <div key={comment.id}>
-              <strong>{comment.author}</strong>
-              <p>{comment.text}</p>
-              <small>{comment.date}</small>
-              <hr />
+            <div key={comment.id} className={styles.commentCard}>
+
+              <div className={styles.commentHeader}>
+                <div>
+                  <span className={styles.author}>{comment.author}</span>
+                  <span className={styles.date}> · {comment.date}</span>
+                </div>
+
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(comment.id)}
+                >
+                  ✕
+                </button>
+              </div>
+
+              <p className={styles.commentText}>{comment.text}</p>
             </div>
           ))
         )}
       </div>
     </div>
   );
+
 }
 
 

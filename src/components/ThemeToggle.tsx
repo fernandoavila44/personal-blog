@@ -1,74 +1,3 @@
-// 'use client';
-
-// // import { useState, useEffect } from 'react';
-// // import styles from './ThemeToggle.module.scss';
-
-// /* 
-//  * EJERCICIO: Implementar toggle de tema claro/oscuro con React Hooks
-//  * 
-//  * CONCEPTOS A APRENDER:
-//  * - useState: Manejo de estado
-//  * - useEffect: Efectos secundarios y sincronización
-//  * - localStorage: Persistencia de datos en el navegador
-//  * - Manipulación del DOM
-//  * 
-//  * PASOS A SEGUIR:
-//  * 
-//  * 1. Crear estado para el tema
-//  *    - useState con valores 'light' o 'dark'
-//  *    - Valor inicial desde localStorage o 'light'
-//  * 
-//  * 2. Implementar función toggle
-//  *    - Cambiar entre 'light' y 'dark'
-//  *    - Guardar preferencia en localStorage
-//  * 
-//  * 3. Usar useEffect para aplicar el tema
-//  *    - Agregar/remover clase 'dark' al body
-//  *    - Ejecutar cuando cambie el tema
-//  * 
-//  * 4. Crear el JSX del botón
-//  *    - Icono de sol/luna según el tema
-//  *    - Texto descriptivo
-//  * 
-//  * 5. Crear estilos en ThemeToggle.module.scss (opcional)
-//  */
-
-// export default function ThemeToggle() {
-//     // TODO: Implementar useState para el tema
-//     // const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-//     // TODO: Implementar useEffect para cargar tema desde localStorage
-//     // useEffect(() => {
-//     //   const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
-//     //   if (savedTheme) {
-//     //     setTheme(savedTheme);
-//     //   }
-//     // }, []);
-
-//     // TODO: Implementar useEffect para aplicar el tema al body
-//     // useEffect(() => {
-//     //   if (theme === 'dark') {
-//     //     document.body.classList.add('dark');
-//     //   } else {
-//     //     document.body.classList.remove('dark');
-//     //   }
-//     // }, [theme]);
-
-//     // TODO: Implementar función toggleTheme
-//     // const toggleTheme = () => {
-//     //   const newTheme = theme === 'light' ? 'dark' : 'light';
-//     //   setTheme(newTheme);
-//     //   localStorage.setItem('theme', newTheme);
-//     // };
-
-//     return (
-//         <button>
-//             TODO: Implementar toggle de tema
-//             {/* TODO: Mostrar icono según el tema */}
-//             {/* {theme === 'light' ? '🌙' : '☀️'} */}
-//         </button>
-//     );
-// }
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -103,10 +32,17 @@ export default function ThemeToggle() {
     };
 
     return (
-        <button onClick={toggleTheme}>
-            {theme === 'light' ? '🌙 Cambiar a oscuro' : '☀️ Cambiar a claro'}
+        <button
+            onClick={toggleTheme}
+            className={`themeToggle ${theme === 'dark' ? 'dark' : ''}`}
+            aria-label="Cambiar tema"
+        >
+            <span className="icon sun">☀️</span>
+            <span className="icon moon">🌙</span>
+            <span className="slider" />
         </button>
     );
+
 }
 
 

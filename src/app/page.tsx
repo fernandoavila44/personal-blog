@@ -36,13 +36,14 @@ export default function Home() {
           <div className={styles.postsGrid}>
             {latestPosts.map((post) => (
               <BlogCard
-                key={post.id}
+                key={post.slug}
                 title={post.title}
                 excerpt={post.excerpt}
                 slug={post.slug}
                 date={post.date}
                 category={post.category}
                 readTime={post.readTime}
+                image={post.image}
               />
             ))}
           </div>

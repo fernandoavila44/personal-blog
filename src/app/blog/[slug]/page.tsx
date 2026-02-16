@@ -63,6 +63,7 @@
 
 import { notFound } from 'next/navigation'
 import postsData from '@/data/posts.json'
+import CommentSection from '@/components/CommentSection';
 
 /*
    SSG - generateStaticParams
@@ -76,10 +77,14 @@ export async function generateStaticParams() {
 /*
    Página dinámica del post
 */
-export default function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
 
   // Buscar el post por slug
-  const post = postsData.find((p) => p.slug === params.slug)
+
+  const { slug } = await params;
+  
+  //const post = postsData.find((p) => p.slug === params.slug)
+  const post = postsData.find((p) => p.slug === slug);
 
   // Si no existe → mostrar 404
   if (!post) {
@@ -98,6 +103,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       </div>
 
       <hr />
+
+      <CommentSection />
 
       <div>
         <p>{post.content}</p>

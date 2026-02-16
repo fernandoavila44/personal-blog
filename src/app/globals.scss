@@ -75,6 +75,10 @@ body {
     }
 }
 
+body.dark {
+  background-color: #111;
+  color: white;
+}
 /* TODO para estudiantes: 
  * 1. Agregar estilos para tema oscuro usando CSS variables
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)

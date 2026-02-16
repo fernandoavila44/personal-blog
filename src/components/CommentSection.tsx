@@ -1,7 +1,7 @@
 'use client';
 
 // import { useState } from 'react';
-// import styles from './CommentSection.module.scss';
+//import styles from './CommentSection.module.scss';
 
 /* 
  * EJERCICIO: Implementar sección de comentarios con React Hooks
@@ -36,14 +36,14 @@
  * 5. Crear estilos en CommentSection.module.scss
  */
 
-interface Comment {
-    id: number;
-    author: string;
-    text: string;
-    date: string;
-}
+// interface Comment {
+//     id: number;
+//     author: string;
+//     text: string;
+//     date: string;
+// }
 
-export default function CommentSection() {
+// export default function CommentSection() {
     // TODO: Implementar useState para comentarios
     // const [comments, setComments] = useState<Comment[]>([]);
 
@@ -60,48 +60,133 @@ export default function CommentSection() {
     //   // Limpiar formulario
     // };
 
-    return (
-        <div>
-            <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
+    // return (
+    //     <div>
+    //         <h3>Comentarios</h3>
+    //         <p>TODO: Implementar sección de comentarios</p>
 
-            {/* TODO: Agregar formulario */}
-            {/* 
+            //{/* TODO: Agregar formulario */}
+//             {/* 
+//       <form onSubmit={handleSubmit}>
+//         <input 
+//           type="text" 
+//           placeholder="Tu nombre"
+//           value={author}
+//           onChange={(e) => setAuthor(e.target.value)}
+//         />
+//         <textarea 
+//           placeholder="Tu comentario"
+//           value={text}
+//           onChange={(e) => setText(e.target.value)}
+//         />
+//         <button type="submit">Agregar comentario</button>
+//       </form>
+//       */}
+
+//             {/* TODO: Mostrar lista de comentarios */}
+//             {/* 
+//       <div>
+//         {comments.length === 0 ? (
+//           <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+//         ) : (
+//           comments.map(comment => (
+//             <div key={comment.id}>
+//               <strong>{comment.author}</strong>
+//               <p>{comment.text}</p>
+//               <small>{comment.date}</small>
+//             </div>
+//           ))
+//         )}
+//       </div>
+//       */}
+//         </div>
+//     );
+// }
+
+
+import { useState } from 'react';
+
+interface Comment {
+  id: number;
+  author: string;
+  text: string;
+  date: string;
+}
+
+export default function CommentSection() {
+
+  //Estado de comentarios
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  //Estado del formulario
+  const [author, setAuthor] = useState('');
+  const [text, setText] = useState('');
+
+  //Función para agregar comentario
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!author || !text) return;
+
+    const newComment: Comment = {
+      id: Date.now(),
+      author,
+      text,
+      date: new Date().toLocaleString(),
+    };
+
+    setComments([...comments, newComment]);
+    setAuthor('');
+    setText('');
+  };
+
+  return (
+    <div>
+      <h3>Comentarios</h3>
+
+      {/* Formulario */}
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Tu nombre"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
-        <textarea 
+
+        <br /><br />
+
+        <textarea
           placeholder="Tu comentario"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
+
+        <br /><br />
+
         <button type="submit">Agregar comentario</button>
       </form>
-      */}
 
-            {/* TODO: Mostrar lista de comentarios */}
-            {/* 
+      <hr />
+
+      {/* Lista de comentarios */}
       <div>
         {comments.length === 0 ? (
           <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
         ) : (
-          comments.map(comment => (
+          comments.map((comment) => (
             <div key={comment.id}>
               <strong>{comment.author}</strong>
               <p>{comment.text}</p>
               <small>{comment.date}</small>
+              <hr />
             </div>
           ))
         )}
       </div>
-      */}
-        </div>
-    );
+    </div>
+  );
 }
+
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

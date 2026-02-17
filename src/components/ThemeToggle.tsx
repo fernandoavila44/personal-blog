@@ -1,6 +1,7 @@
 'use client';
 
-// import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 // import styles from './ThemeToggle.module.scss';
 
 /* 
@@ -35,37 +36,31 @@
 
 export default function ThemeToggle() {
     // TODO: Implementar useState para el tema
-    // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useLocalStorage<'light' | 'dark'>(
+    'theme',
+    'light'
+  );
 
     // TODO: Implementar useEffect para cargar tema desde localStorage
-    // useEffect(() => {
-    //   const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
-    //   if (savedTheme) {
-    //     setTheme(savedTheme);
-    //   }
-    // }, []);
+useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
 
-    // TODO: Implementar useEffect para aplicar el tema al body
-    // useEffect(() => {
-    //   if (theme === 'dark') {
-    //     document.body.classList.add('dark');
-    //   } else {
-    //     document.body.classList.remove('dark');
-    //   }
-    // }, [theme]);
 
     // TODO: Implementar función toggleTheme
-    // const toggleTheme = () => {
-    //   const newTheme = theme === 'light' ? 'dark' : 'light';
-    //   setTheme(newTheme);
-    //   localStorage.setItem('theme', newTheme);
-    // };
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
 
     return (
-        <button>
-            TODO: Implementar toggle de tema
+        <button onClick={toggleTheme}>
             {/* TODO: Mostrar icono según el tema */}
-            {/* {theme === 'light' ? '🌙' : '☀️'} */}
+            {theme === 'light' ? '🌙 Modo Oscuro' : '☀️ Modo Claro'}
         </button>
     );
 }

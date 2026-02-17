@@ -50,9 +50,9 @@ personal-blog/
 │   ├── page.module.scss         # ✅ Estilos del home
 │   ├── globals.scss             # ✅ Estilos globales
 │   ├── blog/
-│   │   ├── page.tsx             # 🟡 Lista de posts (PARCIAL)
+│   │   ├── page.tsx             # 🟡 Lista de posts (PARCIAL) OK Keven
 │   │   └── [slug]/
-│   │       └── page.tsx         # 🔴 Post individual (TODO)
+│   │       └── page.tsx         # 🔴 Post individual (TODO) OK Keven
 │   ├── about/
 │   │   └── page.tsx             # 🔴 Sobre mí (TODO)
 │   └── contact/

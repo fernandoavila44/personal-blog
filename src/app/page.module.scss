@@ -82,3 +82,38 @@
         margin-bottom: $spacing-xl;
     }
 }
+
+.article {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 2rem;
+}
+
+.content {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 2rem;
+  text-decoration: none;
+  color: blue;
+}
+
+.image {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}

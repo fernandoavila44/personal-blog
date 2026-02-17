@@ -1,6 +1,5 @@
 'use client';
-
-// import { useState } from 'react';
+import { useState } from 'react';
 // import styles from './CommentSection.module.scss';
 
 /* 
@@ -45,51 +44,59 @@ interface Comment {
 
 export default function CommentSection() {
     // TODO: Implementar useState para comentarios
-    // const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment[]>([]);
 
     // TODO: Implementar useState para el formulario
-    // const [author, setAuthor] = useState('');
-    // const [text, setText] = useState('');
+    const [author, setAuthor] = useState('');
+    const [text, setText] = useState('');
 
     // TODO: Implementar función handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   // Validar campos
-    //   // Crear nuevo comentario
-    //   // Agregar a la lista
-    //   // Limpiar formulario
-    // };
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      // Validar campos
+      // Crear nuevo comentario
+      // Agregar a la lista
+      // Limpiar formulario
+      if (!author.trim() || !text.trim()) return;
 
-    return (
-        <div>
-            <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
+    const newComment: Comment = {
+      id: Date.now(),
+      author,
+      text,
+      date: new Date().toLocaleDateString(),
+    };
 
-            {/* TODO: Agregar formulario */}
-            {/* 
+    setComments([newComment, ...comments]);
+    setAuthor('');
+    setText('')
+    };
+
+return (
+    <div>
+      <h3>Comentarios</h3>
+
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Tu nombre"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
-        <textarea 
+
+        <textarea
           placeholder="Tu comentario"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
+
         <button type="submit">Agregar comentario</button>
       </form>
-      */}
 
-            {/* TODO: Mostrar lista de comentarios */}
-            {/* 
       <div>
         {comments.length === 0 ? (
           <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
         ) : (
-          comments.map(comment => (
+          comments.map((comment) => (
             <div key={comment.id}>
               <strong>{comment.author}</strong>
               <p>{comment.text}</p>
@@ -98,9 +105,8 @@ export default function CommentSection() {
           ))
         )}
       </div>
-      */}
-        </div>
-    );
+    </div>
+  );
 }
 
 /* PREGUNTAS PARA REFLEXIONAR:

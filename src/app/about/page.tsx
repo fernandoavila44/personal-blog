@@ -1,4 +1,5 @@
-// import authorData from '@/data/author.json';
+import authorData from '@/data/author.json';
+import Image from 'next/image';
 // import styles from './page.module.scss';
 
 /* 
@@ -33,25 +34,86 @@
  */
 
 // TODO: Descomentar y usar authorData
-// const author = authorData;
+const author = authorData;
+
+export async function generateMetadata() {
+  return {
+    title: `Sobre ${authorData.name} | Mi Blog Personal`,
+    description: authorData.bio,
+  };
+}
 
 export default function AboutPage() {
-    // TODO: Implementar la página
+  // TODO: Implementar la página
+  const author = authorData;
 
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
-
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+return (
+    <div>
+      
+      {/* Header */}
+      <div>
+        <Image
+          src={author.avatar}
+          alt={author.name}
+          width={150}
+          height={150}
+        />
+        <div>
+          <h1>{author.name}</h1>
+          <h2>{author.role}</h2>
+          <p>{author.location}</p>
         </div>
+      </div>
+
+      {/* Bio */}
+      <section>
+        <h3>Biografía</h3>
+        <p>{author.bio}</p>
+      </section>
+
+      {/* Skills */}
+      <section>
+        <h3>Skills</h3>
+        <div>
+          {author.skills.map((skill: string) => (
+            <span key={skill}>
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Experiencia */}
+      <section>
+        <h3>Experiencia</h3>
+        <p>{author.experience}</p>
+      </section>
+
+      {/* Educación */}
+      <section>
+        <h3>Educación</h3>
+        <p>{author.education}</p>
+      </section>
+
+      {/* Contacto y Redes */}
+      <section>
+        <h3>Contacto</h3>
+        <p>Email: {author.email}</p>
+
+        <div>
+          <a href={author.social.github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href={author.social.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a href={author.social.twitter} target="_blank" rel="noopener noreferrer">
+            Twitter
+          </a>
+        </div>
+      </section>
+
+    </div>
     );
 }
 

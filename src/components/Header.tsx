@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import styles from './Header.module.scss';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   return (
     <header className={styles.header}>
+      <ThemeToggle />
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <h1>Mi Blog Personal</h1>

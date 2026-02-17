@@ -1,4 +1,6 @@
-// import { useState } from 'react';
+'use client';
+
+import { useState } from 'react';
 // import styles from './page.module.scss';
 
 /* 
@@ -42,112 +44,130 @@ export default function ContactPage() {
     // TODO: Agregar 'use client' al inicio del archivo
 
     // TODO: Implementar estados
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [message, setMessage] = useState('');
-    // const [errors, setErrors] = useState<{name?: string; email?: string; message?: string}>({});
-    // const [isSubmitted, setIsSubmitted] = useState(false);
+    const [name, setName] = useState('');
+      const [email, setEmail] = useState('');
+      const [message, setMessage] = useState('');
+      const [errors, setErrors] = useState<{
+        name?: string;
+        email?: string;
+        message?: string;
+      }>({});
+      const [isSubmitted, setIsSubmitted] = useState(false);
 
     // TODO: Implementar función de validación
-    // const validate = () => {
-    //   const newErrors: any = {};
-    //   
-    //   if (!name || name.length < 2) {
-    //     newErrors.name = 'El nombre debe tener al menos 2 caracteres';
-    //   }
-    //   
-    //   if (!email || !/\S+@\S+\.\S+/.test(email)) {
-    //     newErrors.email = 'Por favor ingresa un email válido';
-    //   }
-    //   
-    //   if (!message || message.length < 10) {
-    //     newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
-    //   }
-    //   
-    //   return newErrors;
-    // };
+const validate = () => {
+    const newErrors: {
+      name?: string;
+      email?: string;
+      message?: string;
+    } = {};
+
+    if (!name || name.trim().length < 2) {
+      newErrors.name = 'El nombre debe tener al menos 2 caracteres';
+    }
+
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Por favor ingresa un email válido';
+    }
+
+    if (!message || message.trim().length < 10) {
+      newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+    }
+
+    return newErrors;
+  };
+
 
     // TODO: Implementar handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   const newErrors = validate();
-    //   
-    //   if (Object.keys(newErrors).length > 0) {
-    //     setErrors(newErrors);
-    //     return;
-    //   }
-    //   
-    //   // Simular envío exitoso
-    //   setErrors({});
-    //   setIsSubmitted(true);
-    //   
-    //   // Limpiar formulario después de 3 segundos
-    //   setTimeout(() => {
-    //     setName('');
-    //     setEmail('');
-    //     setMessage('');
-    //     setIsSubmitted(false);
-    //   }, 3000);
-    // };
+const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '600px' }}>
-            <h1>Contacto</h1>
-            <p>¿Tienes alguna pregunta o comentario? ¡Escríbeme!</p>
+    const newErrors = validate();
 
-            <p style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#f0f0f0', borderRadius: '8px' }}>
-                TODO: Implementar formulario de contacto con validación
-            </p>
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-            {/* TODO: Agregar formulario aquí */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <div>
+    // Sin errores
+    setErrors({});
+    setIsSubmitted(true);
+
+    // Simular envío
+    setTimeout(() => {
+      setName('');
+      setEmail('');
+      setMessage('');
+      setIsSubmitted(false);
+    }, 3000);
+  };
+
+  return (
+    <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '600px' }}>
+      <h1>Contacto</h1>
+      <p>¿Tienes alguna pregunta o comentario? ¡Escríbeme!</p>
+
+      <form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
           <label htmlFor="name">Nombre</label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            style={{ width: '100%', padding: '0.5rem' }}
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {errors.name && (
+            <span style={{ color: 'red', fontSize: '0.9rem' }}>
+              {errors.name}
+            </span>
+          )}
         </div>
-        
-        <div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
           <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ width: '100%', padding: '0.5rem' }}
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {errors.email && (
+            <span style={{ color: 'red', fontSize: '0.9rem' }}>
+              {errors.email}
+            </span>
+          )}
         </div>
-        
-        <div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
           <label htmlFor="message">Mensaje</label>
           <textarea
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={5}
+            style={{ width: '100%', padding: '0.5rem' }}
           />
-          {errors.message && <span className="error">{errors.message}</span>}
+          {errors.message && (
+            <span style={{ color: 'red', fontSize: '0.9rem' }}>
+              {errors.message}
+            </span>
+          )}
         </div>
-        
-        <button type="submit" className="btn btn-primary">
+
+        <button type="submit">
           Enviar mensaje
         </button>
-        
+
         {isSubmitted && (
-          <div className="success">
+          <div style={{ marginTop: '1rem', color: 'green' }}>
             ¡Mensaje enviado exitosamente! Te responderé pronto.
           </div>
         )}
       </form>
-      */}
-        </div>
-    );
+    </div>
+  );
 }
 
 /* PREGUNTAS PARA REFLEXIONAR:

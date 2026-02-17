@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import postsData from '@/data/posts.json';
-// import styles from './page.module.scss';
+import styles from '../page.module.scss';
+import CommentSection from '@/components/CommentSection';
 
 /* 
  * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
@@ -37,28 +39,47 @@ import postsData from '@/data/posts.json';
  */
 
 // TODO: Implementar generateStaticParams
-// export async function generateStaticParams() {
-//   // Tu código aquí
-//   // Pista: Mapear postsData para obtener solo los slugs
-// }
+export async function generateStaticParams() {
+  return postsData.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 
 // TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
-    // TODO: Buscar el post usando params.slug
-    // const post = postsData.find(p => p.slug === params.slug);
+export default async function PostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = await params;
 
-    // TODO: Si no existe el post, llamar notFound()
-    // if (!post) {
-    //   notFound();
-    // }
+  const post = postsData.find((p) => p.slug === slug);
 
-    return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
-    );
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <article className={styles.article}>
+      <h1 className={styles.title}>{post.title}</h1>
+
+      <div className={styles.meta}>
+        <span>{post.date}</span>
+        {post.category && <span> • {post.category}</span>}
+        {post.readTime && <span> • {post.readTime}</span>}
+        {post.author && <span> • {post.author}</span>}
+      </div>
+
+      <div className={styles.content}>{post.content}</div>
+
+      <Link href="/blog" className={styles.backButton}>
+        ← Volver al blog
+      </Link>
+
+      <CommentSection />
+    </article>
+  );
 }
 
 /* PREGUNTAS PARA REFLEXIONAR:
@@ -73,3 +94,5 @@ export default function PostPage({ params }: { params: { slug: string } }) {
  * 3. ¿Qué pasa si visitas un slug que no existe?
  *    Respuesta: Next.js mostrará la página 404 gracias a notFound().
  */
+
+

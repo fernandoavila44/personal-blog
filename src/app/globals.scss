@@ -80,3 +80,8 @@ body {
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
  * 3. Mejorar los estilos de los botones con más variantes
  */
+
+ body.dark {
+  background-color: #1f2937;
+  color: #f9fafb;
+}

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+
 
 interface Comment {
   id: number;
@@ -11,7 +13,7 @@ interface Comment {
 }
 
 export default function CommentSection() {
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useLocalStorage<Comment[]>('comments', []);
   const [author, setAuthor] = useState('');
   const [text, setText] = useState('');
 

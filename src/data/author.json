@@ -1,23 +1,21 @@
 {
-    "name": "Tu Nombre",
+    "name": "Valentina Herrera",
     "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
+    "bio": "Desarrolladora Full Stack apasionada por crear soluciones web innovadoras. Especializada en React y Next.js, con experiencia en tecnologías modernas como Java y Python.",
+    "email": "vahegiraldo@gmail.com",
+    "location": "Estados Unidos",
     "avatar": "/images/avatar.jpg",
     "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
+        "github": "https://github.com/v0927"
     },
     "skills": [
-        "Next.js",
         "React",
-        "TypeScript",
-        "Node.js",
-        "SCSS",
-        "PostgreSQL"
+        "Next.js",
+        "Java",
+        "HTML",
+        "CSS",
+        "Python"
     ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    "experience": "Desarrolladora Full Stack con experiencia en React, Next.js, Java y Python.",
+    "education": "Licenciatura en Ciencias en Computadoras y Desarrollo de Software"
 }

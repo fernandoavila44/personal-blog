@@ -1,82 +1,139 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import Link from 'next/link';
+import authorData from '@/data/author.json';
 
-/* 
- * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
- * 
- * CONCEPTOS A APRENDER:
- * - Server Components: Componentes que se ejecutan en el servidor
- * - SSR: Renderizado en el servidor en cada request
- * - Data fetching en Server Components
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Importar los datos del autor
- *    - Ya está disponible en @/data/author.json
- *    - En un caso real, esto podría ser un fetch a una API
- * 
- * 2. Crear el JSX para mostrar:
- *    - Foto de perfil (usar next/image)
- *    - Nombre y rol
- *    - Biografía
- *    - Skills/habilidades
- *    - Experiencia y educación
- *    - Enlaces a redes sociales
- * 
- * 3. Crear estilos en page.module.scss
- *    - Layout atractivo (puede ser dos columnas en desktop)
- *    - Cards para skills
- *    - Botones para redes sociales
- * 
- * 4. BONUS: Agregar metadata dinámica
- *    - Usar generateMetadata() para SEO
- */
-
-// TODO: Descomentar y usar authorData
-// const author = authorData;
+export function generateMetadata() {
+    return {
+        title: `Sobre ${authorData.name} | Mi Blog Personal`,
+        description: authorData.bio,
+    };
+}
 
 export default function AboutPage() {
-    // TODO: Implementar la página
+    const author = authorData;
 
     return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+        <div style={{ padding: '4rem 1.5rem', maxWidth: '900px', margin: '0 auto' }}>
+            {/* Header con nombre */}
+            <div style={{ marginBottom: '4rem' }}>
+                <h1 style={{ margin: '0 0 0.5rem 0', fontSize: '2.5rem' }}>{author.name}</h1>
+                <p style={{
+                    fontSize: '1.25rem',
+                    color: '#666',
+                    margin: '0 0 1rem 0'
+                }}>{author.role}</p>
+                <p style={{ margin: '0.5rem 0', color: '#666' }}>
+                    📍 {author.location}
+                </p>
+                <p style={{ margin: '0.5rem 0', color: '#666' }}>
+                    ✉️ {author.email}
+                </p>
+            </div>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+            {/* Redes sociales */}
+            <div style={{ marginBottom: '4rem' }}>
+                <h2 style={{ marginBottom: '1.5rem' }}>Conéctate Conmigo</h2>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                    <a
+                        href={author.social.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            display: 'inline-block',
+                            padding: '0.75rem 1.5rem',
+                            backgroundColor: '#333',
+                            color: '#fff',
+                            borderRadius: '6px',
+                            textDecoration: 'none',
+                            transition: 'background-color 0.2s'
+                        }}
+                    >
+                        GitHub
+                    </a>
+                </div>
+            </div>
+
+            {/* Biografía */}
+            <div style={{ marginBottom: '4rem' }}>
+                <h2 style={{ marginBottom: '1.5rem' }}>Biografía</h2>
+                <p style={{
+                    fontSize: '1.1rem',
+                    lineHeight: '1.8',
+                    color: '#555'
+                }}>
+                    {author.bio}
+                </p>
+            </div>
+
+            {/* Skills */}
+            <div style={{ marginBottom: '4rem' }}>
+                <h2 style={{ marginBottom: '1.5rem' }}>Habilidades</h2>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                    gap: '1rem'
+                }}>
+                    {author.skills.map((skill) => (
+                        <div
+                            key={skill}
+                            style={{
+                                padding: '1rem',
+                                backgroundColor: '#f0f0f0',
+                                borderRadius: '6px',
+                                textAlign: 'center',
+                                fontWeight: '500'
+                            }}
+                        >
+                            {skill}
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Experiencia y Educación */}
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '2rem',
+                marginBottom: '4rem'
+            }}>
+                <div>
+                    <h2 style={{ marginBottom: '1.5rem' }}>Experiencia</h2>
+                    <p style={{ fontSize: '1.1rem', color: '#555' }}>
+                        {author.experience}
+                    </p>
+                </div>
+                <div>
+                    <h2 style={{ marginBottom: '1.5rem' }}>Educación</h2>
+                    <p style={{ fontSize: '1.1rem', color: '#555' }}>
+                        {author.education}
+                    </p>
+                </div>
+            </div>
+
+            {/* Call to action */}
+            <div style={{
+                textAlign: 'center',
+                padding: '2rem',
+                backgroundColor: '#f9f9f9',
+                borderRadius: '8px'
+            }}>
+                <h3 style={{ marginBottom: '1rem' }}>¿Quieres trabajar juntos?</h3>
+                <p style={{ color: '#666', marginBottom: '1.5rem' }}>
+                    Estaré encantado de escuchar sobre tu proyecto
+                </p>
+                <Link href="/contact" style={{
+                    display: 'inline-block',
+                    padding: '0.75rem 2rem',
+                    backgroundColor: '#007bff',
+                    color: '#fff',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    transition: 'background-color 0.2s'
+                }}>
+                    Contáctame
+                </Link>
+            </div>
         </div>
     );
 }
-
-/* PREGUNTAS PARA REFLEXIONAR:
- * 
- * 1. ¿Por qué usar SSR para esta página en lugar de SSG?
- *    Respuesta: En este ejemplo, podríamos usar SSG también. Pero SSR es útil
- *    si los datos cambian frecuentemente o necesitas datos en tiempo real.
- *    Esta página es un ejercicio para practicar SSR.
- * 
- * 2. ¿Cuál es la diferencia entre un Server Component y un Client Component?
- *    Respuesta: Server Components se ejecutan en el servidor, no envían JS al cliente,
- *    y pueden acceder directamente a bases de datos. Client Components ('use client')
- *    se ejecutan en el navegador y permiten interactividad (hooks, eventos).
- * 
- * 3. ¿Puedes usar hooks como useState en este componente?
- *    Respuesta: No, porque es un Server Component. Para usar hooks necesitas
- *    agregar 'use client' al inicio del archivo.
- */
-
-/* BONUS: Implementar generateMetadata
-export async function generateMetadata() {
-  return {
-    title: `Sobre ${authorData.name} | Mi Blog Personal`,
-    description: authorData.bio,
-  };
-}
-*/

@@ -51,6 +51,10 @@ h6 {
 p {
     margin-bottom: $spacing-md;
     color: $text-secondary;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 // Links
@@ -60,12 +64,178 @@ a {
     transition: color $transition-fast;
 
     &:hover {
-        color: darken($primary-color, 10%);
+        text-decoration: underline;
+    }
+    
+    &:active {
+        color: darken($primary-color, 15%);
     }
 }
 
-// TODO para estudiantes:
-// 1. Agregar estilos para listas (ul, ol)
-// 2. Agregar estilos para blockquotes
-// 3. Agregar estilos para code y pre
-// 4. Agregar clases de utilidad para tamaños de texto
+// Listas
+ul,
+ol {
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-xl;
+    
+    li {
+        margin-bottom: $spacing-sm;
+        color: $text-secondary;
+    }
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+dl {
+    margin-bottom: $spacing-md;
+}
+
+dt {
+    font-weight: 600;
+    color: $text-primary;
+    margin-top: $spacing-md;
+    
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+dd {
+    margin-left: $spacing-lg;
+    margin-bottom: $spacing-sm;
+    color: $text-secondary;
+}
+
+// Blockquotes
+blockquote {
+    margin: $spacing-lg 0;
+    padding-left: $spacing-lg;
+    border-left: 4px solid $primary-color;
+    color: $text-secondary;
+    font-style: italic;
+    
+    p {
+        margin-bottom: $spacing-sm;
+    }
+    
+    cite {
+        color: $text-light;
+        font-style: normal;
+        
+        &::before {
+            content: '— ';
+        }
+    }
+}
+
+// Código
+code {
+    background-color: $background-gray;
+    border-radius: 0.25rem;
+    padding: 0.2rem 0.4rem;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: #d63384;
+}
+
+pre {
+    background-color: #f5f5f5;
+    border: 1px solid $border-color;
+    border-radius: 0.5rem;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    overflow-x: auto;
+    
+    code {
+        background-color: transparent;
+        color: #333;
+        padding: 0;
+        display: block;
+        font-size: $font-size-sm;
+        line-height: 1.5;
+    }
+}
+
+// Líneas horizontales
+hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: $spacing-xl 0;
+}
+
+// Énfasis
+strong,
+b {
+    font-weight: 700;
+    color: $text-primary;
+}
+
+em,
+i {
+    font-style: italic;
+}
+
+// Superíndice y subíndice
+sup {
+    font-size: 0.85em;
+    vertical-align: super;
+}
+
+sub {
+    font-size: 0.85em;
+    vertical-align: sub;
+}
+
+// Marca (highlight)
+mark {
+    background-color: #fff3cd;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}
+
+// Clases de utilidad para tipografía
+.text-muted {
+    color: $text-light;
+}
+
+.text-small {
+    font-size: $font-size-sm;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-italic {
+    font-style: italic;
+}
+
+.leading-relaxed {
+    line-height: 1.8;
+}
+
+.leading-tight {
+    line-height: 1.25;
+}

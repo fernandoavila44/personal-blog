@@ -5,11 +5,10 @@
         "slug": "introduccion-nextjs-14",
         "excerpt": "Descubre las nuevas características de Next.js 14 y cómo el App Router revoluciona el desarrollo web moderno.",
         "content": "Next.js 14 trae mejoras significativas en rendimiento y developer experience. El App Router permite una mejor organización del código y aprovecha React Server Components al máximo.",
-        "author": "Tu Nombre",
+        "author": "Valentina Herrera",
         "date": "2024-01-15",
         "category": "Tutorial",
-        "readTime": "5 min",
-        "image": "/images/nextjs-intro.jpg"
+        "readTime": "5 min"
     },
     {
         "id": 2,
@@ -17,11 +16,10 @@
         "slug": "server-vs-client-components",
         "excerpt": "Entiende las diferencias clave entre Server y Client Components y cuándo usar cada uno.",
         "content": "Los Server Components se ejecutan en el servidor y no envían JavaScript al cliente, mientras que los Client Components permiten interactividad. Saber cuándo usar cada uno es fundamental.",
-        "author": "Tu Nombre",
+        "author": "Valentina Herrera",
         "date": "2024-01-20",
         "category": "Conceptos",
-        "readTime": "7 min",
-        "image": "/images/components.jpg"
+        "readTime": "7 min"
     },
     {
         "id": 3,
@@ -29,11 +27,10 @@
         "slug": "data-fetching-nextjs",
         "excerpt": "Aprende las diferentes estrategias de data fetching: SSG, SSR, ISR y CSR.",
         "content": "Next.js ofrece múltiples formas de obtener datos. SSG para contenido estático, SSR para datos dinámicos, ISR para regeneración incremental y CSR para datos del cliente.",
-        "author": "Tu Nombre",
+        "author": "Valentina Herrera",
         "date": "2024-01-25",
         "category": "Tutorial",
-        "readTime": "10 min",
-        "image": "/images/data-fetching.jpg"
+        "readTime": "10 min"
     },
     {
         "id": 4,
@@ -41,11 +38,10 @@
         "slug": "react-hooks-esenciales",
         "excerpt": "Domina useState, useEffect y otros hooks fundamentales para crear aplicaciones interactivas.",
         "content": "Los hooks transformaron React. useState maneja el estado local, useEffect gestiona efectos secundarios, y custom hooks permiten reutilizar lógica.",
-        "author": "Tu Nombre",
+        "author": "Valentina Herrera",
         "date": "2024-02-01",
         "category": "React",
-        "readTime": "8 min",
-        "image": "/images/hooks.jpg"
+        "readTime": "8 min"
     },
     {
         "id": 5,
@@ -53,11 +49,10 @@
         "slug": "optimizacion-rendimiento",
         "excerpt": "Técnicas avanzadas para mejorar el rendimiento de tu aplicación Next.js.",
         "content": "Lazy loading, code splitting, optimización de imágenes con next/image, y caching son técnicas esenciales para aplicaciones rápidas.",
-        "author": "Tu Nombre",
+        "author": "Valentina Herrera",
         "date": "2024-02-05",
         "category": "Performance",
-        "readTime": "12 min",
-        "image": "/images/performance.jpg"
+        "readTime": "12 min"
     },
     {
         "id": 6,
@@ -65,10 +60,9 @@
         "slug": "routing-avanzado",
         "excerpt": "Explora rutas dinámicas, grupos de rutas, y layouts anidados en el App Router.",
         "content": "El App Router introduce conceptos como route groups, parallel routes, e intercepting routes que permiten arquitecturas más sofisticadas.",
-        "author": "Tu Nombre",
+        "author": "Valentina Herrera",
         "date": "2024-02-08",
         "category": "Tutorial",
-        "readTime": "9 min",
-        "image": "/images/routing.jpg"
+        "readTime": "9 min"
     }
 ]

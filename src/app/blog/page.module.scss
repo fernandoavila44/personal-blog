@@ -21,6 +21,36 @@
     }
 }
 
+.filters {
+    display: flex;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    button {
+        background: $background-gray;
+        border: none;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $radius-md;
+        color: $text-primary;
+        cursor: pointer;
+        font-size: $font-size-base;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover {
+            background: $primary-color;
+            color: #fff;
+        }
+
+        &.active {
+            background: $primary-color;
+            color: #fff;
+            font-weight: bold;
+        }
+    }
+}
+
 .postsGrid {
     @include grid(1, $spacing-xl);
 
@@ -33,4 +63,36 @@
     }
 }
 
-/* TODO para estudiantes: Agregar estilos para filtros y paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-xl;
+
+    button {
+        background: $background-gray;
+        border: none;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $radius-md;
+        color: $text-primary;
+        cursor: pointer;
+        font-size: $font-size-base;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover:not(:disabled) {
+            background: $primary-color;
+            color: #fff;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    span {
+        color: $text-secondary;
+        font-size: $font-size-base;
+    }
+}

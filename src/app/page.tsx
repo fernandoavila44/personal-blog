@@ -3,9 +3,21 @@ import BlogCard from '@/components/BlogCard';
 import postsData from '@/data/posts.json';
 import styles from './page.module.scss';
 
+interface Post {
+  id: number;
+  title: string;
+  excerpt: string;
+  slug: string;
+  date: string;
+  category: string;
+  readTime: string;
+  image?: string;
+  author?: string;
+}
+
 export default function Home() {
   // Obtener los últimos 3 posts
-  const latestPosts = postsData.slice(0, 3);
+  const latestPosts = (postsData as Post[]).slice(0, 3);
 
   return (
     <div className={styles.home}>
@@ -43,6 +55,8 @@ export default function Home() {
                 date={post.date}
                 category={post.category}
                 readTime={post.readTime}
+                image={post.image}
+                author={post.author}
               />
             ))}
           </div>

@@ -11,11 +11,23 @@
 
 html {
     scroll-behavior: smooth;
+    color-scheme: light;
+}
+
+html.dark {
+    color-scheme: dark;
 }
 
 body {
     background-color: $background-light;
+    color: $text-primary;
     min-height: 100vh;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+html.dark body {
+    background-color: #1f2937;
+    color: #f9fafb;
 }
 
 /* Utilidades globales */
@@ -41,6 +53,10 @@ body {
 
     &:hover {
         transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
     }
 }
 
@@ -75,8 +91,124 @@ body {
     }
 }
 
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
- * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
- * 3. Mejorar los estilos de los botones con más variantes
- */
+html.dark .card {
+    background-color: #374151;
+    color: #f9fafb;
+}
+
+/* Tema oscuro - estilos adicionales */
+html.dark {
+    a {
+        color: #60a5fa;
+        
+        &:hover {
+            color: #93c5fd;
+        }
+    }
+
+    code {
+        background-color: #374151;
+        color: #f87171;
+    }
+
+    pre {
+        background-color: #1f2937;
+        border-color: #374151;
+        
+        code {
+            color: #d1d5db;
+        }
+    }
+
+    blockquote {
+        border-left-color: #60a5fa;
+        color: #d1d5db;
+    }
+
+    hr {
+        border-top-color: #374151;
+    }
+
+    .btn-primary {
+        background-color: #2563eb;
+
+        &:hover {
+            background-color: #1d4ed8;
+        }
+    }
+
+    .btn-secondary {
+        background-color: #7c3aed;
+
+        &:hover {
+            background-color: #6d28d9;
+        }
+    }
+}
+
+/* Utilidades de espaciado */
+.mt-1 { margin-top: $spacing-sm; }
+.mt-2 { margin-top: $spacing-md; }
+.mt-3 { margin-top: $spacing-lg; }
+.mt-4 { margin-top: $spacing-xl; }
+
+.mb-1 { margin-bottom: $spacing-sm; }
+.mb-2 { margin-bottom: $spacing-md; }
+.mb-3 { margin-bottom: $spacing-lg; }
+.mb-4 { margin-bottom: $spacing-xl; }
+
+.pt-1 { padding-top: $spacing-sm; }
+.pt-2 { padding-top: $spacing-md; }
+.pt-3 { padding-top: $spacing-lg; }
+.pt-4 { padding-top: $spacing-xl; }
+
+.pb-1 { padding-bottom: $spacing-sm; }
+.pb-2 { padding-bottom: $spacing-md; }
+.pb-3 { padding-bottom: $spacing-lg; }
+.pb-4 { padding-bottom: $spacing-xl; }
+
+/* Utilidades de visibilidad */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $background-gray;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 4px;
+
+    &:hover {
+        background: darken($primary-color, 10%);
+    }
+}
+
+html.dark {
+    ::-webkit-scrollbar-track {
+        background: #374151;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #60a5fa;
+
+        &:hover {
+            background: #93c5fd;
+        }
+    }
+}

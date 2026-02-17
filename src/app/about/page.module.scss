@@ -1,0 +1,46 @@
+.aboutPage {
+    display: grid;
+    gap: 2rem;
+}
+
+.hero {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .08);
+}
+
+.role {
+    margin-top: .5rem;
+    opacity: .8;
+}
+
+.bio p {
+    line-height: 1.8;
+}
+
+.skillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    padding: 0;
+    list-style: none;
+}
+
+.skillsList li {
+    padding: .5rem .75rem;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 999px;
+    font-size: .95rem;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.socialLinks a {
+    padding: .6rem .9rem;
+    border: 1px solid rgba(0, 0, 0, .12);
+    border-radius: .75rem;
+    text-decoration: none;
+}

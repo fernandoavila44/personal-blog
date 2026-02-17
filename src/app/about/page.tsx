@@ -1,5 +1,5 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import authorData from '@/data/author.json';
+import styles from './page.module.scss';
 
 /* 
  * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
@@ -33,26 +33,45 @@
  */
 
 // TODO: Descomentar y usar authorData
-// const author = authorData;
+const author = authorData;
 
 export default function AboutPage() {
-    // TODO: Implementar la página
+  // TODO: Implementar la página
 
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+  return (
+    <div className="container" style={{ padding: '4rem 1.5rem' }}>
+      <div className={styles.aboutPage}>
+        <header className={styles.hero}>
+          <h1>{author.name}</h1>
+          <p className={styles.role}>{author.role}</p>
+        </header>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
-        </div>
-    );
+        <section className={styles.bio}>
+          <h2>Sobre mí</h2>
+          <p>{author.bio}</p>
+        </section>
+
+        <section className={styles.skills}>
+          <h2>Habilidades</h2>
+          <ul className={styles.skillsList}>
+            {author.skills.map((skill: string) => (
+              <li key={skill}>{skill}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className={styles.social}>
+          <h2>Redes</h2>
+          <div className={styles.socialLinks}>
+            <a href={author.social.github} target="_blank" rel="noreferrer">GitHub</a>
+            <a href={author.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href={author.social.twitter} target="_blank" rel="noreferrer">Twitter</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+
 }
 
 /* PREGUNTAS PARA REFLEXIONAR:

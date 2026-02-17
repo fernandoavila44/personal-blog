@@ -24,3 +24,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+body.dark {
+  background-color: #111;
+  color: #fff;
+}
+
+/* ===== Dark mode (simple) ===== */
+body.dark {
+  background: #0f172a;
+  /* oscuro */
+  color: #e2e8f0;
+  /* texto claro */
+}
+
+body.dark a {
+  color: #93c5fd;
+}
+
+body.dark header,
+body.dark footer {
+  background: #0b1220;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark * {
+  border-color: rgba(255, 255, 255, 0.15);
+}

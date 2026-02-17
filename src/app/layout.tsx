@@ -4,6 +4,7 @@ import "./globals.scss";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

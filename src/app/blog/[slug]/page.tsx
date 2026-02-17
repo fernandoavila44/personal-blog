@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 import postsData from '@/data/posts.json';
+import CommentSection from '@/components/CommentSection';
+
 // import styles from './page.module.scss';
 
 /* 
@@ -37,28 +39,63 @@ import postsData from '@/data/posts.json';
  */
 
 // TODO: Implementar generateStaticParams
-// export async function generateStaticParams() {
-//   // Tu código aquí
-//   // Pista: Mapear postsData para obtener solo los slugs
-// }
+export function generateStaticParams() {
+  return postsData.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 // TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
-    // TODO: Buscar el post usando params.slug
-    // const post = postsData.find(p => p.slug === params.slug);
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-    // TODO: Si no existe el post, llamar notFound()
-    // if (!post) {
-    //   notFound();
-    // }
+  const post = postsData.find((p) => p.slug === slug);
 
-    return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
-    );
+  if (!post) {
+    notFound();
+  }
+
+  // TODO: Buscar el post usando params.slug
+  // const post = postsData.find(p => p.slug === params.slug);
+
+  // TODO: Si no existe el post, llamar notFound()
+  // if (!post) {
+  //   notFound();
+  // }
+
+  return (
+    <article style={{ maxWidth: 900, margin: '0 auto', padding: '2rem 1rem' }}>
+      <a href="/blog" style={{ display: 'inline-block', marginBottom: '1rem' }}>
+        ← Volver al blog
+      </a>
+
+      <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{post.title}</h1>
+
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem', opacity: 0.8 }}>
+        <time>{new Date(post.date).toLocaleDateString()}</time>
+        <span>{post.category}</span>
+        <span>{post.readTime}</span>
+        {post.author && <span>{post.author}</span>}
+      </div>
+
+      <div style={{ lineHeight: 1.8, fontSize: '1.05rem' }}>
+        {post.content}
+      </div>
+      <div style={{ lineHeight: 1.8, fontSize: '1.05rem' }}>
+        {post.content}
+      </div>
+
+      <hr style={{ margin: '2rem 0' }} />
+
+      <CommentSection />
+
+    </article>
+  );
+
 }
 
 /* PREGUNTAS PARA REFLEXIONAR:

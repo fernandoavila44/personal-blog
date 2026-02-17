@@ -1,174 +1,165 @@
-// import { useState } from 'react';
-// import styles from './page.module.scss';
+'use client';
 
-/* 
- * EJERCICIO: Implementar formulario de contacto con validación
- * 
- * CONCEPTOS A APRENDER:
- * - Client Component con 'use client'
- * - useState para múltiples campos de formulario
- * - Validación de formularios
- * - Manejo de eventos
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Agregar 'use client' al inicio del archivo
- * 
- * 2. Crear estados para el formulario:
- *    - name (nombre)
- *    - email (correo)
- *    - message (mensaje)
- *    - errors (objeto con errores de validación)
- *    - isSubmitted (boolean para mostrar mensaje de éxito)
- * 
- * 3. Implementar función de validación
- *    - Nombre: no vacío, mínimo 2 caracteres
- *    - Email: formato válido
- *    - Mensaje: no vacío, mínimo 10 caracteres
- * 
- * 4. Implementar handleSubmit
- *    - Validar campos
- *    - Si hay errores, mostrarlos
- *    - Si no hay errores, simular envío y mostrar mensaje de éxito
- * 
- * 5. Crear el JSX del formulario
- *    - Campos de input con valores controlados
- *    - Mostrar errores debajo de cada campo
- *    - Botón de envío
- *    - Mensaje de éxito condicional
- */
+import { useMemo, useState } from 'react';
+
+type FormState = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 export default function ContactPage() {
-    // TODO: Agregar 'use client' al inicio del archivo
+  const [form, setForm] = useState<FormState>({
+    name: '',
+    email: '',
+    message: '',
+  });
 
-    // TODO: Implementar estados
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [message, setMessage] = useState('');
-    // const [errors, setErrors] = useState<{name?: string; email?: string; message?: string}>({});
-    // const [isSubmitted, setIsSubmitted] = useState(false);
+  const [touched, setTouched] = useState<Record<keyof FormState, boolean>>({
+    name: false,
+    email: false,
+    message: false,
+  });
 
-    // TODO: Implementar función de validación
-    // const validate = () => {
-    //   const newErrors: any = {};
-    //   
-    //   if (!name || name.length < 2) {
-    //     newErrors.name = 'El nombre debe tener al menos 2 caracteres';
-    //   }
-    //   
-    //   if (!email || !/\S+@\S+\.\S+/.test(email)) {
-    //     newErrors.email = 'Por favor ingresa un email válido';
-    //   }
-    //   
-    //   if (!message || message.length < 10) {
-    //     newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
-    //   }
-    //   
-    //   return newErrors;
-    // };
+  const [submitted, setSubmitted] = useState(false);
 
-    // TODO: Implementar handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   const newErrors = validate();
-    //   
-    //   if (Object.keys(newErrors).length > 0) {
-    //     setErrors(newErrors);
-    //     return;
-    //   }
-    //   
-    //   // Simular envío exitoso
-    //   setErrors({});
-    //   setIsSubmitted(true);
-    //   
-    //   // Limpiar formulario después de 3 segundos
-    //   setTimeout(() => {
-    //     setName('');
-    //     setEmail('');
-    //     setMessage('');
-    //     setIsSubmitted(false);
-    //   }, 3000);
-    // };
+  const errors = useMemo(() => {
+    const next: Partial<Record<keyof FormState, string>> = {};
 
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '600px' }}>
-            <h1>Contacto</h1>
-            <p>¿Tienes alguna pregunta o comentario? ¡Escríbeme!</p>
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
 
-            <p style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#f0f0f0', borderRadius: '8px' }}>
-                TODO: Implementar formulario de contacto con validación
-            </p>
+    if (!name) next.name = 'El nombre es obligatorio.';
+    if (!email) {
+      next.email = 'El email es obligatorio.';
+    } else {
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailOk) next.email = 'Escribe un email válido.';
+    }
 
-            {/* TODO: Agregar formulario aquí */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <div>
+    if (!message) next.message = 'El mensaje es obligatorio.';
+    if (message && message.length < 10) next.message = 'Escribe al menos 10 caracteres.';
+
+    return next;
+  }, [form]);
+
+  const isValid = Object.keys(errors).length === 0;
+
+  const onChange =
+    (key: keyof FormState) =>
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setSubmitted(false);
+        setForm((prev) => ({ ...prev, [key]: e.target.value }));
+      };
+
+  const onBlur = (key: keyof FormState) => () => {
+    setTouched((prev) => ({ ...prev, [key]: true }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // marcar todo como "touched" para mostrar errores si los hay
+    setTouched({ name: true, email: true, message: true });
+
+    if (!isValid) return;
+
+    // Simulación de envío (en un proyecto real, aquí harías fetch a una API)
+    setSubmitted(true);
+
+    // limpiar formulario
+    setForm({ name: '', email: '', message: '' });
+    setTouched({ name: false, email: false, message: false });
+  };
+
+  return (
+    <section style={{ maxWidth: 820, margin: '0 auto', padding: '3rem 1rem' }}>
+      <h1 style={{ fontSize: '2rem', marginBottom: '0.25rem' }}>Contacto</h1>
+      <p style={{ opacity: 0.8, marginBottom: '1.5rem' }}>
+        Escríbeme y te respondo lo antes posible.
+      </p>
+
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'grid',
+          gap: '1rem',
+          padding: '1.25rem',
+          border: '1px solid #e5e5e5',
+          borderRadius: 12,
+        }}
+      >
+        <div style={{ display: 'grid', gap: '0.4rem' }}>
           <label htmlFor="name">Nombre</label>
           <input
             id="name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Tu nombre"
+            value={form.name}
+            onChange={onChange('name')}
+            onBlur={onBlur('name')}
+            style={{ padding: '0.7rem 0.8rem', borderRadius: 10, border: '1px solid #dcdcdc' }}
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {touched.name && errors.name && (
+            <small style={{ color: 'crimson' }}>{errors.name}</small>
+          )}
         </div>
-        
-        <div>
+
+        <div style={{ display: 'grid', gap: '0.4rem' }}>
           <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="tuemail@correo.com"
+            value={form.email}
+            onChange={onChange('email')}
+            onBlur={onBlur('email')}
+            style={{ padding: '0.7rem 0.8rem', borderRadius: 10, border: '1px solid #dcdcdc' }}
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {touched.email && errors.email && (
+            <small style={{ color: 'crimson' }}>{errors.email}</small>
+          )}
         </div>
-        
-        <div>
+
+        <div style={{ display: 'grid', gap: '0.4rem' }}>
           <label htmlFor="message">Mensaje</label>
           <textarea
             id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            rows={5}
+            rows={6}
+            placeholder="Escribe tu mensaje..."
+            value={form.message}
+            onChange={onChange('message')}
+            onBlur={onBlur('message')}
+            style={{ padding: '0.7rem 0.8rem', borderRadius: 10, border: '1px solid #dcdcdc' }}
           />
-          {errors.message && <span className="error">{errors.message}</span>}
+          {touched.message && errors.message && (
+            <small style={{ color: 'crimson' }}>{errors.message}</small>
+          )}
         </div>
-        
-        <button type="submit" className="btn btn-primary">
-          Enviar mensaje
+
+        <button
+          type="submit"
+          disabled={!isValid}
+          style={{
+            justifySelf: 'start',
+            padding: '0.7rem 1.1rem',
+            borderRadius: 10,
+            border: '1px solid #111',
+            background: isValid ? '#111' : '#888',
+            color: '#fff',
+            cursor: isValid ? 'pointer' : 'not-allowed',
+          }}
+        >
+          Enviar
         </button>
-        
-        {isSubmitted && (
-          <div className="success">
-            ¡Mensaje enviado exitosamente! Te responderé pronto.
+
+        {submitted && (
+          <div style={{ padding: '0.8rem 1rem', borderRadius: 10, background: '#e9fff0' }}>
+            ✅ Mensaje enviado (simulado). ¡Gracias por escribir!
           </div>
         )}
       </form>
-      */}
-        </div>
-    );
+    </section>
+  );
 }
-
-/* PREGUNTAS PARA REFLEXIONAR:
- * 
- * 1. ¿Por qué usar inputs controlados (controlled inputs)?
- *    Respuesta: Para que React maneje el estado del formulario, permitiendo
- *    validación en tiempo real y mejor control sobre los datos.
- * 
- * 2. ¿Qué es e.preventDefault() y por qué lo usamos?
- *    Respuesta: Previene el comportamiento por defecto del formulario (recargar
- *    la página), permitiéndonos manejar el submit con JavaScript.
- * 
- * 3. ¿Cómo mejorarías este formulario en producción?
- *    Respuesta: Conectarlo a una API real, agregar loading state, mejor UX
- *    con validación en tiempo real, usar una librería como react-hook-form.
- */
-
-/* BONUS: Mejoras opcionales
- * 1. Validación en tiempo real (onChange)
- * 2. Loading state mientras se envía
- * 3. Conectar a una API real (API Routes de Next.js)
- * 4. Agregar más campos (teléfono, asunto, etc.)
- * 5. Usar una librería de validación como Zod o Yup
- */

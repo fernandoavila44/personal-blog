@@ -1,13 +1,13 @@
 {
-    "name": "Tu Nombre",
+    "name": "Byron Herley Basante Pabon",
     "role": "Desarrollador Full Stack",
     "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
+    "email": "byron89xcc@gmail.com",
+    "location": "Pasto - Colombia",
     "avatar": "/images/avatar.jpg",
     "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
+        "github": "https://github.com/zorororonoa89xc",
+        "linkedin": "https://www.linkedin.com/feed/?trk=public_profile_not-found-log-in_google-one-tap-submit",
         "twitter": "https://twitter.com/tuusuario"
     },
     "skills": [
@@ -19,5 +19,5 @@
         "PostgreSQL"
     ],
     "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    "education": "Ingeniería Electronico"
 }

@@ -1,0 +1,71 @@
+@import '../styles/variables';
+
+.commentSection {
+    margin-top: $spacing-3xl;
+}
+
+.title {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+}
+
+.input,
+.textarea {
+    padding: $spacing-sm;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    font-family: inherit;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+.button {
+    align-self: flex-start;
+    padding: $spacing-sm $spacing-lg;
+    border: none;
+    background-color: $primary-color;
+    color: white;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+        background-color: darken($primary-color, 5%);
+    }
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.comment {
+    padding: $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    background-color: $background-gray;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: $font-size-xs;
+    margin-bottom: $spacing-xs;
+}
+
+.empty {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+}

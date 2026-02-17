@@ -1,0 +1,16 @@
+@import '../styles/variables';
+
+.button {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    transition: $transition-fast;
+
+    &:hover {
+        background-color: $primary-color;
+        color: white;
+    }
+}

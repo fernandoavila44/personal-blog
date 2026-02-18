@@ -1,11 +1,25 @@
-// Mixin para flexbox centrado
+// ===============================
+// VARIABLES BASE (INLINE)
+// ===============================
+$transition-base: 0.3s;
+$transition-fast: 0.2s;
+$shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+
+// ===============================
+// FLEXBOX
+// ===============================
 @mixin flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-// Mixin para flexbox con dirección y alineación
 @mixin flex($direction: row, $justify: flex-start, $align: stretch) {
     display: flex;
     flex-direction: $direction;
@@ -13,48 +27,45 @@
     align-items: $align;
 }
 
-// Mixin para grid responsive
+
+// ===============================
+// GRID
+// ===============================
 @mixin grid($columns: 1, $gap: 1rem) {
     display: grid;
     grid-template-columns: repeat($columns, 1fr);
     gap: $gap;
 }
 
-// Mixin para responsive (mobile-first)
+
+// ===============================
+// RESPONSIVE
+// ===============================
 @mixin respond-to($breakpoint) {
-    @if $breakpoint =='sm' {
-        @media (min-width: $breakpoint-sm) {
-            @content;
-        }
+    @if $breakpoint == 'sm' {
+        @media (min-width: $breakpoint-sm) { @content; }
     }
-
-    @else if $breakpoint =='md' {
-        @media (min-width: $breakpoint-md) {
-            @content;
-        }
+    @else if $breakpoint == 'md' {
+        @media (min-width: $breakpoint-md) { @content; }
     }
-
-    @else if $breakpoint =='lg' {
-        @media (min-width: $breakpoint-lg) {
-            @content;
-        }
+    @else if $breakpoint == 'lg' {
+        @media (min-width: $breakpoint-lg) { @content; }
     }
-
-    @else if $breakpoint =='xl' {
-        @media (min-width: $breakpoint-xl) {
-            @content;
-        }
+    @else if $breakpoint == 'xl' {
+        @media (min-width: $breakpoint-xl) { @content; }
     }
 }
 
-// Mixin para truncar texto
+
+// ===============================
+// TEXT
+// ===============================
 @mixin truncate {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-// Mixin para líneas múltiples con ellipsis
 @mixin line-clamp($lines: 2) {
     display: -webkit-box;
     -webkit-line-clamp: $lines;
@@ -62,14 +73,16 @@
     overflow: hidden;
 }
 
-// Mixin para transiciones
+
+// ===============================
+// EFFECTS
+// ===============================
 @mixin transition($properties...) {
     transition-property: $properties;
     transition-duration: $transition-base;
     transition-timing-function: ease-in-out;
 }
 
-// Mixin para hover effect
 @mixin hover-lift {
     transition: transform $transition-fast, box-shadow $transition-fast;
 
@@ -79,5 +92,20 @@
     }
 }
 
-// TODO para estudiantes: Agregar más mixins útiles
-// Ejemplos: button-reset, card-style, etc.
+
+// ===============================
+// EXTRA UTILES
+// ===============================
+@mixin button-reset {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+@mixin card-style {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}

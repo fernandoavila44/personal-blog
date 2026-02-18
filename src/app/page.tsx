@@ -3,13 +3,26 @@ import BlogCard from '@/components/BlogCard';
 import postsData from '@/data/posts.json';
 import styles from './page.module.scss';
 
+type Post = {
+  id: number;
+  title: string;
+  excerpt: string;
+  slug: string;
+  date: string;
+  category: string;
+  readTime: string;
+  image?: string;
+  author?: string;
+  tags?: string[];
+};
+
 export default function Home() {
-  // Obtener los últimos 3 posts
-  const latestPosts = postsData.slice(0, 3);
+  // Últimos 3 posts
+  const latestPosts = postsData.slice(0, 3) as Post[];
 
   return (
     <div className={styles.home}>
-      {/* Hero Section */}
+      {/* Hero */}
       <section className={styles.hero}>
         <div className="container">
           <h1 className={styles.heroTitle}>
@@ -29,10 +42,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Posts Section */}
+      {/* Últimos posts */}
       <section className="section">
         <div className="container">
           <h2 className={styles.sectionTitle}>Últimos Posts</h2>
+
           <div className={styles.postsGrid}>
             {latestPosts.map((post) => (
               <BlogCard
@@ -43,9 +57,13 @@ export default function Home() {
                 date={post.date}
                 category={post.category}
                 readTime={post.readTime}
+                image={post.image ?? '/placeholder.jpg'}
+                author={post.author ?? 'Admin'}
+                tags={post.tags ?? []}
               />
             ))}
           </div>
+
           <div className={styles.viewAll}>
             <Link href="/blog" className="btn btn-primary">
               Ver todos los posts →
@@ -54,7 +72,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Preview Section */}
+      {/* Preview About */}
       <section className={`section ${styles.aboutPreview}`}>
         <div className="container">
           <div className={styles.aboutContent}>

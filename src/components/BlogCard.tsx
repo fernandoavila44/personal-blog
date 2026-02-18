@@ -8,6 +8,7 @@ interface BlogCardProps {
     date: string;
     category: string;
     readTime: string;
+    author?: string;
 }
 
 export default function BlogCard({ title, excerpt, slug, date, category, readTime }: BlogCardProps) {

@@ -1,23 +1,33 @@
 {
-    "name": "Tu Nombre",
-    "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
-    "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
-    },
+    "name": "Edison Arley",
+    "role": "Full Stack Developer",
+    "bio": "Desarrollador especializado en Next.js, React y Node.js.",
+    "image": "/images/profile.jpg",
     "skills": [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Node.js",
-        "SCSS",
-        "PostgreSQL"
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "MongoDB"
     ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
-}
+    "experience": [
+      {
+        "company": "Freelance",
+        "role": "Full Stack Developer",
+        "period": "2023 - Presente",
+        "description": "Desarrollo de aplicaciones web modernas."
+      }
+    ],
+    "education": [
+      {
+        "institution": "Autodidacta",
+        "degree": "Desarrollo Web",
+        "period": "2022 - Presente"
+      }
+    ],
+    "social": {
+      "github": "https://github.com/",
+      "linkedin": "https://linkedin.com/"
+    }
+  }
+  

@@ -1,6 +1,141 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import postsData from '@/data/posts.json';
 // import styles from './page.module.scss';
+
+interface Post {
+    id: number;
+    title: string;
+    excerpt: string;
+    slug: string;
+    date: string;
+    category: string;
+    readTime: string;
+    content?: string;
+    author?: string;
+}
+
+const posts = postsData as Post[];
+
+
+export async function generateStaticParams() {
+
+    return posts.map(post => ({
+        slug: post.slug
+    }));
+
+}
+
+
+/*
+PAGE COMPONENT
+*/
+
+export default function PostPage({
+    params
+}: {
+    params: { slug: string }
+}) {
+
+    // Buscar el post
+    const post = posts.find(
+        post => post.slug === params.slug
+    );
+
+    // Si no existe → 404
+    if (!post) {
+        notFound();
+    }
+
+    return (
+
+        <article
+            style={{
+                maxWidth: '800px',
+                margin: '0 auto',
+                padding: '40px 20px',
+                lineHeight: '1.7'
+            }}
+        >
+
+            {/* BOTÓN VOLVER */}
+            <Link href="/blog">
+                ← Volver al blog
+            </Link>
+
+
+            {/* HEADER */}
+            <header style={{ marginBottom: '30px' }}>
+
+                <h1 style={{
+                    fontSize: '2.5rem',
+                    marginBottom: '10px'
+                }}>
+                    {post.title}
+                </h1>
+
+                <div style={{
+                    display: 'flex',
+                    gap: '15px',
+                    flexWrap: 'wrap',
+                    color: '#666',
+                    fontSize: '14px'
+                }}>
+
+                    <span>{post.date}</span>
+
+                    <span>•</span>
+
+                    <span>{post.category}</span>
+
+                    <span>•</span>
+
+                    <span>{post.readTime}</span>
+
+                    {post.author && (
+                        <>
+                            <span>•</span>
+                            <span>Por {post.author}</span>
+                        </>
+                    )}
+
+                </div>
+
+            </header>
+
+
+            {/* CONTENT */}
+            <section style={{
+                fontSize: '18px'
+            }}>
+
+                {post.content ? (
+                    <div>
+                        {post.content}
+                    </div>
+                ) : (
+                    <p>No hay contenido disponible.</p>
+                )}
+
+            </section>
+
+
+            {/* FOOTER */}
+            <footer style={{
+                marginTop: '40px'
+            }}>
+
+                <Link href="/blog">
+                    ← Volver al blog
+                </Link>
+
+            </footer>
+
+        </article>
+
+    );
+}
+
 
 /* 
  * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
@@ -43,7 +178,7 @@ import postsData from '@/data/posts.json';
 // }
 
 // TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
+
     // TODO: Buscar el post usando params.slug
     // const post = postsData.find(p => p.slug === params.slug);
 
@@ -52,14 +187,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
     //   notFound();
     // }
 
-    return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
-    );
-}
+ 
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

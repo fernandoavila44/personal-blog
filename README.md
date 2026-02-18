@@ -50,29 +50,30 @@ personal-blog/
 │   ├── page.module.scss         # ✅ Estilos del home
 │   ├── globals.scss             # ✅ Estilos globales
 │   ├── blog/
-│   │   ├── page.tsx             # 🟡 Lista de posts (PARCIAL)
+│   │   ├── page.tsx             # ✅ Lista de posts (PARCIAL)
 │   │   └── [slug]/
-│   │       └── page.tsx         # 🔴 Post individual (TODO)
+│   │       └── page.tsx         # ✅ Post individual  YA (TODO)
 │   ├── about/
-│   │   └── page.tsx             # 🔴 Sobre mí (TODO)
+│   │   └── page.tsx             # ✅
+ Sobre mí (TODO)
 │   └── contact/
-│       └── page.tsx             # 🔴 Contacto (TODO)
+│       └── page.tsx             # ✅ Contacto (TODO)
 ├── src/
 │   ├── components/
 │   │   ├── Header.tsx           # ✅ Navegación (COMPLETO)
 │   │   ├── Footer.tsx           # ✅ Footer (COMPLETO)
-│   │   ├── BlogCard.tsx         # 🟡 Card de post (PARCIAL)
-│   │   ├── CommentSection.tsx   # 🔴 Comentarios (TODO)
-│   │   └── ThemeToggle.tsx      # 🔴 Toggle tema (TODO)
+│   │   ├── BlogCard.tsx         # ✅ Card de post (PARCIAL)
+│   │   ├── CommentSection.tsx   # ✅ Comentarios (TODO)
+│   │   └── ThemeToggle.tsx      # ✅ Toggle tema (TODO)
 │   ├── styles/
 │   │   ├── _variables.scss      # ✅ Variables SCSS
 │   │   ├── _mixins.scss         # ✅ Mixins reutilizables
-│   │   └── _typography.scss     # 🟡 Tipografía (PARCIAL)
+│   │   └── _typography.scss     # ✅ Tipografía (PARCIAL)
 │   ├── data/
 │   │   ├── posts.json           # ✅ Datos de posts
 │   │   └── author.json          # ✅ Datos del autor
 │   └── hooks/
-│       └── useLocalStorage.tsx  # 🔴 Custom hook (TODO)
+│       └── useLocalStorage.tsx  # ✅ Custom hook (TODO)
 ├── public/                       # Archivos estáticos
 ├── README.md                     # Este archivo
 └── EJERCICIOS.md                 # Guía de ejercicios

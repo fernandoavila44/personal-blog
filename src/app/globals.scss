@@ -1,82 +1,110 @@
-@import '../styles/variables';
-@import '../styles/mixins';
-@import '../styles/typography';
+@use "sass:color";
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+@use "../styles/typography";
 
-/* Reset básico */
+/* =========================
+   Reset básico
+========================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
+/* =========================
+   Tema con CSS variables
+========================= */
+:root {
+  --bg: #ffffff;
+  --text: #111827;
+  --card: #f9fafb;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+}
+
+[data-theme='dark'] {
+  --bg: #0f172a;
+  --text: #f8fafc;
+  --card: #020617;
+  --border: #334155;
+  --primary: #60a5fa;
+}
+
+/* =========================
+   Body global
+========================= */
 body {
-    background-color: $background-light;
-    min-height: 100vh;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Utilidades globales */
+/* =========================
+   Utilidades globales
+========================= */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
 }
 
 .section {
-    padding: $spacing-3xl 0;
+  padding: $spacing-3xl 0;
 }
 
-/* Botones base */
+/* =========================
+   Botones base
+========================= */
 .btn {
-    display: inline-block;
-    padding: $spacing-sm $spacing-lg;
-    border-radius: $radius-md;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    @include transition(background-color, transform);
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  @include transition(background-color, transform);
 
-    &:hover {
-        transform: translateY(-1px);
-    }
+  &:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .btn-primary {
-    background-color: $primary-color;
-    color: white;
+  background-color: var(--primary);
+  color: #ffffff;
 
-    &:hover {
-        background-color: darken($primary-color, 10%);
-    }
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -10%);
+  }
 }
 
 .btn-secondary {
-    background-color: $secondary-color;
-    color: white;
+  background-color: $secondary-color;
+  color: #ffffff;
 
-    &:hover {
-        background-color: darken($secondary-color, 10%);
-    }
+  &:hover {
+    background-color: color.adjust($secondary-color, $lightness: -10%);
+  }
 }
 
-/* Cards base */
+/* =========================
+   Cards base
+========================= */
 .card {
-    background-color: white;
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-    @include transition(box-shadow);
+  background-color: var(--card);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid var(--border);
+  @include transition(box-shadow);
 
-    &:hover {
-        box-shadow: $shadow-md;
-    }
+  &:hover {
+    box-shadow: $shadow-md;
+  }
 }
-
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
- * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
- * 3. Mejorar los estilos de los botones con más variantes
- */

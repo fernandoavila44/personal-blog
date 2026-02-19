@@ -1,3 +1,204 @@
+'use client';
+
+import { useState } from 'react';
+
+interface FormErrors {
+    name?: string;
+    email?: string;
+    message?: string;
+}
+
+export default function ContactPage() {
+
+    // Estados del formulario
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [errors, setErrors] = useState<FormErrors>({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Función de validación
+    const validate = (): FormErrors => {
+        const newErrors: FormErrors = {};
+
+        if (!name.trim()) {
+            newErrors.name = 'El nombre es obligatorio';
+        } else if (name.trim().length < 2) {
+            newErrors.name = 'El nombre debe tener al menos 2 caracteres';
+        }
+
+        if (!email.trim()) {
+            newErrors.email = 'El email es obligatorio';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newErrors.email = 'Por favor ingresa un email válido';
+        }
+
+        if (!message.trim()) {
+            newErrors.message = 'El mensaje es obligatorio';
+        } else if (message.trim().length < 10) {
+            newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+        }
+
+        return newErrors;
+    };
+
+    // Manejar envío
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const newErrors = validate();
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        setErrors({});
+        setIsLoading(true);
+
+        // Simular envío a servidor
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        setIsLoading(false);
+        setIsSubmitted(true);
+
+        // Limpiar formulario
+        setName('');
+        setEmail('');
+        setMessage('');
+
+        // Ocultar mensaje después de 3 segundos
+        setTimeout(() => {
+            setIsSubmitted(false);
+        }, 3000);
+    };
+
+    return (
+        <div
+            style={{
+                padding: '4rem 1.5rem',
+                maxWidth: '600px',
+                margin: '0 auto'
+            }}
+        >
+            <h1>Contacto</h1>
+            <p>¿Tienes alguna pregunta o comentario? ¡Escríbeme!</p>
+
+            <form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
+
+                {/* Nombre */}
+                <div style={{ marginBottom: '1.5rem' }}>
+                    <label htmlFor="name">Nombre</label>
+
+                    <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            marginTop: '0.25rem',
+                            borderRadius: '6px',
+                            border: errors.name ? '1px solid red' : '1px solid #ccc'
+                        }}
+                    />
+
+                    {errors.name && (
+                        <div style={{ color: 'red', fontSize: '0.875rem' }}>
+                            {errors.name}
+                        </div>
+                    )}
+                </div>
+
+                {/* Email */}
+                <div style={{ marginBottom: '1.5rem' }}>
+                    <label htmlFor="email">Email</label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            marginTop: '0.25rem',
+                            borderRadius: '6px',
+                            border: errors.email ? '1px solid red' : '1px solid #ccc'
+                        }}
+                    />
+
+                    {errors.email && (
+                        <div style={{ color: 'red', fontSize: '0.875rem' }}>
+                            {errors.email}
+                        </div>
+                    )}
+                </div>
+
+                {/* Mensaje */}
+                <div style={{ marginBottom: '1.5rem' }}>
+                    <label htmlFor="message">Mensaje</label>
+
+                    <textarea
+                        id="message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        rows={5}
+                        style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            marginTop: '0.25rem',
+                            borderRadius: '6px',
+                            border: errors.message ? '1px solid red' : '1px solid #ccc'
+                        }}
+                    />
+
+                    {errors.message && (
+                        <div style={{ color: 'red', fontSize: '0.875rem' }}>
+                            {errors.message}
+                        </div>
+                    )}
+                </div>
+
+                {/* Botón */}
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                    style={{
+                        padding: '0.75rem 1.5rem',
+                        backgroundColor: isLoading ? '#999' : '#0070f3',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: isLoading ? 'not-allowed' : 'pointer'
+                    }}
+                >
+                    {isLoading ? 'Enviando...' : 'Enviar mensaje'}
+                </button>
+
+                {/* Mensaje éxito */}
+                {isSubmitted && (
+                    <div
+                        style={{
+                            marginTop: '1rem',
+                            padding: '0.75rem',
+                            backgroundColor: '#d4edda',
+                            color: '#155724',
+                            borderRadius: '6px'
+                        }}
+                    >
+                        ¡Mensaje enviado exitosamente! Te responderé pronto.
+                    </div>
+                )}
+
+            </form>
+        </div>
+    );
+}
+
+
 // import { useState } from 'react';
 // import styles from './page.module.scss';
 
@@ -38,7 +239,7 @@
  *    - Mensaje de éxito condicional
  */
 
-export default function ContactPage() {
+// export default function ContactPage() {
     // TODO: Agregar 'use client' al inicio del archivo
 
     // TODO: Implementar estados
@@ -89,66 +290,7 @@ export default function ContactPage() {
     //     setIsSubmitted(false);
     //   }, 3000);
     // };
-
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '600px' }}>
-            <h1>Contacto</h1>
-            <p>¿Tienes alguna pregunta o comentario? ¡Escríbeme!</p>
-
-            <p style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#f0f0f0', borderRadius: '8px' }}>
-                TODO: Implementar formulario de contacto con validación
-            </p>
-
-            {/* TODO: Agregar formulario aquí */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nombre</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {errors.name && <span className="error">{errors.name}</span>}
-        </div>
-        
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        
-        <div>
-          <label htmlFor="message">Mensaje</label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            rows={5}
-          />
-          {errors.message && <span className="error">{errors.message}</span>}
-        </div>
-        
-        <button type="submit" className="btn btn-primary">
-          Enviar mensaje
-        </button>
-        
-        {isSubmitted && (
-          <div className="success">
-            ¡Mensaje enviado exitosamente! Te responderé pronto.
-          </div>
-        )}
-      </form>
-      */}
-        </div>
-    );
-}
+/*
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

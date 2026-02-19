@@ -1,4 +1,90 @@
-// import { useState, useEffect } from 'react';
+'use client';
+
+import { useState, useEffect } from 'react';
+
+/**
+ * Custom hook useLocalStorage
+ * Funciona como useState pero persiste el valor en localStorage
+ */
+export function useLocalStorage<T>(
+    key: string,
+    initialValue: T
+): [T, (value: T | ((prevValue: T) => T)) => void] {
+
+    // Lazy initialization (solo se ejecuta una vez)
+    const [storedValue, setStoredValue] = useState<T>(() => {
+
+        // Evitar error en SSR
+        if (typeof window === 'undefined') {
+            return initialValue;
+        }
+
+        try {
+
+            const item = window.localStorage.getItem(key);
+
+            return item ? JSON.parse(item) as T : initialValue;
+
+        } catch (error) {
+
+            console.error(`Error reading localStorage key "${key}":`, error);
+
+            return initialValue;
+        }
+    });
+
+
+    // Setter que también guarda en localStorage
+    const setValue = (value: T | ((prevValue: T) => T)) => {
+
+        try {
+
+            const valueToStore =
+                value instanceof Function
+                    ? value(storedValue)
+                    : value;
+
+            setStoredValue(valueToStore);
+
+            if (typeof window !== 'undefined') {
+                window.localStorage.setItem(
+                    key,
+                    JSON.stringify(valueToStore)
+                );
+            }
+
+        } catch (error) {
+
+            console.error(`Error setting localStorage key "${key}":`, error);
+
+        }
+    };
+
+
+    // Sincronizar entre pestañas (BONUS profesional)
+    useEffect(() => {
+
+        const handleStorageChange = (event: StorageEvent) => {
+
+            if (event.key === key && event.newValue !== null) {
+
+                setStoredValue(JSON.parse(event.newValue));
+
+            }
+
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+
+    }, [key]);
+
+
+    return [storedValue, setValue];
+}
 
 /* 
  * EJERCICIO: Crear custom hook useLocalStorage
@@ -29,36 +115,6 @@
  * 
  * 4. Retornar el valor y la función setter
  */
-
-// TODO: Implementar el custom hook
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-    // TODO: Implementar useState con valor inicial desde localStorage
-    // const [storedValue, setStoredValue] = useState<T>(() => {
-    //   try {
-    //     const item = window.localStorage.getItem(key);
-    //     return item ? JSON.parse(item) : initialValue;
-    //   } catch (error) {
-    //     console.error(error);
-    //     return initialValue;
-    //   }
-    // });
-
-    // TODO: Implementar función setValue que también guarde en localStorage
-    // const setValue = (value: T) => {
-    //   try {
-    //     setStoredValue(value);
-    //     window.localStorage.setItem(key, JSON.stringify(value));
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
-
-    // TODO: Retornar el valor y la función setter
-    // return [storedValue, setValue];
-
-    // Placeholder temporal
-    throw new Error('TODO: Implementar useLocalStorage');
-}
 
 /* EJEMPLO DE USO:
  * 

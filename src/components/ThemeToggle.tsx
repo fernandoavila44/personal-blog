@@ -1,5 +1,84 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
+export default function ThemeToggle() {
+
+    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+
+        if (typeof window === 'undefined') {
+            return 'light';
+        }
+
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
+
+        if (savedTheme) {
+            return savedTheme;
+        }
+
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        return systemPrefersDark ? 'dark' : 'light';
+    });
+
+
+    // Aplicar tema al body
+    useEffect(() => {
+
+        const body = document.body;
+
+        // transición suave
+        body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+
+        if (theme === 'dark') {
+            body.classList.add('dark');
+        } else {
+            body.classList.remove('dark');
+        }
+
+        // guardar preferencia
+        localStorage.setItem('theme', theme);
+
+    }, [theme]);
+
+
+    // Toggle
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    };
+
+
+    return (
+        <button
+            onClick={toggleTheme}
+            aria-label="Cambiar tema"
+            style={{
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                border: '1px solid #ccc',
+                background: 'transparent',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                transition: 'all 0.25s ease'
+            }}
+        >
+            {theme === 'light' ? (
+                <>
+                    🌙 <span>Modo oscuro</span>
+                </>
+            ) : (
+                <>
+                    ☀️ <span>Modo claro</span>
+                </>
+            )}
+        </button>
+    );
+}
+
+
 // import { useState, useEffect } from 'react';
 // import styles from './ThemeToggle.module.scss';
 
@@ -32,43 +111,6 @@
  * 
  * 5. Crear estilos en ThemeToggle.module.scss (opcional)
  */
-
-export default function ThemeToggle() {
-    // TODO: Implementar useState para el tema
-    // const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-    // TODO: Implementar useEffect para cargar tema desde localStorage
-    // useEffect(() => {
-    //   const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
-    //   if (savedTheme) {
-    //     setTheme(savedTheme);
-    //   }
-    // }, []);
-
-    // TODO: Implementar useEffect para aplicar el tema al body
-    // useEffect(() => {
-    //   if (theme === 'dark') {
-    //     document.body.classList.add('dark');
-    //   } else {
-    //     document.body.classList.remove('dark');
-    //   }
-    // }, [theme]);
-
-    // TODO: Implementar función toggleTheme
-    // const toggleTheme = () => {
-    //   const newTheme = theme === 'light' ? 'dark' : 'light';
-    //   setTheme(newTheme);
-    //   localStorage.setItem('theme', newTheme);
-    // };
-
-    return (
-        <button>
-            TODO: Implementar toggle de tema
-            {/* TODO: Mostrar icono según el tema */}
-            {/* {theme === 'light' ? '🌙' : '☀️'} */}
-        </button>
-    );
-}
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

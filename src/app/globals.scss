@@ -1,6 +1,6 @@
-@import '../styles/variables';
-@import '../styles/mixins';
-@import '../styles/typography';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/typography';
 
 /* Reset básico */
 * {
@@ -74,6 +74,23 @@ body {
         box-shadow: $shadow-md;
     }
 }
+
+:root {
+    --bg: #ffffff;
+    --text: #111827;
+}
+
+body.dark {
+    --bg: #111827;
+    --text: #f9fafb;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
 
 /* TODO para estudiantes: 
  * 1. Agregar estilos para tema oscuro usando CSS variables

@@ -1,6 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
-
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 .card {
     background-color: white;
     border-radius: $radius-lg;
@@ -79,6 +78,34 @@
         transform: translateX(4px);
     }
 }
+
+.imageContainer {
+    display: block;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.author {
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
 
 /* TODO para estudiantes:
  * 1. Agregar estilos para la imagen del post

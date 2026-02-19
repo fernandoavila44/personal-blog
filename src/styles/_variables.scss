@@ -9,6 +9,19 @@ $background-light: #ffffff;
 $background-gray: #f9fafb;
 $border-color: #e5e7eb;
 
+// Border radius
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 1rem;
+
+// Aliases para border-radius
+$border-radius-sm: $radius-sm;
+$border-radius-md: $radius-md;
+$border-radius-lg: $radius-lg;
+
+// Background secundario
+$background-secondary: $background-gray;
+
 // Colores para tema oscuro (TODO para estudiantes)
 $dark-bg: #1f2937;
 $dark-text: #f9fafb;
@@ -40,11 +53,6 @@ $breakpoint-sm: 640px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
-
-// Border radius
-$radius-sm: 0.25rem;
-$radius-md: 0.5rem;
-$radius-lg: 1rem;
 
 // Sombras
 $shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

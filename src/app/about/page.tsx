@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import authorData from '@/data/author.json';
-import styles from './page.module.scss';
+import styles from '../page.module.scss';
 
 interface Author {
     name: string;

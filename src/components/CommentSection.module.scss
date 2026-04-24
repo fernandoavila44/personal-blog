@@ -1,0 +1,118 @@
+@use '@/styles/variables' as *;
+
+.commentSection {
+  margin-top: $spacing-3xl;
+  padding-top: $spacing-2xl;
+  border-top: 1px solid $border-color;
+  
+  h3 {
+    font-size: $font-size-xl;
+    color: $text-primary;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-bottom: $spacing-2xl;
+  background: $background-gray;
+  padding: $spacing-xl;
+  border-radius: $radius-lg;
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font-family: inherit;
+    font-size: $font-size-base;
+    transition: $transition-fast;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  button {
+    align-self: flex-start;
+    background: $primary-color;
+    color: white;
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-md;
+    font-weight: 500;
+    cursor: pointer;
+    transition: $transition-base;
+    
+    &:hover {
+      background: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: $text-light;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.comment {
+  background: $background-light;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  border: 1px solid $border-color;
+  
+  .commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-sm;
+    
+    strong {
+      color: $text-primary;
+      font-size: $font-size-base;
+    }
+    
+    small {
+      color: $text-light;
+      font-size: $font-size-sm;
+    }
+  }
+  
+  p {
+    color: $text-secondary;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  color: $text-secondary;
+  padding: $spacing-xl;
+  background: $background-gray;
+  border-radius: $radius-lg;
+  font-style: italic;
+}

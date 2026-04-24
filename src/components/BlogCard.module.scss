@@ -4,15 +4,84 @@
 .card {
     background-color: white;
     border-radius: $radius-lg;
-    padding: $spacing-lg;
     box-shadow: $shadow-sm;
-    @include transition(transform, box-shadow);
+    transition: transform $transition-base, box-shadow $transition-base;
     border: 1px solid $border-color;
+    animation: fadeIn 0.5s ease-out backwards;
+    overflow: hidden;
 
     &:hover {
-        transform: translateY(-4px);
+        transform: translateY(-8px);
         box-shadow: $shadow-lg;
     }
+    
+    :global(body.dark) & {
+        background-color: lighten(#1f2937, 5%);
+        border-color: rgba(255, 255, 255, 0.1);
+        
+        .title a {
+            color: #fff;
+            &:hover {
+                color: $accent-color;
+            }
+        }
+        
+        .excerpt {
+            color: #d1d5db;
+        }
+    }
+}
+
+.content {
+    padding: $spacing-lg;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+.postImage {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+.tags {
+    display: flex;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-md;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: $background-gray;
+    color: $text-secondary;
+    padding: 2px $spacing-sm;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    
+    :global(body.dark) & {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e5e7eb;
+    }
+}
+
+.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
 }
 
 .header {

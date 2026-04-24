@@ -50,6 +50,7 @@ body {
 
     &:hover {
         background-color: darken($primary-color, 10%);
+        color: #fde047; // Un amarillo suave para resaltar
     }
 }
 
@@ -59,6 +60,7 @@ body {
 
     &:hover {
         background-color: darken($secondary-color, 10%);
+        color: #bae6fd; // Un azul muy claro (celeste)
     }
 }
 
@@ -75,8 +77,18 @@ body {
     }
 }
 
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
- * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
- * 3. Mejorar los estilos de los botones con más variantes
- */
+/* Estilos para tema oscuro implementados */
+body.dark {
+    background-color: $dark-bg;
+    color: $dark-text;
+
+    .card {
+        background-color: lighten($dark-bg, 5%);
+        color: $dark-text;
+    }
+    
+    // Anulación de colores claros para que hereden el oscuro
+    h1, h2, h3, h4, h5, p, span, label, th, td {
+        color: inherit;
+    }
+}

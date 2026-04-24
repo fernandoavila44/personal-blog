@@ -1,7 +1,7 @@
 'use client';
 
-// import { useState } from 'react';
-// import styles from './CommentSection.module.scss';
+import { useState } from 'react';
+import styles from './CommentSection.module.scss';
 
 /* 
  * EJERCICIO: Implementar sección de comentarios con React Hooks
@@ -45,60 +45,79 @@ interface Comment {
 
 export default function CommentSection() {
     // TODO: Implementar useState para comentarios
-    // const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment[]>([]);
 
     // TODO: Implementar useState para el formulario
-    // const [author, setAuthor] = useState('');
-    // const [text, setText] = useState('');
+    const [author, setAuthor] = useState('');
+    const [text, setText] = useState('');
 
     // TODO: Implementar función handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   // Validar campos
-    //   // Crear nuevo comentario
-    //   // Agregar a la lista
-    //   // Limpiar formulario
-    // };
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      // Validar campos
+      if (!author.trim() || !text.trim()) return;
+      
+      // Crear nuevo comentario
+      const newComment: Comment = {
+          id: Date.now(),
+          author: author.trim(),
+          text: text.trim(),
+          date: new Date().toLocaleString(),
+      };
+      
+      // Agregar a la lista
+      setComments([newComment, ...comments]);
+      
+      // Limpiar formulario
+      setAuthor('');
+      setText('');
+    };
 
     return (
-        <div>
+        <div className={styles.commentSection}>
             <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
+            <p style={{ display: 'none' }}>TODO: Implementar sección de comentarios</p>
 
             {/* TODO: Agregar formulario */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Tu nombre"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <textarea 
-          placeholder="Tu comentario"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button type="submit">Agregar comentario</button>
-      </form>
-      */}
+            <form className={styles.commentForm} onSubmit={handleSubmit}>
+              <div className={styles.inputGroup}>
+                <input 
+                  type="text" 
+                  placeholder="Tu nombre"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                  required
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <textarea 
+                  placeholder="Tu comentario"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" disabled={!author.trim() || !text.trim()}>
+                  Agregar comentario
+              </button>
+            </form>
 
             {/* TODO: Mostrar lista de comentarios */}
-            {/* 
-      <div>
-        {comments.length === 0 ? (
-          <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-        ) : (
-          comments.map(comment => (
-            <div key={comment.id}>
-              <strong>{comment.author}</strong>
-              <p>{comment.text}</p>
-              <small>{comment.date}</small>
+            <div className={styles.commentList}>
+              {comments.length === 0 ? (
+                <p className={styles.emptyState}>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+              ) : (
+                comments.map(comment => (
+                  <div key={comment.id} className={styles.comment}>
+                    <div className={styles.commentHeader}>
+                        <strong>{comment.author}</strong>
+                        <small>{comment.date}</small>
+                    </div>
+                    <p>{comment.text}</p>
+                  </div>
+                ))
+              )}
             </div>
-          ))
-        )}
-      </div>
-      */}
         </div>
     );
 }

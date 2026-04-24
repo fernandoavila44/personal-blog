@@ -21,6 +21,65 @@
     }
 }
 
+.controlsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-2xl;
+    align-items: center;
+    
+    @include respond-to('md') {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.searchBar {
+    width: 100%;
+    max-width: 300px;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    outline: none;
+    transition: $transition-fast;
+    
+    &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    justify-content: center;
+    
+    button {
+        padding: $spacing-xs $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: 20px;
+        background: $background-light;
+        color: $text-secondary;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition-fast;
+        
+        &:hover {
+            background: $background-gray;
+            color: $text-primary;
+        }
+        
+        &.active {
+            background: $primary-color;
+            color: white;
+            border-color: $primary-color;
+        }
+    }
+}
+
 .postsGrid {
     @include grid(1, $spacing-xl);
 
@@ -31,6 +90,51 @@
     @include respond-to('lg') {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-3xl;
+    
+    button {
+        padding: $spacing-sm $spacing-lg;
+        background: $background-light;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        color: $text-primary;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition-fast;
+        
+        &:hover:not(:disabled) {
+            background: $background-gray;
+            border-color: $primary-color;
+            color: $primary-color;
+        }
+        
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: $background-gray;
+        }
+    }
+    
+    span {
+        color: $text-secondary;
+        font-size: $font-size-sm;
+        font-weight: 500;
+    }
+}
+
+.noResults {
+    text-align: center;
+    padding: $spacing-3xl;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    grid-column: 1 / -1;
 }
 
 /* TODO para estudiantes: Agregar estilos para filtros y paginación */

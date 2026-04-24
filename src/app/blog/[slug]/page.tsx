@@ -1,6 +1,9 @@
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 import postsData from '@/data/posts.json';
-// import styles from './page.module.scss';
+import CommentSection from '@/components/CommentSection';
+import styles from './page.module.scss';
 
 /* 
  * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
@@ -37,27 +40,57 @@ import postsData from '@/data/posts.json';
  */
 
 // TODO: Implementar generateStaticParams
-// export async function generateStaticParams() {
-//   // Tu código aquí
-//   // Pista: Mapear postsData para obtener solo los slugs
-// }
+export async function generateStaticParams() {
+  // Pista: Mapear postsData para obtener solo los slugs
+  return postsData.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 // TODO: Implementar el componente de la página
 export default function PostPage({ params }: { params: { slug: string } }) {
     // TODO: Buscar el post usando params.slug
-    // const post = postsData.find(p => p.slug === params.slug);
+    const post = postsData.find(p => p.slug === params.slug);
 
     // TODO: Si no existe el post, llamar notFound()
-    // if (!post) {
-    //   notFound();
-    // }
+    if (!post) {
+      notFound();
+    }
 
     return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
+        <article className={styles.articleContainer}>
+            <Link href="/blog" className={styles.backButton}>
+                &larr; Volver al blog
+            </Link>
+            
+            <header className={styles.header}>
+                <h1>{post.title}</h1>
+                <div className={styles.meta}>
+                    <time dateTime={post.date}>
+                        📅 {new Date(post.date).toLocaleDateString()}
+                    </time>
+                    <span className={styles.category}>{post.category}</span>
+                    <span>⏱️ {post.readTime}</span>
+                    <span>✍️ {post.author}</span>
+                </div>
+            </header>
+
+            <div className={styles.imageWrapper}>
+                <Image 
+                    src={post.image || 'https://via.placeholder.com/800x400'} 
+                    alt={post.title}
+                    fill
+                    priority
+                />
+            </div>
+
+            <div className={styles.content}>
+                {/* TODO: Agregar el contenido del post aquí */}
+                <p>{post.content}</p>
+                {/* BONUS: Agregar CommentSection component (otro ejercicio) */}
+                <CommentSection />
+            </div>
+        </article>
     );
 }
 

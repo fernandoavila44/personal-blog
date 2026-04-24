@@ -66,6 +66,10 @@
 
 .aboutPreview {
     background-color: $background-gray;
+    
+    :global(body.dark) & {
+        background-color: lighten(#1f2937, 3%);
+    }
 }
 
 .aboutContent {

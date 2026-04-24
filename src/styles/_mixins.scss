@@ -79,5 +79,36 @@
     }
 }
 
+// Mixin para resetear estilos por defecto de botones (muy útil en React/Next)
+@mixin button-reset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+// Mixin para estilos base de una tarjeta (Card)
+@mixin card-style {
+    background-color: white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    overflow: hidden;
+
+    :global(body.dark) & {
+        background-color: lighten(#1f2937, 5%);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
 // TODO para estudiantes: Agregar más mixins útiles
 // Ejemplos: button-reset, card-style, etc.

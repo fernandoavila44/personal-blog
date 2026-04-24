@@ -1,5 +1,6 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import Image from 'next/image';
+import authorData from '@/data/author.json';
+import styles from './page.module.scss';
 
 /* 
  * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
@@ -32,25 +33,79 @@
  *    - Usar generateMetadata() para SEO
  */
 
-// TODO: Descomentar y usar authorData
-// const author = authorData;
+/* BONUS: Implementar generateMetadata */
+export async function generateMetadata() {
+  return {
+    title: `Sobre ${authorData.name} | Mi Blog Personal`,
+    description: authorData.bio,
+  };
+}
 
 export default function AboutPage() {
     // TODO: Implementar la página
-
     return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+        <div className={styles.aboutContainer}>
+            {/* Sidebar / Profile Card */}
+            <aside className={styles.profileCard}>
+                <div className={styles.avatarWrapper}>
+                    {/* Using a placeholder avatar for now if the real one isn't in public/images */}
+                    <Image 
+                        src={authorData.avatar || 'https://via.placeholder.com/200'} 
+                        alt={`Avatar de ${authorData.name}`}
+                        fill
+                        sizes="200px"
+                    />
+                </div>
+                <h1>{authorData.name}</h1>
+                <p className={styles.role}>{authorData.role}</p>
+                <p className={styles.location}>📍 {authorData.location}</p>
+                
+                <div className={styles.socialLinks}>
+                    <a href={authorData.social.github} target="_blank" rel="noopener noreferrer">GH</a>
+                    <a href={authorData.social.linkedin} target="_blank" rel="noopener noreferrer">IN</a>
+                    <a href={authorData.social.twitter} target="_blank" rel="noopener noreferrer">TW</a>
+                </div>
+            </aside>
 
+            {/* Main Content Area */}
+            <div className={styles.contentArea}>
+                <section className={styles.section}>
+                    <h2>Sobre mí</h2>
+                    <p>{authorData.bio}</p>
+                </section>
+
+                <section className={styles.section}>
+                    <h2>Habilidades Técnicas</h2>
+                    <div className={styles.skillsGrid}>
+                        {authorData.skills.map(skill => (
+                            <span key={skill} className={styles.skillBadge}>
+                                {skill}
+                            </span>
+                        ))}
+                    </div>
+                </section>
+
+                <section className={styles.section}>
+                    <h2>Trayectoria</h2>
+                    <div className={styles.infoItem}>
+                        <h3>Experiencia</h3>
+                        <p>{authorData.experience}</p>
+                    </div>
+                    <div className={styles.infoItem}>
+                        <h3>Educación</h3>
+                        <p>{authorData.education}</p>
+                    </div>
+                </section>
+            </div>
+            
             {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+             * - Header con foto y nombre
+             * - Biografía
+             * - Skills
+             * - Experiencia
+             * - Educación
+             * - Redes sociales
+             */}
         </div>
     );
 }
@@ -71,12 +126,3 @@ export default function AboutPage() {
  *    Respuesta: No, porque es un Server Component. Para usar hooks necesitas
  *    agregar 'use client' al inicio del archivo.
  */
-
-/* BONUS: Implementar generateMetadata
-export async function generateMetadata() {
-  return {
-    title: `Sobre ${authorData.name} | Mi Blog Personal`,
-    description: authorData.bio,
-  };
-}
-*/

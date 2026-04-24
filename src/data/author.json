@@ -1,10 +1,10 @@
 {
-    "name": "Tu Nombre",
+    "name": "Miguel Cabarcas",
     "role": "Desarrollador Full Stack",
     "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
+    "email": "miguecab8715@gmail.com",
+    "location": "Bucaramanga, Colombia",
+    "avatar": "/images/fotoPor.jpg",
     "social": {
         "github": "https://github.com/tuusuario",
         "linkedin": "https://linkedin.com/in/tuusuario",

@@ -1,0 +1,30 @@
+@use '@/styles/variables' as *;
+
+.toggleBtn {
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  padding: $spacing-xs $spacing-sm;
+  color: $text-primary;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-base;
+  transition: $transition-fast;
+  margin-left: $spacing-md;
+
+  &:hover {
+    background: rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+  }
+}
+
+:global(body.dark) .toggleBtn {
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+  }
+}

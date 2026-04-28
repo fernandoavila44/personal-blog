@@ -1,0 +1,122 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.commentSection {
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-2xl;
+    border-top: 1px solid $border-color;
+}
+
+.title {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-xl;
+    color: $text-primary;
+}
+
+.form {
+    background-color: #fafafa;
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+    margin-bottom: $spacing-2xl;
+    border: 1px solid $border-color;
+}
+
+.inputGroup {
+    margin-bottom: $spacing-md;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: $spacing-md;
+    border: 1px solid #ddd;
+    border-radius: $radius-md;
+    font-family: inherit;
+    font-size: $font-size-md;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: white;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1); /* Fallback si primary-color no funca como rgba directamente */
+    }
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.submitBtn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: $spacing-sm $spacing-xl;
+    font-size: $font-size-md;
+    font-weight: 600;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+}
+
+.emptyMsg {
+    color: $text-secondary;
+    font-style: italic;
+    text-align: center;
+    padding: $spacing-xl;
+    background-color: #f9f9f9;
+    border-radius: $radius-lg;
+    border: 1px dashed #ccc;
+}
+
+.commentCard {
+    background-color: white;
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-md;
+
+    strong {
+        color: $text-primary;
+        font-size: $font-size-lg;
+    }
+
+    small {
+        color: $text-light;
+        font-size: $font-size-sm;
+    }
+}
+
+.commentText {
+    color: $text-secondary;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

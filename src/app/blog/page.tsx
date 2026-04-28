@@ -1,14 +1,36 @@
+'use client';
+
+import { useState } from 'react';
 import BlogCard from '@/components/BlogCard';
 import postsData from '@/data/posts.json';
 import styles from './page.module.scss';
 
 export default function BlogPage() {
+
     // TODO para estudiantes: Implementar filtrado por categoría
     // Pista: Usar useState para manejar la categoría seleccionada
     // y filtrar los posts basándose en esa categoría
+    const [categoria, setCategoria] = useState('Todos');
+
+    const categorias = ['Todos', ...new Set(postsData.map(post => post.category))];
+
+    const postsFiltrados =
+        categoria === 'Todos'
+            ? postsData
+            : postsData.filter(post => post.category === categoria);
+
 
     // TODO para estudiantes: Implementar paginación
     // Pista: Mostrar solo 6 posts por página y agregar botones de navegación
+    const [paginaActual, setPaginaActual] = useState(1);
+    const postsPorPagina = 6;
+
+    const totalPaginas = Math.ceil(postsFiltrados.length / postsPorPagina);
+
+    const indiceInicial = (paginaActual - 1) * postsPorPagina;
+    const indiceFinal = indiceInicial + postsPorPagina;
+
+    const postsMostrados = postsFiltrados.slice(indiceInicial, indiceFinal);
 
     return (
         <div className={styles.blogPage}>
@@ -19,17 +41,22 @@ export default function BlogPage() {
                 </header>
 
                 {/* TODO para estudiantes: Agregar filtros por categoría aquí */}
-                {/* Ejemplo de estructura:
-        <div className={styles.filters}>
-          <button>Todos</button>
-          <button>Tutorial</button>
-          <button>Conceptos</button>
-          <button>React</button>
-        </div>
-        */}
+                <div className={styles.filters}>
+                    {categorias.map((cat) => (
+                        <button
+                            key={cat}
+                            onClick={() => {
+                                setCategoria(cat);
+                                setPaginaActual(1);
+                            }}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
 
                 <div className={styles.postsGrid}>
-                    {postsData.map((post) => (
+                    {postsMostrados.map((post) => (
                         <BlogCard
                             key={post.id}
                             title={post.title}
@@ -43,13 +70,25 @@ export default function BlogPage() {
                 </div>
 
                 {/* TODO para estudiantes: Agregar paginación aquí */}
-                {/* Ejemplo de estructura:
-        <div className={styles.pagination}>
-          <button>← Anterior</button>
-          <span>Página 1 de 2</span>
-          <button>Siguiente →</button>
-        </div>
-        */}
+                <div className={styles.pagination}>
+                    <button
+                        onClick={() => setPaginaActual(paginaActual - 1)}
+                        disabled={paginaActual === 1}
+                    >
+                        ← Anterior
+                    </button>
+
+                    <span>
+                        Página {paginaActual} de {totalPaginas}
+                    </span>
+
+                    <button
+                        onClick={() => setPaginaActual(paginaActual + 1)}
+                        disabled={paginaActual === totalPaginas}
+                    >
+                        Siguiente →
+                    </button>
+                </div>
             </div>
         </div>
     );

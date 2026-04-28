@@ -64,8 +64,92 @@ a {
     }
 }
 
-// TODO para estudiantes:
-// 1. Agregar estilos para listas (ul, ol)
-// 2. Agregar estilos para blockquotes
-// 3. Agregar estilos para code y pre
-// 4. Agregar clases de utilidad para tamaños de texto
+
+// 1. Listas (ul, ol)
+ul,
+ol {
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-xl;
+    color: $text-secondary;
+
+    li {
+        margin-bottom: $spacing-xs;
+    }
+}
+
+// 2. Blockquotes
+blockquote {
+    border-left: 4px solid $primary-color;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: $spacing-md;
+    font-style: italic;
+    color: $text-secondary;
+    background-color: rgba($primary-color, 0.05);
+    padding: $spacing-md $spacing-lg;
+    border-radius: 0 $radius-md $radius-md 0;
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// 3. Código (code y pre)
+code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background-color: $background-gray;
+    padding: 0.2rem 0.4rem;
+    border-radius: $radius-sm;
+    font-size: 0.9em;
+    color: $secondary-color;
+}
+
+pre {
+    background-color: #2d3748;
+    /* Fondo oscuro para bloques de código */
+    color: #f7fafc;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    overflow-x: auto;
+    margin-bottom: $spacing-md;
+
+    code {
+        background-color: transparent;
+        color: inherit;
+        padding: 0;
+        font-size: 0.9em;
+    }
+}
+
+// 4. Clases de utilidad para tamaños de texto
+.text-xs {
+    font-size: $font-size-xs !important;
+}
+
+.text-sm {
+    font-size: $font-size-sm !important;
+}
+
+.text-base {
+    font-size: $font-size-base !important;
+}
+
+.text-lg {
+    font-size: $font-size-lg !important;
+}
+
+.text-xl {
+    font-size: $font-size-xl !important;
+}
+
+.text-2xl {
+    font-size: $font-size-2xl !important;
+}
+
+.text-3xl {
+    font-size: $font-size-3xl !important;
+}
+
+.text-4xl {
+    font-size: $font-size-4xl !important;
+}

@@ -1,0 +1,40 @@
+@import '../styles/variables';
+
+.toggleBtn {
+    background: transparent;
+    border: 2px solid $border-color;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: white;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+        transform: scale(1.1);
+        border-color: $primary-color;
+        box-shadow: 0 0 10px rgba($primary-color, 0.2);
+    }
+
+    .icon {
+        font-size: 1.2rem;
+        transition: transform 0.5s ease;
+    }
+
+    &:active .icon {
+        transform: rotate(360deg) scale(0.8);
+    }
+}
+
+:global(body.dark) .toggleBtn {
+    background-color: #374151; /* Un tono ligeramente más claro que el fondo oscuro */
+    border-color: #4b5563;
+
+    &:hover {
+        border-color: $primary-color;
+    }
+}

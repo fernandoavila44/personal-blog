@@ -1,6 +1,18 @@
 @import '../styles/variables';
 @import '../styles/mixins';
 
+/* 2. Mejorar la animación con keyframes */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .card {
     background-color: white;
     border-radius: $radius-lg;
@@ -8,11 +20,93 @@
     box-shadow: $shadow-sm;
     @include transition(transform, box-shadow);
     border: 1px solid $border-color;
+    /* Aplicamos la animación */
+    animation: fadeInSlideUp 0.5s ease-out forwards;
 
     &:hover {
         transform: translateY(-4px);
         box-shadow: $shadow-lg;
     }
+}
+
+/* 4. Crear variantes de card (featured, compact, etc.) */
+.card.featured {
+    @include respond-to('md') {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+        overflow: hidden;
+
+        .imageContainer {
+            height: 100%;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .content {
+            padding: $spacing-2xl;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .title a {
+            font-size: $font-size-3xl;
+        }
+    }
+}
+
+.card.compact {
+    display: flex;
+    align-items: center;
+    padding: $spacing-md;
+    gap: $spacing-md;
+
+    .imageContainer {
+        width: 80px;
+        height: 80px;
+        margin: 0;
+        border-radius: $radius-md;
+        flex-shrink: 0;
+    }
+
+    .title {
+        margin-bottom: $spacing-xs;
+        a {
+            font-size: $font-size-lg;
+        }
+    }
+
+    .excerpt, .footer, .readTime {
+        display: none;
+    }
+}
+
+/* 1. Agregar estilos para la imagen del post */
+.imageContainer {
+    height: 200px;
+    overflow: hidden;
+    border-radius: $radius-lg $radius-lg 0 0;
+    margin-top: calc(-1 * #{$spacing-lg});
+    margin-left: calc(-1 * #{$spacing-lg});
+    margin-right: calc(-1 * #{$spacing-lg});
+    margin-bottom: $spacing-md;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        @include transition(transform);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -50,6 +144,29 @@
     }
 }
 
+/* 3. Agregar estilos para tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-md;
+}
+
+.tag {
+    background-color: rgba(0, 112, 243, 0.1); /* Ligero color primario de fondo */
+    color: $primary-color;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    @include transition(background-color, color);
+
+    &:hover {
+        background-color: $primary-color;
+        color: white;
+    }
+}
+
 .excerpt {
     color: $text-secondary;
     line-height: 1.6;
@@ -61,6 +178,7 @@
     @include flex(row, space-between, center);
     padding-top: $spacing-md;
     border-top: 1px solid $border-color;
+    margin-top: auto;
 }
 
 .date {
@@ -73,16 +191,10 @@
     font-weight: 600;
     font-size: $font-size-sm;
     @include transition(color, transform);
+    display: inline-block;
 
     &:hover {
         color: $secondary-color;
         transform: translateX(4px);
     }
 }
-
-/* TODO para estudiantes:
- * 1. Agregar estilos para la imagen del post
- * 2. Mejorar la animación con keyframes
- * 3. Agregar estilos para tags
- * 4. Crear variantes de card (featured, compact, etc.)
- */

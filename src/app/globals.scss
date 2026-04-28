@@ -80,3 +80,36 @@ body {
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
  * 3. Mejorar los estilos de los botones con más variantes
  */
+
+/* =========================================
+   Estilos de Tema Oscuro (.dark)
+   ========================================= */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+    background-color: $dark-bg;
+    color: $dark-text;
+
+    .card {
+        background-color: lighten($dark-bg, 5%);
+        border-color: lighten($dark-bg, 10%);
+        color: $dark-text;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, a {
+        color: $dark-text;
+    }
+
+    /* Adaptar inputs y textareas para el tema oscuro */
+    input, textarea {
+        background-color: lighten($dark-bg, 5%);
+        color: $dark-text;
+        border-color: lighten($dark-bg, 15%);
+
+        &:focus {
+            background-color: lighten($dark-bg, 8%);
+        }
+    }
+}

@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 /* 
  * EJERCICIO: Crear custom hook useLocalStorage
@@ -12,52 +12,58 @@
  * OBJETIVO:
  * Crear un hook que funcione como useState pero que persista
  * el valor en localStorage automáticamente.
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Crear la función useLocalStorage con generics
- *    - Parámetros: key (string), initialValue (T)
- *    - Retorno: [value, setValue] como useState
- * 
- * 2. Implementar useState para el valor
- *    - Valor inicial: leer de localStorage o usar initialValue
- *    - Manejar errores de parsing JSON
- * 
- * 3. Implementar useEffect para guardar en localStorage
- *    - Ejecutar cuando cambie el valor
- *    - Convertir a JSON antes de guardar
- * 
- * 4. Retornar el valor y la función setter
  */
 
-// TODO: Implementar el custom hook
 export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-    // TODO: Implementar useState con valor inicial desde localStorage
-    // const [storedValue, setStoredValue] = useState<T>(() => {
-    //   try {
-    //     const item = window.localStorage.getItem(key);
-    //     return item ? JSON.parse(item) : initialValue;
-    //   } catch (error) {
-    //     console.error(error);
-    //     return initialValue;
-    //   }
-    // });
+    // 1 y 2: Implementamos useState con inicialización lazy para no leer localStorage en cada render
+    const [storedValue, setStoredValue] = useState<T>(() => {
+        // BONUS: Verificación de SSR (Server-Side Rendering)
+        if (typeof window === 'undefined') {
+            return initialValue;
+        }
 
-    // TODO: Implementar función setValue que también guarde en localStorage
-    // const setValue = (value: T) => {
-    //   try {
-    //     setStoredValue(value);
-    //     window.localStorage.setItem(key, JSON.stringify(value));
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+        try {
+            const item = window.localStorage.getItem(key);
+            // Si existe en localStorage lo parseamos, sino devolvemos el valor inicial
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.error("Error al leer de localStorage:", error);
+            return initialValue;
+        }
+    });
 
-    // TODO: Retornar el valor y la función setter
-    // return [storedValue, setValue];
+    // 3: Función setter que actualiza el estado local y también localStorage
+    const setValue = (value: T) => {
+        try {
+            setStoredValue(value);
+            if (typeof window !== 'undefined') {
+                window.localStorage.setItem(key, JSON.stringify(value));
+            }
+        } catch (error) {
+            console.error("Error al guardar en localStorage:", error);
+        }
+    };
 
-    // Placeholder temporal
-    throw new Error('TODO: Implementar useLocalStorage');
+    // BONUS: Sincronizar entre pestañas usando el evento 'storage'
+    useEffect(() => {
+        const handleStorageChange = (e: StorageEvent) => {
+            if (e.key === key && e.newValue) {
+                try {
+                    setStoredValue(JSON.parse(e.newValue));
+                } catch (error) {
+                    console.error("Error al parsear desde otra pestaña:", error);
+                }
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            window.addEventListener('storage', handleStorageChange);
+            return () => window.removeEventListener('storage', handleStorageChange);
+        }
+    }, [key]);
+
+    // 4: Retornamos el valor y su setter, idéntico a cómo funciona useState
+    return [storedValue, setValue];
 }
 
 /* EJEMPLO DE USO:
@@ -95,9 +101,9 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
  *    de dato, manteniendo la inferencia de tipos de TypeScript.
  */
 
-/* BONUS: Mejoras opcionales
- * 1. Agregar soporte para SSR (verificar typeof window)
- * 2. Sincronizar entre pestañas usando storage event
+/* BONUS: Mejoras opcionales (¡IMPLEMENTADAS!)
+ * 1. Agregar soporte para SSR (verificar typeof window) -> ¡HECHO!
+ * 2. Sincronizar entre pestañas usando storage event -> ¡HECHO!
  * 3. Agregar opción para remover el item de localStorage
  * 4. Manejar valores undefined/null de manera especial
  */

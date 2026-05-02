@@ -80,9 +80,116 @@
     }
 }
 
-/* TODO para estudiantes:
- * 1. Agregar estilos para la imagen del post
- * 2. Mejorar la animación con keyframes
- * 3. Agregar estilos para tags
- * 4. Crear variantes de card (featured, compact, etc.)
- */
+/* ==========================================================================
+   NUEVAS IMPLEMENTACIONES (TODO)
+   ========================================================================== */
+
+/* 1. Estilos para la imagen del post */
+.imageContainer {
+    width: 100%;
+    height: 200px;
+    border-radius: $radius-lg $radius-lg 0 0;
+    overflow: hidden;
+    margin: -$spacing-lg -$spacing-lg $spacing-md -$spacing-lg;
+    position: relative;
+    width: calc(100% + (#{$spacing-lg} * 2));
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+/* 2. Mejorar la animación con keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    /* Agrega la animación de entrada a las cards */
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* 3. Estilos para tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-md;
+}
+
+.tag {
+    background-color: $background-gray;
+    color: $text-secondary;
+    padding: 2px $spacing-sm;
+    border-radius: 9999px;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover {
+        background-color: $primary-color;
+        color: white;
+    }
+}
+
+/* 4. Crear variantes de card */
+
+/* Variante Destacada */
+.cardFeatured {
+    border: 2px solid $primary-color;
+    
+    .title a {
+        font-size: $font-size-2xl;
+    }
+    
+    .imageContainer {
+        height: 280px;
+    }
+}
+
+/* Variante Compacta */
+.cardCompact {
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-md;
+    align-items: center;
+
+    .imageContainer {
+        width: 100px;
+        height: 100px;
+        margin: 0;
+        border-radius: $radius-md;
+        flex-shrink: 0;
+    }
+
+    .content {
+        flex: 1;
+    }
+
+    .excerpt, .footer {
+        display: none; /* Ocultamos detalles extra para mantenerla compacta */
+    }
+
+    .title {
+        margin-bottom: $spacing-xs;
+        
+        a {
+            font-size: $font-size-lg;
+        }
+    }
+}

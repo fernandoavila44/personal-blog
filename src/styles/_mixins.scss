@@ -79,5 +79,74 @@
     }
 }
 
-// TODO para estudiantes: Agregar más mixins útiles
-// Ejemplos: button-reset, card-style, etc.
+// ==========================================================================
+// NUEVOS MIXINS AÑADIDOS
+// ==========================================================================
+
+// Mixin para resetear estilos por defecto de los botones
+@mixin button-reset {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    outline: none;
+    
+    &:focus {
+        outline: none;
+    }
+}
+
+// Mixin para aplicar un estilo de tarjeta consistente
+@mixin card-style($padding: $spacing-lg, $radius: $radius-lg, $bg: white) {
+    background-color: $bg;
+    border-radius: $radius;
+    padding: $padding;
+    box-shadow: $shadow-sm;
+    @include transition(box-shadow, transform);
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+// Mixin para crear texto con degradado
+@mixin text-gradient($start-color: $primary-color, $end-color: $secondary-color) {
+    background: linear-gradient(135deg, $start-color, $end-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; // Fallback
+}
+
+// Mixin para personalizar la barra de desplazamiento
+@mixin custom-scrollbar($width: 8px, $thumb-color: $primary-color, $track-color: $background-gray) {
+    &::-webkit-scrollbar {
+        width: $width;
+        height: $width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track-color;
+        border-radius: $radius-sm;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb-color;
+        border-radius: $radius-sm;
+
+        &:hover {
+            background: darken($thumb-color, 10%);
+        }
+    }
+}
+
+// Mixin para centrado absoluto
+@mixin absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,85 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.postPage {
+    padding: $spacing-3xl 0;
+    min-height: 100vh;
+}
+
+.backButton {
+    display: inline-block;
+    margin-bottom: $spacing-2xl;
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $secondary-color;
+        text-decoration: underline;
+    }
+}
+
+.header {
+    margin-bottom: $spacing-3xl;
+    padding-bottom: $spacing-xl;
+    border-bottom: 1px solid $border-color;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    align-items: center;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+}
+
+.category {
+    background-color: $primary-color;
+    color: $background-light;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-md;
+    font-weight: 500;
+}
+
+.title {
+    font-size: $font-size-3xl;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    line-height: 1.2;
+
+    @include respond-to('md') {
+        font-size: $font-size-4xl;
+    }
+}
+
+.author {
+    font-size: $font-size-md;
+    color: $text-secondary;
+    font-style: italic;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: $font-size-lg;
+    line-height: 1.8;
+    color: $text-primary;
+
+    p {
+        margin-bottom: $spacing-lg;
+    }
+    
+    .excerpt {
+        color: $text-secondary;
+        font-size: $font-size-xl;
+        border-left: 4px solid $primary-color;
+        padding-left: $spacing-md;
+        margin-bottom: $spacing-xl;
+    }
+}

@@ -1,82 +1,91 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import Image from 'next/image';
+import authorData from '@/data/author.json';
+import styles from './page.module.scss';
 
-/* 
- * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
- * 
- * CONCEPTOS A APRENDER:
- * - Server Components: Componentes que se ejecutan en el servidor
- * - SSR: Renderizado en el servidor en cada request
- * - Data fetching en Server Components
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Importar los datos del autor
- *    - Ya está disponible en @/data/author.json
- *    - En un caso real, esto podría ser un fetch a una API
- * 
- * 2. Crear el JSX para mostrar:
- *    - Foto de perfil (usar next/image)
- *    - Nombre y rol
- *    - Biografía
- *    - Skills/habilidades
- *    - Experiencia y educación
- *    - Enlaces a redes sociales
- * 
- * 3. Crear estilos en page.module.scss
- *    - Layout atractivo (puede ser dos columnas en desktop)
- *    - Cards para skills
- *    - Botones para redes sociales
- * 
- * 4. BONUS: Agregar metadata dinámica
- *    - Usar generateMetadata() para SEO
- */
-
-// TODO: Descomentar y usar authorData
-// const author = authorData;
+export async function generateMetadata() {
+    return {
+        title: `Sobre ${authorData.name} | Mi Blog Personal`,
+        description: authorData.bio,
+    };
+}
 
 export default function AboutPage() {
-    // TODO: Implementar la página
+    const author = authorData;
 
     return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+        <div className={styles.aboutPage}>
+            <div className="container">
+                <div className={styles.content}>
+                    <section className={styles.header}>
+                        <div className={styles.imageContainer}>
+                            {author.avatar ? (
+                                <Image
+                                    src={author.avatar}
+                                    alt={`Foto de ${author.name}`}
+                                    width={150}
+                                    height={150}
+                                    className={styles.avatar}
+                                />
+                            ) : (
+                                <div className={styles.avatarPlaceholder}>
+                                    <span>{author.name.charAt(0)}</span>
+                                </div>
+                            )}
+                        </div>
+                        <div className={styles.headerInfo}>
+                            <h1>{author.name}</h1>
+                            <h2>{author.role}</h2>
+                            <p className={styles.location}>📍 {author.location}</p>
+                            <p className={styles.email}>✉️ {author.email}</p>
+                        </div>
+                    </section>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+                    <section className={styles.bio}>
+                        <h3>Biografía</h3>
+                        <p>{author.bio}</p>
+                    </section>
+
+                    <div className={styles.grid}>
+                        <section className={styles.skills}>
+                            <h3>Habilidades</h3>
+                            <div className={styles.tags}>
+                                {author.skills.map((skill) => (
+                                    <span key={skill} className={styles.tag}>
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section className={styles.experience}>
+                            <h3>Experiencia y Educación</h3>
+                            <div className={styles.card}>
+                                <h4>💼 Experiencia</h4>
+                                <p>{author.experience}</p>
+                            </div>
+                            <div className={styles.card}>
+                                <h4>🎓 Educación</h4>
+                                <p>{author.education}</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <section className={styles.social}>
+                        <h3>Conéctate conmigo</h3>
+                        <div className={styles.socialLinks}>
+                            <a href={author.social.github} target="_blank" rel="noopener noreferrer">
+                                GitHub
+                            </a>
+                            <a href={author.social.linkedin} target="_blank" rel="noopener noreferrer">
+                                LinkedIn
+                            </a>
+                            <a href={author.social.twitter} target="_blank" rel="noopener noreferrer">
+                                Twitter
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     );
 }
-
-/* PREGUNTAS PARA REFLEXIONAR:
- * 
- * 1. ¿Por qué usar SSR para esta página en lugar de SSG?
- *    Respuesta: En este ejemplo, podríamos usar SSG también. Pero SSR es útil
- *    si los datos cambian frecuentemente o necesitas datos en tiempo real.
- *    Esta página es un ejercicio para practicar SSR.
- * 
- * 2. ¿Cuál es la diferencia entre un Server Component y un Client Component?
- *    Respuesta: Server Components se ejecutan en el servidor, no envían JS al cliente,
- *    y pueden acceder directamente a bases de datos. Client Components ('use client')
- *    se ejecutan en el navegador y permiten interactividad (hooks, eventos).
- * 
- * 3. ¿Puedes usar hooks como useState en este componente?
- *    Respuesta: No, porque es un Server Component. Para usar hooks necesitas
- *    agregar 'use client' al inicio del archivo.
- */
-
-/* BONUS: Implementar generateMetadata
-export async function generateMetadata() {
-  return {
-    title: `Sobre ${authorData.name} | Mi Blog Personal`,
-    description: authorData.bio,
-  };
-}
-*/

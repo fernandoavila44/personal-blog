@@ -1,0 +1,109 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.commentSection {
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-2xl;
+    border-top: 1px solid $border-color;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-xl;
+    color: $text-primary;
+}
+
+.form {
+    background-color: $background-gray;
+    padding: $spacing-lg;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-2xl;
+}
+
+.inputGroup {
+    margin-bottom: $spacing-md;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    font-size: $font-size-base;
+    font-family: inherit;
+    transition: border-color $transition-fast;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.error {
+    color: #ef4444;
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-sm;
+}
+
+.submitButton {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.commentList {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+}
+
+.emptyMessage {
+    color: $text-secondary;
+    font-style: italic;
+    text-align: center;
+    padding: $spacing-lg 0;
+}
+
+.comment {
+    background-color: white;
+    padding: $spacing-lg;
+    border-radius: $radius-md;
+    border: 1px solid $border-color;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-sm;
+
+    strong {
+        color: $primary-color;
+    }
+
+    small {
+        color: $text-light;
+        font-size: $font-size-sm;
+    }
+}
+
+.commentText {
+    color: $text-primary;
+    line-height: 1.5;
+}

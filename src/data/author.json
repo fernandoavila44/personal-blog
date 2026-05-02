@@ -1,10 +1,10 @@
 {
-    "name": "Tu Nombre",
+    "name": "Cristian Andrey",
     "role": "Desarrollador Full Stack",
     "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
+    "email": "bmxcristianm@gmail.com",
+    "location": "La Tebaida, Quindío, Colombia",
+    "avatar": "/images/avatar.jpeg",
     "social": {
         "github": "https://github.com/tuusuario",
         "linkedin": "https://linkedin.com/in/tuusuario",

@@ -1,104 +1,58 @@
 'use client';
 
-// import { useState, useEffect } from 'react';
-// import styles from './ThemeToggle.module.scss';
-
-/* 
- * EJERCICIO: Implementar toggle de tema claro/oscuro con React Hooks
- * 
- * CONCEPTOS A APRENDER:
- * - useState: Manejo de estado
- * - useEffect: Efectos secundarios y sincronización
- * - localStorage: Persistencia de datos en el navegador
- * - Manipulación del DOM
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Crear estado para el tema
- *    - useState con valores 'light' o 'dark'
- *    - Valor inicial desde localStorage o 'light'
- * 
- * 2. Implementar función toggle
- *    - Cambiar entre 'light' y 'dark'
- *    - Guardar preferencia en localStorage
- * 
- * 3. Usar useEffect para aplicar el tema
- *    - Agregar/remover clase 'dark' al body
- *    - Ejecutar cuando cambie el tema
- * 
- * 4. Crear el JSX del botón
- *    - Icono de sol/luna según el tema
- *    - Texto descriptivo
- * 
- * 5. Crear estilos en ThemeToggle.module.scss (opcional)
- */
+import { useState, useEffect } from 'react';
+import styles from './ThemeToggle.module.scss';
 
 export default function ThemeToggle() {
-    // TODO: Implementar useState para el tema
-    // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+    const [mounted, setMounted] = useState(false); // Para evitar problemas de hidratación en SSR
 
-    // TODO: Implementar useEffect para cargar tema desde localStorage
-    // useEffect(() => {
-    //   const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
-    //   if (savedTheme) {
-    //     setTheme(savedTheme);
-    //   }
-    // }, []);
+    // Cargar el tema inicial desde localStorage o preferencia del sistema
+    useEffect(() => {
+        setMounted(true);
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+        
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            // BONUS: Detectar preferencia del sistema con window.matchMedia
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+    }, []);
 
-    // TODO: Implementar useEffect para aplicar el tema al body
-    // useEffect(() => {
-    //   if (theme === 'dark') {
-    //     document.body.classList.add('dark');
-    //   } else {
-    //     document.body.classList.remove('dark');
-    //   }
-    // }, [theme]);
+    // Aplicar la clase al DOM y guardar en localStorage cada vez que cambie
+    useEffect(() => {
+        if (!mounted) return;
+        
+        if (theme === 'dark') {
+            document.body.classList.add('dark');
+        } else {
+            document.body.classList.remove('dark');
+        }
+        
+        localStorage.setItem('theme', theme);
+    }, [theme, mounted]);
 
-    // TODO: Implementar función toggleTheme
-    // const toggleTheme = () => {
-    //   const newTheme = theme === 'light' ? 'dark' : 'light';
-    //   setTheme(newTheme);
-    //   localStorage.setItem('theme', newTheme);
-    // };
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
+    // No renderizar en servidor para evitar error de hidratación (SSR mismatch)
+    if (!mounted) {
+        return <button className={styles.toggleButton} style={{ visibility: 'hidden' }} aria-hidden="true" />;
+    }
 
     return (
-        <button>
-            TODO: Implementar toggle de tema
-            {/* TODO: Mostrar icono según el tema */}
-            {/* {theme === 'light' ? '🌙' : '☀️'} */}
+        <button 
+            className={`${styles.toggleButton} ${theme === 'dark' ? styles.dark : ''}`}
+            onClick={toggleTheme}
+            aria-label={`Cambiar a tema ${theme === 'light' ? 'oscuro' : 'claro'}`}
+            title={`Cambiar a tema ${theme === 'light' ? 'oscuro' : 'claro'}`}
+        >
+            <span className={styles.icon}>
+                {theme === 'light' ? '🌙' : '☀️'}
+            </span>
         </button>
     );
 }
-
-/* PREGUNTAS PARA REFLEXIONAR:
- * 
- * 1. ¿Por qué necesitamos dos useEffect diferentes?
- *    Respuesta: Uno para cargar el tema inicial (se ejecuta una vez al montar),
- *    y otro para aplicar el tema cada vez que cambia.
- * 
- * 2. ¿Qué pasa si no usamos useEffect para aplicar el tema?
- *    Respuesta: El tema no se aplicaría al DOM. useState solo maneja el estado
- *    de React, pero no modifica el DOM directamente.
- * 
- * 3. ¿Por qué guardar en localStorage?
- *    Respuesta: Para recordar la preferencia del usuario entre sesiones.
- *    Sin localStorage, el tema se resetearía al recargar la página.
- */
-
-/* BONUS: Mejorar el componente
- * 1. Agregar transición suave al cambiar de tema
- * 2. Detectar preferencia del sistema con window.matchMedia
- * 3. Usar CSS variables para los colores del tema
- * 4. Agregar animación al botón
- */
-
-/* NOTA SOBRE CSS:
- * Para que funcione el tema oscuro, necesitas agregar estilos CSS:
- * 
- * body.dark {
- *   background-color: #1f2937;
- *   color: #f9fafb;
- * }
- * 
- * O mejor aún, usar CSS variables que cambien según la clase .dark
- */

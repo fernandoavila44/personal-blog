@@ -1,0 +1,42 @@
+@import '../styles/variables';
+
+.toggleButton {
+    background-color: transparent;
+    border: 2px solid $border-color;
+    border-radius: $radius-full;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    margin-left: $spacing-md;
+
+    &:hover {
+        background-color: $background-gray;
+        transform: scale(1.05);
+    }
+}
+
+.dark {
+    border-color: $text-secondary;
+    background-color: transparent;
+    
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.icon {
+    font-size: 1.2rem;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+// Estilos globales para la transición del body
+:global(body) {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

@@ -33,4 +33,100 @@
     }
 }
 
-/* TODO para estudiantes: Agregar estilos para filtros y paginación */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    align-items: center;
+}
+
+.searchBar {
+    width: 100%;
+    max-width: 400px;
+    
+    input {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        font-size: $font-size-base;
+        transition: border-color $transition-fast;
+        
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+    }
+}
+
+.filters {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $border-color;
+        background-color: transparent;
+        border-radius: $radius-lg;
+        cursor: pointer;
+        font-size: $font-size-sm;
+        transition: all $transition-fast;
+
+        &:hover {
+            border-color: $primary-color;
+            color: $primary-color;
+        }
+
+        &.active {
+            background-color: $primary-color;
+            color: $background-light;
+            border-color: $primary-color;
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-2xl;
+
+    button {
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $primary-color;
+        background-color: $background-light;
+        color: $primary-color;
+        border-radius: $radius-md;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all $transition-fast;
+
+        &:hover:not(:disabled) {
+            background-color: $primary-color;
+            color: $background-light;
+        }
+
+        &:disabled {
+            border-color: $border-color;
+            color: $text-light;
+            cursor: not-allowed;
+        }
+    }
+
+    span {
+        font-size: $font-size-base;
+        color: $text-secondary;
+    }
+}
+
+.noResults {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: $spacing-2xl;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+}

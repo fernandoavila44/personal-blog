@@ -1,7 +1,7 @@
 'use client';
 
  import { useState } from 'react';
-// import styles from './CommentSection.module.scss';
+ import styles from './CommentSection.module.scss';
 
 /* 
  * EJERCICIO: Implementar sección de comentarios con React Hooks
@@ -68,29 +68,33 @@ export default function CommentSection() {
 
 
     return (
-        <div>
+        <div className={styles.section}>
             <h3>Comentarios</h3>
-             <form onSubmit={handleSubmit}>
+             <form onSubmit={handleSubmit} className={styles.form}>
                 <input
                     type="text"
                     placeholder="Tu nombre"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
+                    className={styles.input}
                 />
                 <textarea
                     placeholder="Tu comentario"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                    className={styles.textarea}
                 />
-                <button type="submit">Agregar comentario</button>
+                <button type="submit" className={styles.button}>
+                    Agregar comentario
+                </button>
             </form>
 
-            <div>
+            <div className={styles.commentsList}>
                 {comments.length === 0 ? (
-                    <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+                    <p className={styles.empty}>No hay comentarios aún. ¡Sé el primero en comentar!</p>
                 ) : (
                     comments.map((comment) => (
-                        <div key={comment.id}>
+                        <div key={comment.id} className={styles.comment}>
                             <strong>{comment.author}</strong>
                             <p>{comment.text}</p>
                             <small>{new Date(comment.date).toLocaleString()}</small>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import postsData from '@/data/posts.json';
+import CommentSection from '@/components/CommentSection';
 //import styles from './page.module.scss';
 
 /* 
@@ -73,11 +74,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     <p>{post.content}</p>
                 </div>
                 <Link href="/blog">← Volver al blog</Link>
+
+                <CommentSection />
             </article>
         </div>
     );
 }
-
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

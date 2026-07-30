@@ -1,0 +1,84 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.section {
+    margin-top: $spacing-2xl;
+    padding-top: $spacing-xl;
+    border-top: 1px solid $border-color;
+}
+
+.form {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    background-color: $background-gray;
+    padding: $spacing-lg;
+    border-radius: $radius-md;
+}
+
+.input,
+.textarea {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    @include transition(border-color);
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.button {
+    align-self: flex-start;
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing-sm $spacing-lg;
+    border: none;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    cursor: pointer;
+    @include transition(background-color);
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.commentsList {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-md;
+}
+
+.comment {
+    padding: $spacing-md;
+    background-color: $background-light;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+
+    strong {
+        color: $text-primary;
+    }
+
+    p {
+        margin: $spacing-xs 0;
+        color: $text-secondary;
+    }
+
+    small {
+        color: $text-light;
+        font-size: $font-size-xs;
+    }
+}
+
+.empty {
+    color: $text-light;
+    font-style: italic;
+}

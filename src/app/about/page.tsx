@@ -1,4 +1,5 @@
-// import authorData from '@/data/author.json';
+import Image from 'next/image';
+import authorData from '@/data/author.json';
 // import styles from './page.module.scss';
 
 /* 
@@ -33,28 +34,58 @@
  */
 
 // TODO: Descomentar y usar authorData
-// const author = authorData;
+ const author = authorData;
 
 export default function AboutPage() {
     // TODO: Implementar la página
 
-    return (
+     return (
         <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+            <div>
+                <Image
+                    src={author.avatar}
+                    alt={author.name}
+                    width={150}
+                    height={150}
+                />
+                <h1>{author.name}</h1>
+                <p>{author.role}</p>
+                <p>{author.location}</p>
+            </div>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+            <div>
+                <h2>Sobre mí</h2>
+                <p>{author.bio}</p>
+            </div>
+
+            <div>
+                <h2>Habilidades</h2>
+                <ul>
+                    {author.skills.map((skill) => (
+                        <li key={skill}>{skill}</li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h2>Experiencia</h2>
+                <p>{author.experience}</p>
+            </div>
+
+            <div>
+                <h2>Educación</h2>
+                <p>{author.education}</p>
+            </div>
+
+            <div>
+                <h2>Redes sociales</h2>
+                <a href={author.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href={author.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href={author.social.twitter} target="_blank" rel="noopener noreferrer">Twitter</a>
+            </div>
         </div>
     );
 }
-
 /* PREGUNTAS PARA REFLEXIONAR:
  * 
  * 1. ¿Por qué usar SSR para esta página en lugar de SSG?

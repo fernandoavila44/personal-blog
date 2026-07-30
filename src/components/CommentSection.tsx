@@ -1,6 +1,6 @@
 'use client';
 
-// import { useState } from 'react';
+ import { useState } from 'react';
 // import styles from './CommentSection.module.scss';
 
 /* 
@@ -44,61 +44,60 @@ interface Comment {
 }
 
 export default function CommentSection() {
-    // TODO: Implementar useState para comentarios
-    // const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [author, setAuthor] = useState('');
+    const [text, setText] = useState('');
 
-    // TODO: Implementar useState para el formulario
-    // const [author, setAuthor] = useState('');
-    // const [text, setText] = useState('');
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
 
-    // TODO: Implementar función handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   // Validar campos
-    //   // Crear nuevo comentario
-    //   // Agregar a la lista
-    //   // Limpiar formulario
-    // };
+        
+        if (!author || !text) return;
+
+        const newComment: Comment = {
+            id: Date.now(),
+            author,
+            text,
+            date: new Date().toISOString(),
+        };
+
+        setComments([...comments, newComment]);
+        setAuthor('');
+        setText('');
+    };
+
 
     return (
         <div>
             <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
+             <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Tu nombre"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                />
+                <textarea
+                    placeholder="Tu comentario"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+                <button type="submit">Agregar comentario</button>
+            </form>
 
-            {/* TODO: Agregar formulario */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Tu nombre"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <textarea 
-          placeholder="Tu comentario"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button type="submit">Agregar comentario</button>
-      </form>
-      */}
-
-            {/* TODO: Mostrar lista de comentarios */}
-            {/* 
-      <div>
-        {comments.length === 0 ? (
-          <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-        ) : (
-          comments.map(comment => (
-            <div key={comment.id}>
-              <strong>{comment.author}</strong>
-              <p>{comment.text}</p>
-              <small>{comment.date}</small>
+            <div>
+                {comments.length === 0 ? (
+                    <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+                ) : (
+                    comments.map((comment) => (
+                        <div key={comment.id}>
+                            <strong>{comment.author}</strong>
+                            <p>{comment.text}</p>
+                            <small>{new Date(comment.date).toLocaleString()}</small>
+                        </div>
+                    ))
+                )}
             </div>
-          ))
-        )}
-      </div>
-      */}
         </div>
     );
 }

@@ -69,3 +69,65 @@ a {
 // 2. Agregar estilos para blockquotes
 // 3. Agregar estilos para code y pre
 // 4. Agregar clases de utilidad para tamaños de texto
+
+// Listas
+ul, ol {
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-xl;
+    color: $text-secondary;
+
+    li {
+        margin-bottom: $spacing-xs;
+        line-height: 1.6;
+    }
+}
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+
+// Blockquotes
+blockquote {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $primary-color;
+    background-color: $background-gray;
+    border-radius: $radius-sm;
+    font-style: italic;
+    color: $text-secondary;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+// Code inline
+code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: $font-size-sm;
+    background-color: $background-gray;
+    color: $secondary-color;
+    padding: 0.15em 0.4em;
+    border-radius: $radius-sm;
+}
+
+// Bloques de código (pre > code)
+pre {
+    margin-bottom: $spacing-md;
+    padding: $spacing-md;
+    background-color: $text-primary;
+    border-radius: $radius-md;
+    overflow-x: auto;
+
+    code {
+        background-color: transparent;
+        color: $background-light;
+        padding: 0;
+        font-size: $font-size-sm;
+    }
+}
+
+// Clases de utilidad para tamaños de texto
+.text-xs { font-size: $font-size-xs; }
+.text-sm { font-size: $font-size-sm; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }

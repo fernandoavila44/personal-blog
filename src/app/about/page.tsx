@@ -43,11 +43,17 @@ export default function AboutPage() {
         <div className="container" style={{ padding: '4rem 1.5rem' }}>
             <div>
                 <Image
-                    src={author.avatar}
-                    alt={author.name}
-                    width={150}
-                    height={150}
-                />
+                        src={author.avatar}
+                        alt={author.name}
+                        width={150}
+                        height={150}
+                        style={{
+                            objectFit: 'cover',
+                            borderRadius: '50%',
+                            width: '150px',
+                            height: '150px',
+                        }}
+                    />
                 <h1>{author.name}</h1>
                 <p>{author.role}</p>
                 <p>{author.location}</p>

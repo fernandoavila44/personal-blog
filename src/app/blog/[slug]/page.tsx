@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import postsData from '@/data/posts.json';
-// import styles from './page.module.scss';
+//import styles from './page.module.scss';
 
 /* 
  * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
@@ -41,25 +42,42 @@ import postsData from '@/data/posts.json';
 //   // Tu código aquí
 //   // Pista: Mapear postsData para obtener solo los slugs
 // }
-
+export async function generateStaticParams() {
+    return postsData.map((post) => ({
+        slug: post.slug,
+    }));
+}
 // TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
     // TODO: Buscar el post usando params.slug
-    // const post = postsData.find(p => p.slug === params.slug);
+    const { slug } = await params;
+    const post = postsData.find(p => p.slug === slug);
+     
 
     // TODO: Si no existe el post, llamar notFound()
-    // if (!post) {
-    //   notFound();
-    // }
+     if (!post) {
+       notFound();
+     }
 
     return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
+        <div className="container">
+            <article>
+                <h1>{post.title}</h1>
+                <div>
+                    <time>{new Date(post.date).toLocaleDateString()}</time>
+                    <span> · {post.category}</span>
+                    <span> · {post.readTime}</span>
+                    <span> · Por {post.author}</span>
+                </div>
+                <div>
+                    <p>{post.content}</p>
+                </div>
+                <Link href="/blog">← Volver al blog</Link>
+            </article>
         </div>
     );
 }
+
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

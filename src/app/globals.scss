@@ -15,7 +15,26 @@ html {
 
 body {
     background-color: $background-light;
+    color: $text-primary;
     min-height: 100vh;
+    transition: background-color $transition-base, color $transition-base;
+}
+
+body.dark {
+    background-color: $dark-bg;
+    color: $dark-text;
+
+    .card, input, textarea { background-color: #374151; color: $dark-text; }
+    .card, input, textarea { border-color: #4b5563; }
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    color: inherit;
+    cursor: pointer;
+    padding: $spacing-sm;
 }
 
 /* Utilidades globales */

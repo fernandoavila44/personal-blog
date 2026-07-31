@@ -68,6 +68,9 @@
     background-color: $background-gray;
 }
 
+:global(body.dark) .aboutPreview { background-color: #111827; }
+:global(body.dark) .sectionTitle { color: #f9fafb; }
+
 .aboutContent {
     max-width: 700px;
     margin: 0 auto;

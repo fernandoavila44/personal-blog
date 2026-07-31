@@ -1,0 +1,13 @@
+.comments { margin-top: 3rem; border-top: 1px solid #e5e7eb; padding-top: 2rem; }
+.form { display: grid; gap: .75rem; margin: 1rem 0 1.5rem; }
+.form input, .form textarea { border: 1px solid #cbd5e1; border-radius: .5rem; padding: .75rem; font: inherit; }
+.form textarea { resize: vertical; }
+.error { color: #b91c1c; }
+.list { display: grid; gap: 1rem; }
+.comment { background: #f8fafc; border-radius: .5rem; padding: 1rem; }
+.comment p { margin: .5rem 0; }
+.comment small { color: #64748b; }
+
+:global(body.dark) .comments { border-color: #4b5563; }
+:global(body.dark) .comment { background: #374151; }
+:global(body.dark) .comment small { color: #cbd5e1; }

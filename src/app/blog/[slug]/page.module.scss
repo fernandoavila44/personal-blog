@@ -1,0 +1,10 @@
+.post { padding: 3.5rem 0; }
+.back { color: #2563eb; font-weight: 600; }
+.header { border-bottom: 1px solid #e5e7eb; margin: 1.5rem 0 2rem; padding-bottom: 1.5rem; }
+.header span { color: #2563eb; font-weight: 600; }
+.header h1 { font-size: clamp(2rem, 5vw, 3rem); margin: .75rem 0; }
+.header p { color: #64748b; }
+.content { font-size: 1.125rem; line-height: 1.8; max-width: 760px; }
+
+:global(body.dark) .header { border-color: #4b5563; }
+:global(body.dark) .header p { color: #cbd5e1; }

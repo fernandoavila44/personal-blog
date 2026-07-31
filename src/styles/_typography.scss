@@ -53,6 +53,11 @@ p {
     color: $text-secondary;
 }
 
+body.dark {
+    h1, h2, h3, h4, h5, h6 { color: $dark-text; }
+    p { color: #cbd5e1; }
+}
+
 // Links
 a {
     color: $primary-color;

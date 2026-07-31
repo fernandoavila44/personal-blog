@@ -1,7 +1,7 @@
 {
-    "name": "Tu Nombre",
-    "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
+    "name": "Alberto Molina",
+    "role": "Ingeniero Industrial y Administrador",
+    "bio": "Soy Alberto Molina, ingeniero industrial y administrador. Me interesa la gestión, la mejora de procesos y el uso de la tecnología para crear soluciones útiles.",
     "email": "tu.email@ejemplo.com",
     "location": "Tu Ciudad, País",
     "avatar": "/images/avatar.jpg",
@@ -18,6 +18,6 @@
         "SCSS",
         "PostgreSQL"
     ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    "experience": "Interés en la gestión, la administración y la mejora continua",
+    "education": "Ingeniería Industrial y Administración"
 }

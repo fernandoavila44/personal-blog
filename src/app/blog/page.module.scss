@@ -22,15 +22,73 @@
 }
 
 .postsGrid {
-    @include grid(1, $spacing-xl);
-
-    @include respond-to('md') {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include respond-to('lg') {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  display: flex;
+  flex-direction: column;   
+  gap: $spacing-xl;         
 }
 
-/* TODO para estudiantes: Agregar estilos para filtros y paginación */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-2xl;
+
+  button {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background-color: $background-gray;
+    color: $text-primary;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+
+  .active {
+    background-color: $primary-color;
+    color: white;
+    border-color: $primary-color;
+  }
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-md;
+  margin-top: $spacing-2xl;
+  margin-bottom: $spacing-3xl; 
+
+  button {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background-color: $background-gray;
+    color: $text-primary;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+
+    &:disabled {
+      background-color: lighten($background-gray, 10%);
+      color: $text-secondary;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    font-size: $font-size-base;
+    color: $text-secondary;
+  }
+}

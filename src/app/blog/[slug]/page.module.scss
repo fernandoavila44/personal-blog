@@ -1,0 +1,37 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.postPage {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-2xl $spacing-md;
+}
+
+.header {
+  margin-bottom: $spacing-xl;
+}
+
+.title {
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-md;
+}
+
+.meta {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  margin-bottom: $spacing-xl;
+
+  span {
+    margin-left: $spacing-xs;
+  }
+}
+
+.content {
+  font-size: $font-size-base;
+  line-height: 1.6;
+  margin-bottom: $spacing-2xl;
+}
+
+.backButton {
+  margin-top: $spacing-xl;
+}

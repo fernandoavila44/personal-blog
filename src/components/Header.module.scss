@@ -2,78 +2,164 @@
 @import '../styles/mixins';
 
 .header {
-    background-color: white;
-    box-shadow: $shadow-sm;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid $border-color;
+  background-color: white;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid $border-color;
+  animation: fadeInDown 0.6s ease; 
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 $spacing-lg;
-    @include flex(row, space-between, center);
-    height: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  @include flex(row, space-between, center);
+  height: 70px;
 }
 
 .logo {
-    h1 {
-        font-size: $font-size-xl;
-        color: $primary-color;
-        margin: 0;
-        font-family: $font-family-heading;
-        @include transition(color);
-
-        &:hover {
-            color: $secondary-color;
-        }
-    }
-}
-
-.nav {
-    @include flex(row, flex-end, center);
-    gap: $spacing-xl;
-}
-
-.navLink {
-    color: $text-secondary;
-    font-weight: 500;
-    font-size: $font-size-base;
-    position: relative;
+  h1 {
+    font-size: $font-size-xl;
+    color: $primary-color;
+    margin: 0;
+    font-family: $font-family-heading;
     @include transition(color);
 
     &:hover {
-        color: $primary-color;
+      color: $secondary-color;
     }
+  }
+}
 
-    // Efecto de subrayado animado
+.nav {
+  @include flex(row, flex-end, center);
+  gap: $spacing-xl;
+}
+
+.navLink {
+  color: $text-secondary;
+  font-weight: 500;
+  font-size: $font-size-base;
+  position: relative;
+  @include transition(color);
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: $primary-color;
+    transition: width $transition-base;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  
+  &.active {
+    color: $primary-color;
+
     &::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: $primary-color;
-        transition: width $transition-base;
+      width: 100%;
+      background-color: $secondary-color;
     }
-
-    &:hover::after {
-        width: 100%;
-    }
+  }
 }
 
-// Responsive
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 90;
+}
+
+.overlay.show {
+  display: block;
+}
+
+
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 101;
+
+  span {
+    display: block;
+    height: 3px;
+    background: $text-primary;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  &.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  &.active span:nth-child(2) {
+    opacity: 0;
+  }
+  &.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
+
+
 @include respond-to('md') {
-    .container {
-        padding: 0 $spacing-xl;
-    }
+  .container {
+    padding: 0 $spacing-xl;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: $spacing-md;
+    background-color: white;
+    padding: $spacing-lg $spacing-md;
+    border-top: 1px solid $border-color;
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 70%;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+  }
+
+  .nav.show {
+    display: flex;
+    transform: translateX(0); 
+  }
+
+  .menuToggle {
+    display: flex;
+  }
 }
 
-/* TODO para estudiantes:
- * 1. Agregar un menú hamburguesa para móviles
- * 2. Implementar un indicador de página activa
- * 3. Agregar animación de entrada al hacer scroll
- */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

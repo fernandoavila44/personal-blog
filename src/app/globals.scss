@@ -2,81 +2,142 @@
 @import '../styles/mixins';
 @import '../styles/typography';
 
-/* Reset básico */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    background-color: $background-light;
-    min-height: 100vh;
+  background-color: $background-light;
+  color: $text-primary;
+  min-height: 100vh;
 }
 
-/* Utilidades globales */
+
+body.dark-theme {
+  background-color: $dark-bg;
+  color: $dark-text;
+
+  .card {
+    background-color: lighten($dark-bg, 5%);
+    box-shadow: $shadow-md;
+  }
+
+  .btn-primary {
+    background-color: lighten($primary-color, 10%);
+  }
+
+  .btn-secondary {
+    background-color: lighten($secondary-color, 10%);
+  }
+}
+
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
 }
 
 .section {
-    padding: $spacing-3xl 0;
+  padding: $spacing-3xl 0;
 }
 
-/* Botones base */
-.btn {
-    display: inline-block;
-    padding: $spacing-sm $spacing-lg;
-    border-radius: $radius-md;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    @include transition(background-color, transform);
 
-    &:hover {
-        transform: translateY(-1px);
-    }
+.text-center {
+  text-align: center;
+}
+
+.mt-xs { margin-top: $spacing-xs; }
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-xs { margin-bottom: $spacing-xs; }
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  @include transition(background-color, transform);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .btn-primary {
-    background-color: $primary-color;
-    color: white;
+  background-color: $primary-color;
+  color: white;
 
-    &:hover {
-        background-color: darken($primary-color, 10%);
-    }
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
 }
 
 .btn-secondary {
-    background-color: $secondary-color;
+  background-color: $secondary-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}
+
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid $primary-color;
+  color: $primary-color;
+
+  &:hover {
+    background-color: $primary-color;
     color: white;
-
-    &:hover {
-        background-color: darken($secondary-color, 10%);
-    }
+  }
 }
 
-/* Cards base */
+.btn-danger {
+  background-color: $accent-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+}
+
+.btn-success {
+  background-color: $secondary-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+}
+
+
 .card {
-    background-color: white;
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-    @include transition(box-shadow);
+  background-color: white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-sm;
+  @include transition(box-shadow);
 
-    &:hover {
-        box-shadow: $shadow-md;
-    }
+  &:hover {
+    box-shadow: $shadow-md;
+  }
 }
-
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
- * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
- * 3. Mejorar los estilos de los botones con más variantes
- */

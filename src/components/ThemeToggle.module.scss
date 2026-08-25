@@ -1,0 +1,25 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.toggle {
+    @include flex(row, center, center);
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    background-color: transparent;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    cursor: pointer;
+    @include transition(background-color, border-color);
+
+    &:hover {
+        border-color: $primary-color;
+    }
+
+    :global(body.dark) & {
+        border-color: rgba($dark-text, 0.2);
+        color: $dark-text;
+    }
+}

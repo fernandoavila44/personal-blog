@@ -8,6 +8,12 @@
     top: 0;
     z-index: 100;
     border-bottom: 1px solid $border-color;
+    @include transition(background-color, border-color);
+
+    :global(body.dark) & {
+        background-color: $dark-bg;
+        border-bottom-color: rgba($dark-text, 0.1);
+    }
 }
 
 .container {
@@ -29,6 +35,10 @@
         &:hover {
             color: $secondary-color;
         }
+
+        :global(body.dark) & {
+            color: lighten($primary-color, 12%);
+        }
     }
 }
 
@@ -46,6 +56,14 @@
 
     &:hover {
         color: $primary-color;
+    }
+
+    :global(body.dark) & {
+        color: rgba($dark-text, 0.75);
+
+        &:hover {
+            color: $dark-text;
+        }
     }
 
     // Efecto de subrayado animado

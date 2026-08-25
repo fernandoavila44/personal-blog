@@ -53,6 +53,14 @@
         margin-bottom: 0;
         color: $text-primary;
     }
+
+    :global(body.dark) & {
+        color: $text-primary;
+
+        p {
+            color: $text-primary;
+        }
+    }
 }
 
 .commentHeader {

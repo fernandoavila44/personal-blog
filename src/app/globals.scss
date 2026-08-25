@@ -75,8 +75,31 @@ body {
     }
 }
 
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
- * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
- * 3. Mejorar los estilos de los botones con más variantes
+/* Tema oscuro */
+body.dark {
+    background-color: $dark-bg;
+    color: $dark-text;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $dark-text;
+    }
+
+    p {
+        color: rgba($dark-text, 0.75);
+    }
+
+    .card {
+        background-color: lighten($dark-bg, 6%);
+        color: $dark-text;
+    }
+}
+
+/* TODO para estudiantes:
+ * 1. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
+ * 2. Mejorar los estilos de los botones con más variantes
  */

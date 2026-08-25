@@ -55,6 +55,10 @@
     line-height: 1.6;
     margin-bottom: $spacing-lg;
     @include line-clamp(3);
+
+    :global(body.dark) & {
+        color: $text-secondary;
+    }
 }
 
 .footer {

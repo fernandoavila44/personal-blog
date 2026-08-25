@@ -1,0 +1,94 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.aboutPage {
+    min-height: 100vh;
+    padding: $spacing-3xl 0;
+}
+
+.hero {
+    @include flex(column, flex-start, center);
+    text-align: center;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-3xl;
+
+    @include respond-to('md') {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    h1 {
+        margin-bottom: $spacing-xs;
+    }
+}
+
+.avatar {
+    @include flex-center;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    color: white;
+    font-size: $font-size-3xl;
+    font-weight: 700;
+}
+
+.role {
+    font-size: $font-size-lg;
+    color: $primary-color;
+    font-weight: 600;
+    margin-bottom: $spacing-xs;
+}
+
+.location {
+    color: $text-secondary;
+    margin-bottom: 0;
+}
+
+.content {
+    @include grid(1, $spacing-xl);
+
+    @include respond-to('md') {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.bio,
+.social {
+    @include respond-to('md') {
+        grid-column: 1 / -1;
+    }
+}
+
+.skillsList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+}
+
+.skillTag {
+    background-color: $background-gray;
+    border: 1px solid $border-color;
+    padding: $spacing-xs $spacing-md;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-primary;
+}
+
+.details {
+    @include grid(1, $spacing-lg);
+    grid-column: 1 / -1;
+
+    @include respond-to('sm') {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.socialLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+}

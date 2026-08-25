@@ -1,0 +1,61 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.contactPage {
+    min-height: 100vh;
+    padding: $spacing-3xl 0;
+}
+
+.contactPage .container {
+    max-width: 600px;
+}
+
+.form {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-lg;
+    margin-top: $spacing-xl;
+}
+
+.field {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-xs;
+
+    label {
+        font-weight: 600;
+        font-size: $font-size-sm;
+        color: $text-primary;
+    }
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    @include transition(border-color);
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.error {
+    color: #dc2626;
+    font-size: $font-size-sm;
+}
+
+.success {
+    background-color: #dcfce7;
+    color: #166534;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    font-weight: 600;
+}

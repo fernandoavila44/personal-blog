@@ -1,23 +1,26 @@
 {
-    "name": "Tu Nombre",
+    "name": "Víctor A. Durán Bedoya",
     "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
+    "bio": "Apasionado por el mundo del software. A lo largo de mi carrera he trabajado en diseño gráfico, arquitectura, mapping y generalista 3D, proyectos que despertaron mi curiosidad por entender cómo están hechos los programas que uso y me llevaron a adentrarme en el desarrollo de software. Actualmente en formación autodidacta como desarrollador Full Stack (Platzi, Udemy y otras plataformas), con foco principal en FrontEnd por mis aptitudes de diseñador, sin dejar de lado el interés por el Backend y por entender cómo se comunican ambos mundos.",
+    "email": "vicduran3d@hotmail.com",
+    "location": "Bogotá, Colombia",
     "avatar": "/images/avatar.jpg",
     "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
+        "linkedin": "https://www.linkedin.com/in/victor-duran-bedoya"
     },
     "skills": [
-        "Next.js",
         "React",
-        "TypeScript",
         "Node.js",
-        "SCSS",
-        "PostgreSQL"
+        "Express",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "WordPress",
+        "Python",
+        "Agile",
+        "Principios SOLID",
+        "Revisión de código"
     ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    "experience": "Formación autodidacta como Desarrollador Full Stack (Platzi, Udemy), con foco en FrontEnd e interés creciente en Backend.",
+    "education": "Certificaciones: Curso de JavaScript Engine (V8) y el Navegador · Curso Profesional de React.js y Redux · Curso de Asincronismo con JavaScript · Curso Práctico de JavaScript 2021 · Certificate of Accomplishment – JavaScript (Intermediate)."
 }

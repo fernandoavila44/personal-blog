@@ -59,14 +59,8 @@ export default function AboutPage() {
                     <section className={styles.social}>
                         <h2>Encuéntrame en</h2>
                         <div className={styles.socialLinks}>
-                            <a href={authorData.social.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                                GitHub
-                            </a>
                             <a href={authorData.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                                 LinkedIn
-                            </a>
-                            <a href={authorData.social.twitter} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                                Twitter
                             </a>
                             <a href={`mailto:${authorData.email}`} className="btn btn-primary">
                                 Enviar email

@@ -1,0 +1,66 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.commentSection {
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-2xl;
+    border-top: 1px solid $border-color;
+    max-width: 720px;
+}
+
+.form {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-md;
+    margin: $spacing-lg 0 $spacing-2xl;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    @include transition(border-color);
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.list {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-md;
+}
+
+.empty {
+    color: $text-light;
+    font-style: italic;
+}
+
+.comment {
+    background-color: $background-gray;
+    border-radius: $radius-md;
+    padding: $spacing-md;
+
+    p {
+        margin-bottom: 0;
+        color: $text-primary;
+    }
+}
+
+.commentHeader {
+    @include flex(row, space-between, center);
+    margin-bottom: $spacing-xs;
+    font-size: $font-size-sm;
+
+    time {
+        color: $text-light;
+    }
+}

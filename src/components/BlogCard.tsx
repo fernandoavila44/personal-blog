@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './BlogCard.module.scss';
 
@@ -8,11 +9,41 @@ interface BlogCardProps {
     date: string;
     category: string;
     readTime: string;
+    author?: string;
+    image?: string;
+    tags?: string[];
+    variant?: 'default' | 'featured' | 'compact';
 }
 
-export default function BlogCard({ title, excerpt, slug, date, category, readTime }: BlogCardProps) {
+export default function BlogCard({
+    title,
+    excerpt,
+    slug,
+    date,
+    category,
+    readTime,
+    author,
+    image,
+    tags,
+    variant = 'default',
+}: BlogCardProps) {
+    // Combina la clase base con la de la variante (si no es "default")
+    const cardClass = variant === 'default' ? styles.card : `${styles.card} ${styles[variant]}`;
+
     return (
-        <article className={styles.card}>
+        <article className={cardClass}>
+            {image && (
+                <div className={styles.imageWrapper}>
+                    <Image
+                        src={image}
+                        alt={title}
+                        width={400}
+                        height={200}
+                        className={styles.image}
+                    />
+                </div>
+            )}
+
             <div className={styles.header}>
                 <span className={styles.category}>{category}</span>
                 <span className={styles.readTime}>{readTime}</span>
@@ -26,12 +57,23 @@ export default function BlogCard({ title, excerpt, slug, date, category, readTim
 
             <p className={styles.excerpt}>{excerpt}</p>
 
+            {tags && tags.length > 0 && (
+                <div className={styles.tags}>
+                    {tags.map((tag) => (
+                        <span key={tag} className={styles.tag}>#{tag}</span>
+                    ))}
+                </div>
+            )}
+
             <div className={styles.footer}>
-                <time className={styles.date}>{new Date(date).toLocaleDateString('es-ES', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                })}</time>
+                <div>
+                    {author && <span className={styles.author}>Por {author} · </span>}
+                    <time className={styles.date}>{new Date(date).toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })}</time>
+                </div>
 
                 <Link href={`/blog/${slug}`} className={styles.readMore}>
                     Leer más →
@@ -40,10 +82,3 @@ export default function BlogCard({ title, excerpt, slug, date, category, readTim
         </article>
     );
 }
-
-/* TODO para estudiantes:
- * 1. Agregar una imagen al card (usar next/image)
- * 2. Agregar prop para el autor
- * 3. Mejorar la animación hover
- * 4. Agregar tags/etiquetas del post
- */

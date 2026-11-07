@@ -5,7 +5,7 @@ body {
     font-family: $font-family-base;
     font-size: $font-size-base;
     line-height: 1.6;
-    color: $text-primary;
+    color: var(--text-color, #{$text-primary});
 }
 
 // Headings
@@ -19,7 +19,7 @@ h6 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: $spacing-md;
-    color: $text-primary;
+    color: var(--text-color, #{$text-primary});
 }
 
 h1 {
@@ -50,7 +50,8 @@ h6 {
 // Párrafos
 p {
     margin-bottom: $spacing-md;
-    color: $text-secondary;
+    color: var(--text-color, #{$text-secondary});
+    opacity: 0.85;
 }
 
 // Links
@@ -64,8 +65,91 @@ a {
     }
 }
 
-// TODO para estudiantes:
-// 1. Agregar estilos para listas (ul, ol)
-// 2. Agregar estilos para blockquotes
-// 3. Agregar estilos para code y pre
-// 4. Agregar clases de utilidad para tamaños de texto
+// Listas
+ul,
+ol {
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-lg;
+
+    li {
+        margin-bottom: $spacing-xs;
+        color: var(--text-color, #{$text-secondary});
+    }
+
+    // Listas anidadas
+    ul,
+    ol {
+        margin-top: $spacing-xs;
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+// Blockquotes
+blockquote {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $primary-color;
+    background-color: rgba(127, 127, 127, 0.1);
+    border-radius: 0 $radius-md $radius-md 0;
+    font-style: italic;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+// Código en línea
+code {
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    font-size: 0.9em;
+    background-color: rgba(127, 127, 127, 0.15);
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+}
+
+// Bloques de código
+pre {
+    margin: $spacing-md 0;
+    padding: $spacing-md;
+    background-color: #1f2937;
+    color: #f9fafb;
+    border-radius: $radius-md;
+    overflow-x: auto;
+    line-height: 1.5;
+
+    // El código dentro de pre no necesita su propio fondo
+    code {
+        background-color: transparent;
+        padding: 0;
+        color: inherit;
+    }
+}
+
+// Clases de utilidad para tamaños de texto
+.text-xs {
+    font-size: $font-size-xs;
+}
+
+.text-sm {
+    font-size: $font-size-sm;
+}
+
+.text-base {
+    font-size: $font-size-base;
+}
+
+.text-lg {
+    font-size: $font-size-lg;
+}
+
+.text-xl {
+    font-size: $font-size-xl;
+}

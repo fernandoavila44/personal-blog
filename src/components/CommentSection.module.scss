@@ -1,0 +1,136 @@
+
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.commentSection {
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-2xl;
+    border-top: 1px solid var(--border-color);
+}
+
+.title {
+    margin-bottom: $spacing-xl;
+    color: var(--text-primary);
+    font-size: $font-size-2xl;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-2xl;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    label {
+        color: var(--text-primary);
+        font-size: $font-size-sm;
+        font-weight: 600;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: $spacing-md;
+        border: 1px solid var(--border-color);
+        border-radius: $radius-md;
+        background-color: var(--surface-bg);
+        color: var(--text-primary);
+        font: inherit;
+        transition: border-color $transition-fast, background-color 300ms ease, color 300ms ease;
+
+        &::placeholder {
+            color: var(--text-light);
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 110px;
+    }
+}
+
+.submitButton {
+    align-self: flex-start;
+    padding: $spacing-md $spacing-lg;
+    border: none;
+    border-radius: $radius-md;
+    background-color: $primary-color;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+}
+
+.emptyMessage {
+    padding: $spacing-lg;
+    border: 1px dashed var(--border-color);
+    border-radius: $radius-md;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.comment {
+    padding: $spacing-lg;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-md;
+    background-color: var(--surface-bg);
+
+    p {
+        margin: $spacing-md 0 0;
+        color: var(--text-primary);
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+
+    strong {
+        color: var(--text-primary);
+    }
+
+    time {
+        color: var(--text-secondary);
+        font-size: $font-size-xs;
+    }
+}
+
+@media (max-width: 600px) {
+    .commentSection {
+        margin-top: $spacing-2xl;
+    }
+
+    .submitButton {
+        width: 100%;
+    }
+
+    .commentHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

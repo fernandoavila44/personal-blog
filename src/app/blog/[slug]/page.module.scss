@@ -1,0 +1,118 @@
+
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.postPage {
+    min-height: 100vh;
+    padding: $spacing-3xl $spacing-md;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+}
+
+.article {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.backLink {
+    display: inline-block;
+    margin-bottom: $spacing-2xl;
+    color: $primary-color;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+.header {
+    margin-bottom: $spacing-2xl;
+    text-align: center;
+}
+
+.category {
+    display: inline-block;
+    margin-bottom: $spacing-md;
+    padding: $spacing-xs $spacing-md;
+    background-color: $primary-color;
+    color: white;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.title {
+    margin-bottom: $spacing-lg;
+    color: var(--text-primary);
+    font-family: $font-family-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+}
+
+.metadata {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    color: var(--text-secondary);
+    font-size: $font-size-sm;
+}
+
+.imageContainer {
+    margin-bottom: $spacing-2xl;
+    overflow: hidden;
+    border-radius: $radius-lg;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.content {
+    color: var(--text-primary);
+    font-size: $font-size-lg;
+    line-height: 1.9;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.postFooter {
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-xl;
+    border-top: 1px solid var(--border-color);
+}
+
+.backButton {
+    display: inline-block;
+    padding: $spacing-md $spacing-lg;
+    background-color: $primary-color;
+    color: white;
+    border-radius: $radius-md;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color $transition-fast;
+
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+@media (max-width: 600px) {
+    .postPage {
+        padding: $spacing-xl $spacing-md;
+    }
+
+    .metadata {
+        flex-direction: column;
+        gap: $spacing-sm;
+    }
+
+    .content {
+        font-size: $font-size-base;
+    }
+}

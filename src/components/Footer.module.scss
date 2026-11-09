@@ -81,3 +81,11 @@
         font-size: $font-size-sm;
     }
 }
+
+.footer {
+    background-color: #1f2937;
+    color: white;
+    margin-top: auto;
+    padding: $spacing-3xl 0 $spacing-lg;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}

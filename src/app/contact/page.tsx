@@ -1,152 +1,142 @@
-// import { useState } from 'react';
-// import styles from './page.module.scss';
+'use client';
 
-/* 
- * EJERCICIO: Implementar formulario de contacto con validación
- * 
- * CONCEPTOS A APRENDER:
- * - Client Component con 'use client'
- * - useState para múltiples campos de formulario
- * - Validación de formularios
- * - Manejo de eventos
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Agregar 'use client' al inicio del archivo
- * 
- * 2. Crear estados para el formulario:
- *    - name (nombre)
- *    - email (correo)
- *    - message (mensaje)
- *    - errors (objeto con errores de validación)
- *    - isSubmitted (boolean para mostrar mensaje de éxito)
- * 
- * 3. Implementar función de validación
- *    - Nombre: no vacío, mínimo 2 caracteres
- *    - Email: formato válido
- *    - Mensaje: no vacío, mínimo 10 caracteres
- * 
- * 4. Implementar handleSubmit
- *    - Validar campos
- *    - Si hay errores, mostrarlos
- *    - Si no hay errores, simular envío y mostrar mensaje de éxito
- * 
- * 5. Crear el JSX del formulario
- *    - Campos de input con valores controlados
- *    - Mostrar errores debajo de cada campo
- *    - Botón de envío
- *    - Mensaje de éxito condicional
- */
+import { useState, type FormEvent } from 'react';
+import styles from './page.module.scss';
+
+interface FormErrors {
+    name?: string;
+    email?: string;
+    message?: string;
+}
 
 export default function ContactPage() {
-    // TODO: Agregar 'use client' al inicio del archivo
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [errors, setErrors] = useState<FormErrors>({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
-    // TODO: Implementar estados
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [message, setMessage] = useState('');
-    // const [errors, setErrors] = useState<{name?: string; email?: string; message?: string}>({});
-    // const [isSubmitted, setIsSubmitted] = useState(false);
+    // Validar los campos del formulario
+    const validate = (): FormErrors => {
+        const newErrors: FormErrors = {};
 
-    // TODO: Implementar función de validación
-    // const validate = () => {
-    //   const newErrors: any = {};
-    //   
-    //   if (!name || name.length < 2) {
-    //     newErrors.name = 'El nombre debe tener al menos 2 caracteres';
-    //   }
-    //   
-    //   if (!email || !/\S+@\S+\.\S+/.test(email)) {
-    //     newErrors.email = 'Por favor ingresa un email válido';
-    //   }
-    //   
-    //   if (!message || message.length < 10) {
-    //     newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
-    //   }
-    //   
-    //   return newErrors;
-    // };
+        if (name.trim().length < 2) {
+            newErrors.name = 'El nombre debe tener al menos 2 caracteres';
+        }
 
-    // TODO: Implementar handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   const newErrors = validate();
-    //   
-    //   if (Object.keys(newErrors).length > 0) {
-    //     setErrors(newErrors);
-    //     return;
-    //   }
-    //   
-    //   // Simular envío exitoso
-    //   setErrors({});
-    //   setIsSubmitted(true);
-    //   
-    //   // Limpiar formulario después de 3 segundos
-    //   setTimeout(() => {
-    //     setName('');
-    //     setEmail('');
-    //     setMessage('');
-    //     setIsSubmitted(false);
-    //   }, 3000);
-    // };
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+            newErrors.email = 'Por favor ingresa un email válido';
+        }
+
+        if (message.trim().length < 10) {
+            newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+        }
+
+        return newErrors;
+    };
+
+    // Procesar el envío del formulario
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const newErrors = validate();
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            setIsSubmitted(false);
+            return;
+        }
+
+        // Simular un envío exitoso
+        setErrors({});
+        setIsSubmitted(true);
+
+        // Limpiar el formulario después de 3 segundos
+        setTimeout(() => {
+            setName('');
+            setEmail('');
+            setMessage('');
+            setIsSubmitted(false);
+        }, 3000);
+    };
 
     return (
-        <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '600px' }}>
-            <h1>Contacto</h1>
-            <p>¿Tienes alguna pregunta o comentario? ¡Escríbeme!</p>
+        <main className={styles.contactPage}>
+            <div className={styles.contactContainer}>
+                <header className={styles.header}>
+                    <h1>Contacto</h1>
+                    <p>
+                        ¿Tienes alguna pregunta o comentario? ¡Escríbeme!
+                    </p>
+                </header>
 
-            <p style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#f0f0f0', borderRadius: '8px' }}>
-                TODO: Implementar formulario de contacto con validación
-            </p>
+                <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="name">Nombre</label>
+                        <input
+                            id="name"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className={errors.name ? styles.inputError : ''}
+                            aria-invalid={Boolean(errors.name)}
+                            aria-describedby={errors.name ? 'name-error' : undefined}
+                        />
+                        {errors.name && (
+                            <span id="name-error" className={styles.error}>
+                                {errors.name}
+                            </span>
+                        )}
+                    </div>
 
-            {/* TODO: Agregar formulario aquí */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nombre</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {errors.name && <span className="error">{errors.name}</span>}
-        </div>
-        
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        
-        <div>
-          <label htmlFor="message">Mensaje</label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            rows={5}
-          />
-          {errors.message && <span className="error">{errors.message}</span>}
-        </div>
-        
-        <button type="submit" className="btn btn-primary">
-          Enviar mensaje
-        </button>
-        
-        {isSubmitted && (
-          <div className="success">
-            ¡Mensaje enviado exitosamente! Te responderé pronto.
-          </div>
-        )}
-      </form>
-      */}
-        </div>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className={errors.email ? styles.inputError : ''}
+                            aria-invalid={Boolean(errors.email)}
+                            aria-describedby={errors.email ? 'email-error' : undefined}
+                        />
+                        {errors.email && (
+                            <span id="email-error" className={styles.error}>
+                                {errors.email}
+                            </span>
+                        )}
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="message">Mensaje</label>
+                        <textarea
+                            id="message"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            rows={5}
+                            className={errors.message ? styles.inputError : ''}
+                            aria-invalid={Boolean(errors.message)}
+                            aria-describedby={errors.message ? 'message-error' : undefined}
+                        />
+                        {errors.message && (
+                            <span id="message-error" className={styles.error}>
+                                {errors.message}
+                            </span>
+                        )}
+                    </div>
+
+                    <button type="submit" className={styles.submitButton}>
+                        Enviar mensaje
+                    </button>
+
+                    {isSubmitted && (
+                        <div className={styles.success} role="status">
+                            ¡Mensaje enviado exitosamente! Te responderé pronto.
+                        </div>
+                    )}
+                </form>
+            </div>
+        </main>
     );
 }
 

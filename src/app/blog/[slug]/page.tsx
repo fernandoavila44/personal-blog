@@ -1,63 +1,82 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
 import postsData from '@/data/posts.json';
-// import styles from './page.module.scss';
+import CommentSection from '@/components/CommentSection';
+import styles from './page.module.scss';
 
-/* 
- * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
- * 
- * CONCEPTOS A APRENDER:
- * - generateStaticParams: Pre-renderiza páginas estáticas en build time
- * - Dynamic routes: [slug] para rutas dinámicas
- * - notFound(): Manejo de páginas no encontradas
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Implementar generateStaticParams()
- *    Esta función le dice a Next.js qué páginas generar estáticamente
- *    Debe retornar un array de objetos con los slugs de todos los posts
- *    Ejemplo: [{ slug: 'post-1' }, { slug: 'post-2' }]
- * 
- * 2. Implementar la función del componente
- *    - Recibe params con el slug del post
- *    - Buscar el post en postsData usando el slug
- *    - Si no existe, llamar notFound()
- *    - Si existe, renderizar el contenido del post
- * 
- * 3. Crear el JSX para mostrar:
- *    - Título del post
- *    - Metadata (fecha, categoría, tiempo de lectura, autor)
- *    - Contenido del post
- *    - Botón para volver al blog
- *    - BONUS: Agregar CommentSection component (otro ejercicio)
- * 
- * 4. Crear estilos en page.module.scss
- *    - Estilos para el artículo
- *    - Tipografía legible
- *    - Espaciado adecuado
- */
+// Generar las rutas estáticas de todas las publicaciones
+export function generateStaticParams() {
+    return postsData.map((post) => ({
+        slug: post.slug
+    }));
+}
 
-// TODO: Implementar generateStaticParams
-// export async function generateStaticParams() {
-//   // Tu código aquí
-//   // Pista: Mapear postsData para obtener solo los slugs
-// }
+// Página individual de publicación
+export default async function PostPage({
+    params
+}: {
+    params: Promise<{ slug: string }>;
+}) {
+    const { slug } = await params;
 
-// TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
-    // TODO: Buscar el post usando params.slug
-    // const post = postsData.find(p => p.slug === params.slug);
+    const post = postsData.find((post) => post.slug === slug);
 
-    // TODO: Si no existe el post, llamar notFound()
-    // if (!post) {
-    //   notFound();
-    // }
+    if (!post) {
+        notFound();
+    }
 
     return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
+        <main className={styles.postPage}>
+            <article className={styles.article}>
+                <Link href="/blog" className={styles.backLink}>
+                    ← Volver al blog
+                </Link>
+
+                <header className={styles.header}>
+                    <span className={styles.category}>{post.category}</span>
+                    <h1 className={styles.title}>{post.title}</h1>
+
+                    <div className={styles.metadata}>
+                        <span>{post.author}</span>
+
+                        <time dateTime={post.date}>
+                            {new Date(post.date).toLocaleDateString('es-CO', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}
+                        </time>
+
+                        <span>{post.readTime} de lectura</span>
+                    </div>
+                </header>
+
+                <div className={styles.imageContainer}>
+                    <Image
+                        src={post.image}
+                        alt={post.title}
+                        width={1200}
+                        height={675}
+                        priority
+                        className={styles.image}
+                    />
+                </div>
+
+                <div className={styles.content}>
+                    {post.content}
+                </div>
+
+                <CommentSection />
+
+                <footer className={styles.postFooter}>
+                    <Link href="/blog" className={styles.backButton}>
+                        ← Volver a todas las publicaciones
+                    </Link>
+                </footer>
+            </article>
+        </main>
     );
 }
 

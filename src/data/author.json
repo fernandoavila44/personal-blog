@@ -1,14 +1,14 @@
 {
-    "name": "Tu Nombre",
+    "name": "Monica Romero",
     "role": "Desarrollador Full Stack",
     "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
+    "email": "monicaromerofreelance@gmail.com",
+    "location": "Bogotá,Colombia",
+    "avatar": "/images/avatar.webp",
     "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
+        "github": "https://github.com/NikaMonroes",
+        "linkedin": "https://www.linkedin.com/in/monicaromerofreelance/",
+        "twitter": "https://twitter.com/MonicaR17991063"
     },
     "skills": [
         "Next.js",

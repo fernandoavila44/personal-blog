@@ -1,13 +1,14 @@
+
 @import '../styles/variables';
 @import '../styles/mixins';
 
 .header {
-    background-color: white;
+    background-color: var(--surface-bg);
     box-shadow: $shadow-sm;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .container {
@@ -16,6 +17,7 @@
     padding: 0 $spacing-lg;
     @include flex(row, space-between, center);
     height: 70px;
+    position: relative;
 }
 
 .logo {
@@ -32,13 +34,19 @@
     }
 }
 
+.actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+}
+
 .nav {
     @include flex(row, flex-end, center);
     gap: $spacing-xl;
 }
 
 .navLink {
-    color: $text-secondary;
+    color: var(--text-secondary);
     font-weight: 500;
     font-size: $font-size-base;
     position: relative;
@@ -65,10 +73,98 @@
     }
 }
 
+// Botón del menú hamburguesa
+.menuButton {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-md;
+    background-color: var(--surface-bg);
+    cursor: pointer;
+
+    span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        border-radius: 2px;
+        background-color: var(--text-primary);
+        transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    &:hover {
+        border-color: $primary-color;
+    }
+
+    &:focus-visible {
+        outline: 3px solid rgba(37, 99, 235, 0.3);
+        outline-offset: 2px;
+    }
+}
+
+// Animación de hamburguesa a X
+.menuButtonOpen {
+    span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+        opacity: 0;
+    }
+
+    span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
 // Responsive
 @include respond-to('md') {
     .container {
         padding: 0 $spacing-xl;
+    }
+}
+
+// Menú para dispositivos móviles
+@media (max-width: 767px) {
+    .container {
+        padding: 0 $spacing-md;
+    }
+
+    .menuButton {
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: $spacing-md $spacing-lg;
+        background-color: var(--surface-bg);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: $shadow-md;
+    }
+
+    .navOpen {
+        display: flex;
+    }
+
+    .navLink {
+        width: 100%;
+        padding: $spacing-md 0;
+
+        &::after {
+            bottom: 5px;
+        }
     }
 }
 

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './BlogCard.module.scss';
 
@@ -8,38 +9,69 @@ interface BlogCardProps {
     date: string;
     category: string;
     readTime: string;
+    author: string;
+    image: string;
 }
 
-export default function BlogCard({ title, excerpt, slug, date, category, readTime }: BlogCardProps) {
+export default function BlogCard({
+    title,
+    excerpt,
+    slug,
+    date,
+    category,
+    readTime,
+    author,
+    image
+}: BlogCardProps) {
     return (
         <article className={styles.card}>
-            <div className={styles.header}>
-                <span className={styles.category}>{category}</span>
-                <span className={styles.readTime}>{readTime}</span>
-            </div>
+            <Link href={`/blog/${slug}`} className={styles.imageLink}>
+                <Image
+                    src={image}
+                    alt={title}
+                    width={600}
+                    height={340}
+                    className={styles.image}
+                />
+            </Link>
 
-            <h3 className={styles.title}>
-                <Link href={`/blog/${slug}`}>
-                    {title}
-                </Link>
-            </h3>
+            <div className={styles.content}>
+                <div className={styles.header}>
+                    <span className={styles.category}>{category}</span>
+                    <span className={styles.readTime}>{readTime}</span>
+                </div>
 
-            <p className={styles.excerpt}>{excerpt}</p>
+                <h3 className={styles.title}>
+                    <Link href={`/blog/${slug}`}>
+                        {title}
+                    </Link>
+                </h3>
 
-            <div className={styles.footer}>
-                <time className={styles.date}>{new Date(date).toLocaleDateString('es-ES', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                })}</time>
+                <p className={styles.excerpt}>{excerpt}</p>
 
-                <Link href={`/blog/${slug}`} className={styles.readMore}>
-                    Leer más →
-                </Link>
+                <div className={styles.footer}>
+                    <div className={styles.metadata}>
+                        <span className={styles.author}>{author}</span>
+
+                        <time className={styles.date} dateTime={date}>
+                            {new Date(date).toLocaleDateString('es-CO', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}
+                        </time>
+                    </div>
+
+                    <Link href={`/blog/${slug}`} className={styles.readMore}>
+                        Leer más →
+                    </Link>
+                </div>
             </div>
         </article>
     );
 }
+
+
 
 /* TODO para estudiantes:
  * 1. Agregar una imagen al card (usar next/image)

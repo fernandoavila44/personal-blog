@@ -1,0 +1,38 @@
+
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.themeButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-md;
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
+    font-size: $font-size-sm;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color $transition-fast,
+        color $transition-fast,
+        border-color $transition-fast,
+        transform $transition-fast;
+
+    &:hover {
+        border-color: $primary-color;
+        color: var(--text-primary);
+        transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+        outline: 3px solid rgba(37, 99, 235, 0.3);
+        outline-offset: 2px;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}

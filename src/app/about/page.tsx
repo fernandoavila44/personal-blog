@@ -1,59 +1,99 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import Image from 'next/image';
+import { connection } from 'next/server';
+import type { Metadata } from 'next';
 
-/* 
- * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
- * 
- * CONCEPTOS A APRENDER:
- * - Server Components: Componentes que se ejecutan en el servidor
- * - SSR: Renderizado en el servidor en cada request
- * - Data fetching en Server Components
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Importar los datos del autor
- *    - Ya está disponible en @/data/author.json
- *    - En un caso real, esto podría ser un fetch a una API
- * 
- * 2. Crear el JSX para mostrar:
- *    - Foto de perfil (usar next/image)
- *    - Nombre y rol
- *    - Biografía
- *    - Skills/habilidades
- *    - Experiencia y educación
- *    - Enlaces a redes sociales
- * 
- * 3. Crear estilos en page.module.scss
- *    - Layout atractivo (puede ser dos columnas en desktop)
- *    - Cards para skills
- *    - Botones para redes sociales
- * 
- * 4. BONUS: Agregar metadata dinámica
- *    - Usar generateMetadata() para SEO
- */
+import authorData from '@/data/author.json';
+import styles from './page.module.scss';
 
-// TODO: Descomentar y usar authorData
-// const author = authorData;
+// Metadata para SEO
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: `Sobre ${authorData.name} | Mi Blog Personal`,
+        description: authorData.bio
+    };
+}
 
-export default function AboutPage() {
-    // TODO: Implementar la página
+export default async function AboutPage() {
+    // Esperar a la conexión para habilitar renderizado dinámico
+    await connection();
+
+    const author = authorData;
 
     return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+        <main className={styles.aboutPage}>
+            <section className={styles.profile}>
+                <div className={styles.avatarContainer}>
+                    <Image
+                        src={author.avatar}
+                        alt={`Foto de ${author.name}`}
+                        width={250}
+                        height={250}
+                        priority
+                        className={styles.avatar}
+                    />
+                </div>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
-        </div>
+                <div className={styles.profileInfo}>
+                    <h1>{author.name}</h1>
+                    <h2>{author.role}</h2>
+
+                    <p className={styles.location}>
+                        <span>📍</span> {author.location}
+                    </p>
+
+                    <a
+                        href={`mailto:${author.email}`}
+                        className={styles.email}
+                    >
+                        {author.email}
+                    </a>
+
+                    <div className={styles.socialLinks}>
+                        <a href={author.social.github} target="_blank" rel="noopener noreferrer">
+                            GitHub
+                        </a>
+
+                        <a href={author.social.linkedin} target="_blank" rel="noopener noreferrer">
+                            LinkedIn
+                        </a>
+
+                        <a href={author.social.twitter} target="_blank" rel="noopener noreferrer">
+                            Twitter
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section className={styles.section}>
+                <h2>Sobre mí</h2>
+                <p>{author.bio}</p>
+            </section>
+
+            <section className={styles.section}>
+                <h2>Habilidades</h2>
+
+                <div className={styles.skillsGrid}>
+                    {author.skills.map((skill) => (
+                        <span key={skill} className={styles.skill}>
+                            {skill}
+                        </span>
+                    ))}
+                </div>
+            </section>
+
+            <section className={styles.section}>
+                <h2>Experiencia</h2>
+                <p>{author.experience}</p>
+            </section>
+
+            <section className={styles.section}>
+                <h2>Educación</h2>
+                <p>{author.education}</p>
+            </section>
+        </main>
     );
 }
+
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

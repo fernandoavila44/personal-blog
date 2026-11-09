@@ -1,3 +1,4 @@
+
 @import './variables';
 
 // Estilos base de tipografía
@@ -5,7 +6,7 @@ body {
     font-family: $font-family-base;
     font-size: $font-size-base;
     line-height: 1.6;
-    color: $text-primary;
+    color: var(--text-primary);
 }
 
 // Headings
@@ -19,7 +20,7 @@ h6 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: $spacing-md;
-    color: $text-primary;
+    color: var(--text-primary);
 }
 
 h1 {
@@ -50,7 +51,7 @@ h6 {
 // Párrafos
 p {
     margin-bottom: $spacing-md;
-    color: $text-secondary;
+    color: var(--text-secondary);
 }
 
 // Links
@@ -62,6 +63,89 @@ a {
     &:hover {
         color: darken($primary-color, 10%);
     }
+}
+
+// Listas
+ul,
+ol {
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-xl;
+    color: var(--text-secondary);
+
+    li {
+        margin-bottom: $spacing-xs;
+        line-height: 1.6;
+    }
+}
+
+// Blockquotes
+blockquote {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $primary-color;
+    background-color: var(--surface-bg);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+// Código en línea
+code {
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+// Bloques de código
+pre {
+    margin-bottom: $spacing-lg;
+    padding: $spacing-lg;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
+
+    code {
+        padding: 0;
+        background-color: transparent;
+        font-size: $font-size-sm;
+    }
+}
+
+// Clases de utilidad para tamaños de texto
+.text-xs {
+    font-size: $font-size-xs;
+}
+
+.text-sm {
+    font-size: $font-size-sm;
+}
+
+.text-base {
+    font-size: $font-size-base;
+}
+
+.text-lg {
+    font-size: $font-size-lg;
+}
+
+.text-xl {
+    font-size: $font-size-xl;
+}
+
+.text-2xl {
+    font-size: $font-size-2xl;
+}
+
+.text-3xl {
+    font-size: $font-size-3xl;
+}
+
+.text-4xl {
+    font-size: $font-size-4xl;
 }
 
 // TODO para estudiantes:

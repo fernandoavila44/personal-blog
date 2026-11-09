@@ -1,0 +1,145 @@
+
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.aboutPage {
+    max-width: 1100px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: $spacing-3xl $spacing-md;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+}
+
+.profile {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    align-items: center;
+    gap: $spacing-2xl;
+    margin-bottom: $spacing-3xl;
+    padding-bottom: $spacing-2xl;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.avatarContainer {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--surface-bg);
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profileInfo {
+    h1 {
+        margin-bottom: $spacing-sm;
+        color: var(--text-primary);
+        font-size: $font-size-4xl;
+    }
+
+    h2 {
+        margin-bottom: $spacing-md;
+        color: $primary-color;
+        font-size: $font-size-xl;
+    }
+}
+
+.location,
+.email {
+    margin-bottom: $spacing-sm;
+    color: var(--text-secondary);
+}
+
+.email {
+    display: inline-block;
+    text-decoration: none;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.socialLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+
+    a {
+        padding: $spacing-sm $spacing-md;
+        background-color: $primary-color;
+        color: white;
+        border-radius: $radius-md;
+        text-decoration: none;
+        font-size: $font-size-sm;
+        transition: background-color $transition-fast;
+
+        &:hover {
+            background-color: $secondary-color;
+        }
+    }
+}
+
+.section {
+    margin-bottom: $spacing-2xl;
+
+    h2 {
+        margin-bottom: $spacing-md;
+        color: var(--text-primary);
+        font-size: $font-size-2xl;
+    }
+
+    p {
+        color: var(--text-secondary);
+        font-size: $font-size-base;
+        line-height: 1.8;
+    }
+}
+
+.skillsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+}
+
+.skill {
+    padding: $spacing-sm $spacing-md;
+    background-color: var(--surface-bg);
+    color: $primary-color;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: 600;
+}
+
+@media (max-width: 650px) {
+    .aboutPage {
+        padding: $spacing-xl $spacing-md;
+    }
+
+    .profile {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .avatarContainer {
+        width: 180px;
+        height: 180px;
+    }
+
+    .profileInfo {
+        h1 {
+            font-size: $font-size-3xl;
+        }
+    }
+
+    .socialLinks {
+        justify-content: center;
+    }
+}

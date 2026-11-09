@@ -1,8 +1,12 @@
+
 @import '../styles/variables';
 @import '../styles/mixins';
 
 .home {
     min-height: 100vh;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+    transition: background-color 300ms ease, color 300ms ease;
 }
 
 .hero {
@@ -44,7 +48,7 @@
 .sectionTitle {
     text-align: center;
     margin-bottom: $spacing-2xl;
-    color: $text-primary;
+    color: var(--text-primary);
 }
 
 .postsGrid {
@@ -65,7 +69,9 @@
 }
 
 .aboutPreview {
-    background-color: $background-gray;
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
+    transition: background-color 300ms ease, color 300ms ease;
 }
 
 .aboutContent {
@@ -75,10 +81,12 @@
 
     h2 {
         margin-bottom: $spacing-lg;
+        color: var(--text-primary);
     }
 
     p {
         font-size: $font-size-lg;
         margin-bottom: $spacing-xl;
+        color: var(--text-secondary);
     }
 }

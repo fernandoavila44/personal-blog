@@ -1,6 +1,7 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import authorData from '@/data/author.json';
+import Image from 'next/image';
 
+const author = authorData
 /* 
  * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
  * 
@@ -39,22 +40,95 @@ export default function AboutPage() {
     // TODO: Implementar la página
 
     return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+        <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                {author.avatar && (
+                    <Image 
+                        src={author.avatar} 
+                        alt={author.name} 
+                        width={120} 
+                        height={120} 
+                        style={{ borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem' }}
+                    />
+                )}
+                <h1>{author.name}</h1>
+                <p style={{ fontSize: '1.2rem', color: '#666' }}>{author.role}</p>
+            </div>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+            <section style={{ marginBottom: '2rem' }}>
+                <h2>Sobre mí</h2>
+                <p style={{ lineHeight: '1.6' }}>{author.bio}</p>
+            </section>
+
+            <section style={{ marginBottom: '2rem' }}>
+                <h2>Habilidades</h2>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
+                    {Array.isArray(author.skills) ? (
+                        author.skills.map((skill: string) => (
+                            <span key={skill} style={{ background: '#eee', padding: '0.4rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                {skill}
+                            </span>
+                        ))
+                    ) : (
+                        <p>{author.skills}</p>
+                    )}
+                </div>
+            </section>
+
+            {author.experience && (
+                <section style={{ marginBottom: '2rem' }}>
+                    <h2>Experiencia</h2>
+                    {Array.isArray(author.experience) ? (
+                        <ul>
+                            {author.experience.map((exp: any, index: number) => (
+                                <li key={index} style={{ marginBottom: '0.8rem' }}>
+                                    <strong>{exp.role}</strong> en {exp.company} ({exp.period})
+                                    <p>{exp.description}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p style={{ lineHeight: '1.6' }}>{author.experience}</p>
+                    )}
+                </section>
+            )}
+
+            {author.education && (
+                <section style={{ marginBottom: '2rem' }}>
+                    <h2>Educación</h2>
+                    {Array.isArray(author.education) ? (
+                        <ul>
+                            {author.education.map((edu: any, index: number) => (
+                                <li key={index}>
+                                    {edu.degree} - {edu.institution} ({edu.year})
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p style={{ lineHeight: '1.6' }}>{author.education}</p>
+                    )}
+                </section>
+            )}
+
+            <section>
+                <h2>Redes Sociales</h2>
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                    {author.social?.github && <a href={author.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
+                    {author.social?.twitter && <a href={author.social.twitter} target="_blank" rel="noopener noreferrer">Twitter</a>}
+                    {author.social?.linkedin && <a href={author.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+                </div>
+            </section>
         </div>
     );
 }
 
+
+export async function generateMetadata() {
+  return {
+    title: `Sobre ${authorData.name} | Mi Blog Personal`,
+    description: authorData.bio,
+  };
+}
 /* PREGUNTAS PARA REFLEXIONAR:
  * 
  * 1. ¿Por qué usar SSR para esta página en lugar de SSG?

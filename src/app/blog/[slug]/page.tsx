@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import postsData from '@/data/posts.json';
+import Link from 'next/link';
 // import styles from './page.module.scss';
 
 /* 
@@ -42,22 +43,47 @@ import postsData from '@/data/posts.json';
 //   // Pista: Mapear postsData para obtener solo los slugs
 // }
 
+export async function generateStaticParams() {
+  return postsData.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 // TODO: Implementar el componente de la página
 export default function PostPage({ params }: { params: { slug: string } }) {
     // TODO: Buscar el post usando params.slug
     // const post = postsData.find(p => p.slug === params.slug);
+    const post = postsData.find(p => p.slug === params.slug);
 
     // TODO: Si no existe el post, llamar notFound()
     // if (!post) {
     //   notFound();
     // }
+    if (!post) {
+        notFound();
+    }
 
     return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
+        <article className="container" style={{ padding: '4rem 1.5rem', maxWidth: '800px', margin: '0 auto' }}>
+            <Link href="/blog" style={{ display: 'inline-block', marginBottom: '1.5rem', color: '#0070f3', textDecoration: 'none' }}>
+                ← Volver al blog
+            </Link>
+            
+            <header style={{ marginBottom: '2rem' }}>
+                <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{post.title}</h1>
+                <div style={{ color: '#666', display: 'flex', gap: '1rem', fontSize: '0.95rem' }}>
+                    <time>{new Date(post.date).toLocaleDateString()}</time>
+                    <span>•</span>
+                    <span>{post.category}</span>
+                    <span>•</span>
+                    <span>{post.readTime}</span>
+                </div>
+            </header>
+
+            <div className="content" style={{ lineHeight: '1.8', fontSize: '1.1rem' }}>
+                <p>{post.content}</p>
+            </div>
+        </article>
     );
 }
 

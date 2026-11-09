@@ -1,23 +1,44 @@
 {
-    "name": "Tu Nombre",
-    "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
-    "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
+  "name": "Jorge Jhonnyer Otalvaro Sierra",
+  "role": "Ingeniero de Sistemas & Remote IT Support Technician",
+  "bio": "Apasionado por el desarrollo de software y la resolución de problemas técnicos. Con sólida formación en ingeniería de sistemas y experiencia en soporte tecnológico, desarrollo web full-stack y automatización.",
+  "avatar": "", 
+  "skills": [
+    "JavaScript",
+    "TypeScript",
+    "React.js",
+    "Node.js",
+    "Python",
+    "PHP",
+    "MySQL",
+    "MongoDB",
+    "Git",
+    "Linux"
+  ],
+  "experience": [
+    {
+      "role": "Remote IT Support Technician",
+      "company": "Inetum",
+      "period": "2026 - Presente",
+      "description": "Brindando soporte técnico avanzado, gestión de cuentas de usuario y resolución de incidencias de software."
     },
-    "skills": [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Node.js",
-        "SCSS",
-        "PostgreSQL"
-    ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    {
+      "role": "IT Help Desk Assistant",
+      "company": "Fundación Valle del Lili",
+      "period": "Hasta 2026",
+      "description": "Soporte técnico de TI y asistencia a usuarios en entornos de alta criticidad en Cali."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Ingeniería en Sistemas",
+      "institution": "Universidad / Institución",
+      "year": "Grado obtenido"
+    }
+  ],
+  "social": {
+    "github": "https://github.com",
+    "twitter": "",
+    "linkedin": "https://linkedin.com"
+  }
 }

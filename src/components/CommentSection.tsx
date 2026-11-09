@@ -1,6 +1,6 @@
 'use client';
 
-// import { useState } from 'react';
+import { useState } from 'react';
 // import styles from './CommentSection.module.scss';
 
 /* 
@@ -46,6 +46,9 @@ interface Comment {
 export default function CommentSection() {
     // TODO: Implementar useState para comentarios
     // const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [author, setAuthor] = useState('');
+    const [text, setText] = useState('');
 
     // TODO: Implementar useState para el formulario
     // const [author, setAuthor] = useState('');
@@ -60,45 +63,61 @@ export default function CommentSection() {
     //   // Limpiar formulario
     // };
 
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        if (!author.trim() || !text.trim()) return;
+
+        const newComment: Comment = {
+            id: Date.now(),
+            author,
+            text,
+            date: new Date().toLocaleDateString(),
+        };
+
+        setComments([...comments, newComment]);
+        setAuthor('');
+        setText('');
+    };
+
     return (
         <div>
             <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem', marginTop: '1rem' }}>
+                <input 
+                    type="text" 
+                    placeholder="Tu nombre"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                    style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}
+                    required
+                />
+                <textarea 
+                    placeholder="Tu comentario"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    rows={4}
+                    style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}
+                    required
+                />
+                <button type="submit" style={{ padding: '0.5rem 1rem', background: '#0070f3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                    Agregar comentario
+                </button>
+            </form>
 
-            {/* TODO: Agregar formulario */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Tu nombre"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <textarea 
-          placeholder="Tu comentario"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button type="submit">Agregar comentario</button>
-      </form>
-      */}
-
-            {/* TODO: Mostrar lista de comentarios */}
-            {/* 
-      <div>
-        {comments.length === 0 ? (
-          <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-        ) : (
-          comments.map(comment => (
-            <div key={comment.id}>
-              <strong>{comment.author}</strong>
-              <p>{comment.text}</p>
-              <small>{comment.date}</small>
+            <div>
+                {comments.length === 0 ? (
+                    <p style={{ color: '#666' }}>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+                ) : (
+                    comments.map(comment => (
+                        <div key={comment.id} style={{ borderBottom: '1px solid #eee', paddingBottom: '1rem', marginBottom: '1rem' }}>
+                            <strong>{comment.author}</strong>
+                            <p style={{ margin: '0.5rem 0' }}>{comment.text}</p>
+                            <small style={{ color: '#888' }}>{comment.date}</small>
+                        </div>
+                    ))
+                )}
             </div>
-          ))
-        )}
-      </div>
-      */}
         </div>
     );
 }

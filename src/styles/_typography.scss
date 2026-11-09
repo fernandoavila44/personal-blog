@@ -1,5 +1,5 @@
-
-@import './variables';
+@use './variables' as *;
+@use 'sass:color';
 
 // Estilos base de tipografía
 body {
@@ -61,7 +61,7 @@ a {
     transition: color $transition-fast;
 
     &:hover {
-        color: darken($primary-color, 10%);
+        color: color.adjust($primary-color, $lightness: -10%);
     }
 }
 

@@ -1,7 +1,7 @@
-
-@import '../styles/variables';
-@import '../styles/mixins';
-@import '../styles/typography';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+@use '../styles/typography' as *;
+@use 'sass:color';
 
 /* Variables del tema claro */
 :root {
@@ -76,7 +76,7 @@ body {
     color: white;
 
     &:hover {
-        background-color: darken($primary-color, 10%);
+        background-color: color.adjust($primary-color, $lightness: -10%);
     }
 }
 
@@ -85,7 +85,7 @@ body {
     color: white;
 
     &:hover {
-        background-color: darken($secondary-color, 10%);
+        background-color: color.adjust($secondary-color, $lightness: -10%);
     }
 }
 

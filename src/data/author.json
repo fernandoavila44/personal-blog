@@ -1,23 +1,26 @@
+
 {
-    "name": "Tu Nombre",
-    "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
-    "email": "tu.email@ejemplo.com",
-    "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
-    "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
-    },
-    "skills": [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Node.js",
-        "SCSS",
-        "PostgreSQL"
-    ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+  "name": "Santiago Valencia",
+  "role": "Estudiante de Ingeniería de Software",
+  "bio": "¡Hola! Soy Santiago. Me interesa el mundo de la tecnología, el desarrollo web y la creación de proyectos digitales. En SantiDev comparto mis aprendizajes, proyectos y experiencias mientras sigo creciendo como desarrollador.",
+  "email": "",
+  "location": "Colombia",
+  "avatar": "/images/avatar.jpg",
+  "social": {
+    "github": "",
+    "linkedin": "",
+    "twitter": ""
+  },
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Python"
+  ],
+  "experience": "En formación y desarrollando proyectos personales y académicos.",
+  "education": "Ingeniería de Software"
 }

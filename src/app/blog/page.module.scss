@@ -1,36 +1,332 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
+
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mixins;
 
 .blogPage {
     min-height: 100vh;
-    padding: $spacing-3xl 0;
+    padding: 4rem 0 5rem;
+    background: #ffffff;
 }
 
 .header {
+    max-width: 800px;
+    margin: 0 auto 3rem;
     text-align: center;
-    margin-bottom: $spacing-3xl;
 
     h1 {
-        font-size: $font-size-4xl;
-        margin-bottom: $spacing-md;
+        color: #0f172a;
+        font-size: 2.7rem;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -1.5px;
+        margin: 1rem 0;
+
+        span {
+            color: #2563eb;
+        }
     }
 
     p {
-        font-size: $font-size-lg;
-        color: $text-secondary;
+        color: #64748b;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        max-width: 680px;
+        margin: 0 auto;
     }
 }
 
-.postsGrid {
-    @include grid(1, $spacing-xl);
+.eyebrow {
+    display: inline-block;
+    color: #2563eb;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
 
-    @include respond-to('md') {
+.searchSection {
+    max-width: 680px;
+    margin: 0 auto 3rem;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0 1.2rem;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+
+    &:focus-within {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+
+    input {
+        flex: 1;
+        min-width: 0;
+        padding: 1.1rem 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #0f172a;
+        font-family: inherit;
+        font-size: 0.95rem;
+
+        &::placeholder {
+            color: #94a3b8;
+        }
+    }
+}
+
+.searchIcon {
+    color: #64748b;
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.clearSearch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    &:hover {
+        background: #cbd5e1;
+    }
+}
+
+.filterSection {
+    margin-bottom: 2.5rem;
+}
+
+.filterHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+
+    h2 {
+        color: #0f172a;
+        font-size: 1.15rem;
+        font-weight: 800;
+    }
+
+    span {
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.filterButton,
+.activeFilter {
+    border: 1px solid #e2e8f0;
+    border-radius: 30px;
+    padding: 0.65rem 1.2rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 200ms ease,
+        color 200ms ease,
+        border-color 200ms ease,
+        transform 200ms ease;
+}
+
+.filterButton {
+    background: #ffffff;
+    color: #475569;
+
+    &:hover {
+        border-color: #93c5fd;
+        color: #2563eb;
+        transform: translateY(-2px);
+    }
+}
+
+.activeFilter {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.postsGrid {
+    @include mixins.grid(1, vars.$spacing-xl);
+
+    @include mixins.respond-to('md') {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @include respond-to('lg') {
+    @include mixins.respond-to('lg') {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* TODO para estudiantes: Agregar estilos para filtros y paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3.5rem;
+}
+
+.pageButton {
+    padding: 0.8rem 1.3rem;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    color: #1e40af;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 200ms ease;
+
+    &:hover:not(:disabled) {
+        background: #eff6ff;
+        border-color: #2563eb;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.pageInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+    font-size: 0.9rem;
+
+    strong {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+}
+
+.emptyState {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+
+    h2 {
+        color: #0f172a;
+        font-size: 1.5rem;
+        margin: 1rem 0 0.7rem;
+    }
+
+    p {
+        color: #64748b;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    button {
+        padding: 0.85rem 1.3rem;
+        background: #2563eb;
+        color: #ffffff;
+        border: none;
+        border-radius: 9px;
+        font-family: inherit;
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover {
+            background: #1d4ed8;
+        }
+    }
+}
+
+.emptyIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    background: #eff6ff;
+    border-radius: 50%;
+    color: #2563eb;
+    font-size: 2.5rem;
+}
+
+@media (max-width: 640px) {
+    .blogPage {
+        padding: 3rem 0;
+    }
+
+    .header {
+        padding: 0 0.5rem;
+        margin-bottom: 2.5rem;
+
+        h1 {
+            font-size: 2.1rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+
+    .searchSection {
+        margin-bottom: 2.5rem;
+    }
+
+    .filterHeader {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .filters {
+        gap: 0.5rem;
+    }
+
+    .filterButton,
+    .activeFilter {
+        padding: 0.55rem 0.9rem;
+        font-size: 0.82rem;
+    }
+
+    .pagination {
+        gap: 0.7rem;
+        flex-wrap: wrap;
+    }
+
+    .pageButton {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.82rem;
+    }
+
+    .pageInfo {
+        font-size: 0.82rem;
+    }
+}

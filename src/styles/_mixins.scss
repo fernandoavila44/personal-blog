@@ -1,60 +1,61 @@
-// Mixin para flexbox centrado
+
+@use './variables' as vars;
+
+// Flexbox centrado
 @mixin flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-// Mixin para flexbox con dirección y alineación
-@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+// Flexbox configurable
+@mixin flex(
+    $direction: row,
+    $justify: flex-start,
+    $align: stretch
+) {
     display: flex;
     flex-direction: $direction;
     justify-content: $justify;
     align-items: $align;
 }
 
-// Mixin para grid responsive
+// Grid
 @mixin grid($columns: 1, $gap: 1rem) {
     display: grid;
-    grid-template-columns: repeat($columns, 1fr);
+    grid-template-columns: repeat($columns, minmax(0, 1fr));
     gap: $gap;
 }
 
-// Mixin para responsive (mobile-first)
+// Responsive mobile-first
 @mixin respond-to($breakpoint) {
-    @if $breakpoint =='sm' {
-        @media (min-width: $breakpoint-sm) {
+    @if $breakpoint == 'sm' {
+        @media (min-width: vars.$breakpoint-sm) {
             @content;
         }
-    }
-
-    @else if $breakpoint =='md' {
-        @media (min-width: $breakpoint-md) {
+    } @else if $breakpoint == 'md' {
+        @media (min-width: vars.$breakpoint-md) {
             @content;
         }
-    }
-
-    @else if $breakpoint =='lg' {
-        @media (min-width: $breakpoint-lg) {
+    } @else if $breakpoint == 'lg' {
+        @media (min-width: vars.$breakpoint-lg) {
             @content;
         }
-    }
-
-    @else if $breakpoint =='xl' {
-        @media (min-width: $breakpoint-xl) {
+    } @else if $breakpoint == 'xl' {
+        @media (min-width: vars.$breakpoint-xl) {
             @content;
         }
     }
 }
 
-// Mixin para truncar texto
+// Truncar una línea
 @mixin truncate {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-// Mixin para líneas múltiples con ellipsis
+// Limitar número de líneas
 @mixin line-clamp($lines: 2) {
     display: -webkit-box;
     -webkit-line-clamp: $lines;
@@ -62,22 +63,40 @@
     overflow: hidden;
 }
 
-// Mixin para transiciones
+// Transiciones
 @mixin transition($properties...) {
     transition-property: $properties;
-    transition-duration: $transition-base;
+    transition-duration: vars.$transition-base;
     transition-timing-function: ease-in-out;
 }
 
-// Mixin para hover effect
+// Efecto hover
 @mixin hover-lift {
-    transition: transform $transition-fast, box-shadow $transition-fast;
+    transition:
+        transform vars.$transition-fast,
+        box-shadow vars.$transition-fast;
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: $shadow-lg;
+        box-shadow: vars.$shadow-lg;
     }
 }
 
-// TODO para estudiantes: Agregar más mixins útiles
-// Ejemplos: button-reset, card-style, etc.
+// Reset de botones
+@mixin button-reset {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+// Estilo base de tarjetas
+@mixin card-style {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: vars.$radius-lg;
+    box-shadow: vars.$shadow-sm;
+}

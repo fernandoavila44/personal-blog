@@ -1,0 +1,125 @@
+
+@use '../../../styles/variables' as vars;
+
+.postPage {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+.backLink {
+    display: inline-block;
+    color: vars.$primary-color;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    transition: color vars.$transition-fast;
+
+    &:hover {
+        color: vars.$secondary-color;
+    }
+}
+
+.article {
+    background: vars.$background-light;
+    border: 1px solid vars.$border-color;
+    border-radius: vars.$radius-lg;
+    padding: 3rem;
+    box-shadow: vars.$shadow-sm;
+}
+
+.header {
+    border-bottom: 1px solid vars.$border-color;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+.category {
+    display: inline-block;
+    background: vars.$primary-color;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: vars.$font-size-sm;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-family: vars.$font-family-heading;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: vars.$text-primary;
+    margin-bottom: 1rem;
+}
+
+.excerpt {
+    font-size: vars.$font-size-lg;
+    line-height: 1.7;
+    color: vars.$text-secondary;
+    margin-bottom: 1.5rem;
+}
+
+.metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    color: vars.$text-secondary;
+    font-size: vars.$font-size-sm;
+}
+
+.content {
+    color: vars.$text-primary;
+    font-size: vars.$font-size-lg;
+    line-height: 2;
+    min-height: 150px;
+
+    p {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.articleFooter {
+    border-top: 1px solid vars.$border-color;
+    margin-top: 2rem;
+    padding-top: 2rem;
+
+    p {
+        color: vars.$text-secondary;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.backButton {
+    display: inline-block;
+    background: vars.$primary-color;
+    color: white;
+    padding: 0.85rem 1.5rem;
+    border-radius: vars.$radius-md;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background vars.$transition-fast;
+
+    &:hover {
+        background: vars.$secondary-color;
+    }
+}
+
+@media (max-width: 640px) {
+    .postPage {
+        padding: 2rem 1rem;
+    }
+
+    .article {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .metadata {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+}

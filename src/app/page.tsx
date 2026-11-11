@@ -1,38 +1,71 @@
+
 import Link from 'next/link';
 import BlogCard from '@/components/BlogCard';
 import postsData from '@/data/posts.json';
 import styles from './page.module.scss';
 
+export const metadata = {
+  title: 'SantiDev | Tecnología, Desarrollo y Aprendizaje',
+  description:
+    'Soy Santiago Valencia. Bienvenido a SantiDev, mi espacio personal para compartir proyectos, aprendizajes y experiencias sobre tecnología y desarrollo web.',
+};
+
 export default function Home() {
-  // Obtener los últimos 3 posts
   const latestPosts = postsData.slice(0, 3);
 
   return (
-    <div className={styles.home}>
-      {/* Hero Section */}
+    <main className={styles.home}>
+      {/* Presentación principal */}
       <section className={styles.hero}>
         <div className="container">
+          <span className={styles.heroTag}>
+            SANTIAGO VALENCIA · BLOG PERSONAL
+          </span>
+
           <h1 className={styles.heroTitle}>
-            Bienvenido a Mi Blog Personal
+            Construyendo mi camino en el mundo de la{' '}
+            <span>tecnología.</span>
           </h1>
+
           <p className={styles.heroSubtitle}>
-            Explorando el mundo del desarrollo web con Next.js, React y tecnologías modernas
+            ¡Hola! Soy Santiago. Este es SantiDev, un espacio donde comparto
+            mis aprendizajes, proyectos y experiencias mientras descubro
+            todo lo que puedo crear con la tecnología.
           </p>
+
           <div className={styles.heroButtons}>
             <Link href="/blog" className="btn btn-primary">
-              Ver todos los posts
+              Explorar publicaciones →
             </Link>
+
             <Link href="/about" className="btn btn-secondary">
-              Sobre mí
+              Conóceme
             </Link>
+          </div>
+
+          <div className={styles.heroFooter}>
+            <span>Desarrollo web</span>
+            <span>Aprendizaje continuo</span>
+            <span>Proyectos digitales</span>
           </div>
         </div>
       </section>
 
-      {/* Latest Posts Section */}
+      {/* Últimas publicaciones */}
       <section className="section">
         <div className="container">
-          <h2 className={styles.sectionTitle}>Últimos Posts</h2>
+          <div className={styles.sectionHeader}>
+            <div>
+              <span className={styles.sectionTag}>MI CONTENIDO</span>
+              <h2 className={styles.sectionTitle}>
+                Últimas publicaciones
+              </h2>
+              <p className={styles.sectionDescription}>
+                Ideas, conocimientos y experiencias que quiero compartir.
+              </p>
+            </div>
+          </div>
+
           <div className={styles.postsGrid}>
             {latestPosts.map((post) => (
               <BlogCard
@@ -46,29 +79,39 @@ export default function Home() {
               />
             ))}
           </div>
+
           <div className={styles.viewAll}>
             <Link href="/blog" className="btn btn-primary">
-              Ver todos los posts →
+              Ver todas las publicaciones →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* About Preview Section */}
+      {/* Presentación personal */}
       <section className={`section ${styles.aboutPreview}`}>
         <div className="container">
           <div className={styles.aboutContent}>
-            <h2>¿Quién soy?</h2>
+            <span className={styles.sectionTag}>UN POCO SOBRE MÍ</span>
+
+            <h2>
+              Detrás de <span>SantiDev</span> está Santiago.
+            </h2>
+
             <p>
-              Soy un desarrollador apasionado por crear experiencias web increíbles.
-              Me encanta compartir conocimiento y ayudar a otros a crecer en el mundo del desarrollo.
+              Soy estudiante de Ingeniería de Software y una persona
+              interesada en la tecnología, la programación y la creación
+              de proyectos digitales. Este blog es mi espacio para
+              documentar lo que aprendo, compartir mis avances y mostrar
+              mi evolución en este mundo.
             </p>
+
             <Link href="/about" className="btn btn-secondary">
-              Conoce más sobre mí
+              Conoce mi historia →
             </Link>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

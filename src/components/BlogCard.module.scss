@@ -1,88 +1,257 @@
-@import '../styles/variables';
-@import '../styles/mixins';
 
 .card {
-    background-color: white;
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-    @include transition(transform, box-shadow);
-    border: 1px solid $border-color;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease,
+        border-color 250ms ease;
 
     &:hover {
-        transform: translateY(-4px);
-        box-shadow: $shadow-lg;
+        transform: translateY(-7px);
+        border-color: var(--primary);
+        box-shadow: 0 16px 35px rgba(15, 23, 42, 0.1);
+
+        .visualSymbol {
+            transform: scale(1.12) rotate(-5deg);
+        }
+
+        .readMore span {
+            transform: translateX(5px);
+        }
     }
 }
 
+.cardVisual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 145px;
+    padding: 1.5rem 1.7rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        135deg,
+        #0f172a 0%,
+        #172554 55%,
+        #2563eb 100%
+    );
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    &::before {
+        width: 180px;
+        height: 180px;
+        top: -100px;
+        right: -30px;
+        background: rgba(96, 165, 250, 0.15);
+    }
+
+    &::after {
+        width: 130px;
+        height: 130px;
+        bottom: -90px;
+        left: 35%;
+        background: rgba(147, 197, 253, 0.12);
+    }
+}
+
+.visualLabel {
+    position: relative;
+    z-index: 1;
+    color: #bfdbfe;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.visualSymbol {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 75px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1.65rem;
+    font-weight: 800;
+    transition: transform 250ms ease;
+    backdrop-filter: blur(8px);
+}
+
+.visualDecoration {
+    position: absolute;
+    right: 45%;
+    bottom: 15px;
+    color: rgba(255, 255, 255, 0.18);
+    font-size: 2rem;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem;
+}
+
 .header {
-    @include flex(row, space-between, center);
-    margin-bottom: $spacing-md;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 1.1rem;
 }
 
 .category {
-    background-color: $primary-color;
-    color: white;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $radius-sm;
-    font-size: $font-size-xs;
-    font-weight: 600;
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    background: var(--surface-hover);
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .readTime {
-    color: $text-light;
-    font-size: $font-size-sm;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .title {
-    margin-bottom: $spacing-md;
+    margin: 0 0 0.8rem;
+    line-height: 1.4;
 
     a {
-        color: $text-primary;
-        font-size: $font-size-xl;
-        font-weight: 700;
-        @include transition(color);
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition: color 200ms ease;
 
         &:hover {
-            color: $primary-color;
+            color: var(--primary);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 4px;
+            border-radius: 3px;
         }
     }
 }
 
 .excerpt {
-    color: $text-secondary;
-    line-height: 1.6;
-    margin-bottom: $spacing-lg;
-    @include line-clamp(3);
+    flex: 1;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.93rem;
+    line-height: 1.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .footer {
-    @include flex(row, space-between, center);
-    padding-top: $spacing-md;
-    border-top: 1px solid $border-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border);
 }
 
 .date {
-    color: $text-light;
-    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    text-transform: capitalize;
 }
 
 .readMore {
-    color: $primary-color;
-    font-weight: 600;
-    font-size: $font-size-sm;
-    @include transition(color, transform);
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 200ms ease;
+
+    span {
+        display: inline-block;
+        margin-left: 0.25rem;
+        transition: transform 200ms ease;
+    }
 
     &:hover {
-        color: $secondary-color;
-        transform: translateX(4px);
+        color: #1d4ed8;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 4px;
+        border-radius: 3px;
     }
 }
 
-/* TODO para estudiantes:
- * 1. Agregar estilos para la imagen del post
- * 2. Mejorar la animación con keyframes
- * 3. Agregar estilos para tags
- * 4. Crear variantes de card (featured, compact, etc.)
- */
+@media (max-width: 640px) {
+    .cardVisual {
+        min-height: 125px;
+        padding: 1.2rem;
+    }
+
+    .visualSymbol {
+        width: 65px;
+        height: 65px;
+        font-size: 1.4rem;
+    }
+
+    .cardContent {
+        padding: 1.2rem;
+    }
+
+    .title a {
+        font-size: 1.1rem;
+    }
+
+    .footer {
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .visualSymbol,
+    .readMore,
+    .readMore span {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+}

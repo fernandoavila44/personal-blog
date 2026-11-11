@@ -1,14 +1,15 @@
-@import './variables';
 
-// Estilos base de tipografía
+@use './variables' as *;
+@use 'sass:color';
+
+// Tipografía base
 body {
     font-family: $font-family-base;
     font-size: $font-size-base;
     line-height: 1.6;
-    color: $text-primary;
+    color: var(--text-primary);
 }
 
-// Headings
 h1,
 h2,
 h3,
@@ -19,7 +20,7 @@ h6 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: $spacing-md;
-    color: $text-primary;
+    color: var(--text-primary);
 }
 
 h1 {
@@ -27,45 +28,100 @@ h1 {
     margin-bottom: $spacing-lg;
 }
 
-h2 {
-    font-size: $font-size-3xl;
-}
+h2 { font-size: $font-size-3xl; }
+h3 { font-size: $font-size-2xl; }
+h4 { font-size: $font-size-xl; }
+h5 { font-size: $font-size-lg; }
+h6 { font-size: $font-size-base; }
 
-h3 {
-    font-size: $font-size-2xl;
-}
-
-h4 {
-    font-size: $font-size-xl;
-}
-
-h5 {
-    font-size: $font-size-lg;
-}
-
-h6 {
-    font-size: $font-size-base;
-}
-
-// Párrafos
 p {
     margin-bottom: $spacing-md;
-    color: $text-secondary;
+    color: var(--text-secondary);
 }
 
-// Links
 a {
     color: $primary-color;
     text-decoration: none;
     transition: color $transition-fast;
 
     &:hover {
-        color: darken($primary-color, 10%);
+        color: color.adjust($primary-color, $lightness: -10%);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $primary-color;
+        outline-offset: 3px;
     }
 }
 
-// TODO para estudiantes:
-// 1. Agregar estilos para listas (ul, ol)
-// 2. Agregar estilos para blockquotes
-// 3. Agregar estilos para code y pre
-// 4. Agregar clases de utilidad para tamaños de texto
+// Listas
+ul,
+ol {
+    margin: 0 0 $spacing-md;
+    padding-left: $spacing-xl;
+    color: var(--text-secondary);
+
+    li {
+        margin-bottom: $spacing-sm;
+        line-height: 1.7;
+
+        &::marker {
+            color: $primary-color;
+        }
+    }
+}
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+
+// Citas
+blockquote {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $primary-color;
+    border-radius: 0 $radius-md $radius-md 0;
+    background: var(--surface-secondary);
+
+    p {
+        margin-bottom: 0;
+        color: var(--text-primary);
+        font-style: italic;
+    }
+}
+
+// Código en línea
+code {
+    padding: 0.2rem 0.4rem;
+    border-radius: $radius-sm;
+    background: var(--surface-secondary);
+    color: var(--primary);
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.9em;
+}
+
+// Bloques de código
+pre {
+    margin: $spacing-lg 0;
+    padding: $spacing-lg;
+    overflow-x: auto;
+    border-radius: $radius-md;
+    background: #101827;
+    color: #e5e7eb;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+
+    code {
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font-size: inherit;
+    }
+}
+
+// Utilidades de texto
+.text-xs { font-size: $font-size-xs; }
+.text-sm { font-size: $font-size-sm; }
+.text-base { font-size: $font-size-base; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }

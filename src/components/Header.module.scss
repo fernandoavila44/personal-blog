@@ -1,63 +1,74 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+
+@use '../styles/variables' as vars;
+@use '../styles/mixins' as mixins;
 
 .header {
-    background-color: white;
-    box-shadow: $shadow-sm;
+    background-color: var(--surface);
+    box-shadow: vars.$shadow-sm;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    transition: background-color 200ms ease, border-color 200ms ease;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 $spacing-lg;
-    @include flex(row, space-between, center);
-    height: 70px;
+    padding: 0 vars.$spacing-lg;
+    @include mixins.flex(row, space-between, center);
+    height: 76px;
 }
 
 .logo {
+    text-decoration: none;
+
     h1 {
-        font-size: $font-size-xl;
-        color: $primary-color;
+        font-size: 1.8rem;
+        color: #1e40af;
         margin: 0;
-        font-family: $font-family-heading;
-        @include transition(color);
+        font-family: vars.$font-family-heading;
+        font-weight: 800;
+        letter-spacing: -1px;
+        @include mixins.transition(color);
+
+        span {
+            color: #3b82f6;
+        }
 
         &:hover {
-            color: $secondary-color;
+            color: #3b82f6;
         }
     }
 }
 
 .nav {
-    @include flex(row, flex-end, center);
-    gap: $spacing-xl;
+    @include mixins.flex(row, flex-end, center);
+    gap: vars.$spacing-xl;
 }
 
 .navLink {
-    color: $text-secondary;
-    font-weight: 500;
-    font-size: $font-size-base;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: vars.$font-size-base;
     position: relative;
-    @include transition(color);
+    text-decoration: none;
+    @include mixins.transition(color);
 
     &:hover {
-        color: $primary-color;
+        color: #2563eb;
     }
 
-    // Efecto de subrayado animado
     &::after {
         content: '';
         position: absolute;
-        bottom: -5px;
+        bottom: -7px;
         left: 0;
         width: 0;
         height: 2px;
-        background-color: $primary-color;
-        transition: width $transition-base;
+        background-color: #2563eb;
+        transition: width vars.$transition-base;
     }
 
     &:hover::after {
@@ -65,15 +76,66 @@
     }
 }
 
-// Responsive
-@include respond-to('md') {
-    .container {
-        padding: 0 $spacing-xl;
+.themeButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 200ms ease;
+
+    &:hover {
+        border-color: #3b82f6;
+        background: var(--surface-hover);
+        transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #93c5fd;
+        outline-offset: 3px;
     }
 }
 
-/* TODO para estudiantes:
- * 1. Agregar un menú hamburguesa para móviles
- * 2. Implementar un indicador de página activa
- * 3. Agregar animación de entrada al hacer scroll
- */
+@media (max-width: 640px) {
+    .container {
+        height: auto;
+        min-height: 76px;
+        padding: vars.$spacing-md;
+        flex-direction: column;
+        justify-content: center;
+        gap: vars.$spacing-md;
+    }
+
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+
+    .nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: vars.$spacing-md;
+    }
+
+    .navLink {
+        font-size: vars.$font-size-sm;
+    }
+
+    .themeButton {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.8rem;
+    }
+}
+
+@include mixins.respond-to('md') {
+    .container {
+        padding: 0 vars.$spacing-xl;
+    }
+}

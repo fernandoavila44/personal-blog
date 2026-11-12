@@ -33,4 +33,168 @@
     }
 }
 
-/* TODO para estudiantes: Agregar estilos para filtros y paginación */
+/* Búsqueda */
+.search {
+    max-width: 520px;
+    margin: 0 auto $spacing-lg;
+
+    input {
+        width: 100%;
+        padding: $spacing-sm $spacing-lg;
+        border: 1px solid $border-color;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: $font-size-base;
+        color: $text-primary;
+        background-color: $background-light;
+        @include transition(border-color, box-shadow);
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        :global(body.dark) & {
+            background-color: #111827;
+            border-color: #4b5563;
+            color: $dark-text;
+        }
+    }
+}
+
+/* Filtros por categoría */
+.filters {
+    @include flex(row, center, center);
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+}
+
+.filterButton {
+    @include flex(row, center, center);
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: 999px;
+    background-color: white;
+    color: $text-secondary;
+    font-family: inherit;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    cursor: pointer;
+    @include transition(background-color, color, border-color, transform);
+
+    &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+        transform: translateY(-1px);
+    }
+
+    &.active {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: white;
+    }
+
+    :global(body.dark) &:not(.active) {
+        background-color: #111827;
+        border-color: #4b5563;
+        color: #d1d5db;
+    }
+}
+
+.filterCount {
+    min-width: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.08);
+    font-size: $font-size-xs;
+
+    .active & {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    :global(body.dark) & {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.results {
+    text-align: center;
+    font-size: $font-size-sm;
+    color: $text-light;
+    margin-bottom: $spacing-xl;
+}
+
+.empty {
+    text-align: center;
+    padding: $spacing-3xl 0;
+
+    p {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-lg;
+    }
+}
+
+/* Paginación */
+.pagination {
+    @include flex(row, center, center);
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    margin-top: $spacing-2xl;
+}
+
+.pageButton,
+.pageNumber {
+    border: 1px solid $border-color;
+    background-color: white;
+    color: $text-primary;
+    border-radius: $radius-md;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    @include transition(background-color, color, border-color);
+
+    &:hover:not(:disabled) {
+        border-color: $primary-color;
+        color: $primary-color;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    :global(body.dark) & {
+        background-color: #111827;
+        border-color: #4b5563;
+        color: $dark-text;
+    }
+}
+
+.pageButton {
+    padding: $spacing-sm $spacing-md;
+}
+
+.pageNumbers {
+    @include flex(row, center, center);
+    gap: $spacing-xs;
+}
+
+.pageNumber {
+    width: 40px;
+    height: 40px;
+
+    &.active,
+    :global(body.dark) &.active {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: white;
+    }
+}
+
+.pageInfo {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+}

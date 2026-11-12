@@ -1,0 +1,170 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.contactPage {
+    padding: $spacing-3xl 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+
+    p {
+        font-size: $font-size-lg;
+    }
+}
+
+.form {
+    @include flex(column);
+    gap: $spacing-lg;
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    padding: $spacing-xl $spacing-lg;
+    box-shadow: $shadow-md;
+
+    @include respond-to('md') {
+        padding: $spacing-2xl;
+    }
+
+    :global(body.dark) & {
+        background-color: #111827;
+        border-color: #374151;
+    }
+}
+
+.field {
+    @include flex(column);
+    gap: $spacing-xs;
+
+    label {
+        font-weight: 600;
+        color: $text-primary;
+
+        :global(body.dark) & {
+            color: $dark-text;
+        }
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        font-family: inherit;
+        font-size: $font-size-base;
+        color: $text-primary;
+        background-color: $background-light;
+        @include transition(border-color, box-shadow);
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        :global(body.dark) & {
+            background-color: #1f2937;
+            border-color: #4b5563;
+            color: $dark-text;
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    // Campo con error (va después para tener prioridad sobre el modo oscuro)
+    .inputError,
+    :global(body.dark) & .inputError {
+        border-color: #dc2626;
+
+        &:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+        }
+    }
+}
+
+.error {
+    color: #dc2626;
+    font-size: $font-size-sm;
+    animation: shake 300ms ease-in-out;
+
+    :global(body.dark) & {
+        color: #f87171;
+    }
+}
+
+.fieldFooter {
+    @include flex(row, space-between, flex-start);
+    gap: $spacing-md;
+}
+
+.counter {
+    flex-shrink: 0;
+    color: $text-light;
+    font-size: $font-size-xs;
+}
+
+.submit {
+    align-self: flex-start;
+    padding: $spacing-sm $spacing-xl;
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+.success {
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    background-color: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+    font-weight: 600;
+    animation: fadeIn $transition-base;
+
+    :global(body.dark) & {
+        background-color: #14532d;
+        border-color: #166534;
+        color: #bbf7d0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}

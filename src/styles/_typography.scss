@@ -64,8 +64,167 @@ a {
     }
 }
 
-// TODO para estudiantes:
-// 1. Agregar estilos para listas (ul, ol)
-// 2. Agregar estilos para blockquotes
-// 3. Agregar estilos para code y pre
-// 4. Agregar clases de utilidad para tamaños de texto
+// 1. Listas (ul, ol)
+ul,
+ol {
+    margin: 0 0 $spacing-md $spacing-lg;
+    padding-left: $spacing-sm;
+    color: $text-secondary;
+
+    li {
+        margin-bottom: $spacing-xs;
+        line-height: 1.6;
+        padding-left: $spacing-xs;
+    }
+
+    li::marker {
+        color: $primary-color;
+        font-weight: 700;
+    }
+
+    // Listas anidadas
+    ul,
+    ol {
+        margin-top: $spacing-xs;
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    list-style-type: disc;
+
+    ul {
+        list-style-type: circle;
+    }
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+// 2. Blockquotes
+blockquote {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-left: 4px solid $secondary-color;
+    border-radius: 0 $radius-md $radius-md 0;
+    background-color: $background-gray;
+    font-style: italic;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    cite {
+        display: block;
+        margin-top: $spacing-sm;
+        font-size: $font-size-sm;
+        font-style: normal;
+        color: $text-light;
+
+        &::before {
+            content: '— ';
+        }
+    }
+}
+
+// 3. Código en línea (code) y bloques de código (pre)
+code,
+kbd,
+pre {
+    font-family: var(--font-geist-mono), 'Fira Code', Consolas, 'Courier New', monospace;
+}
+
+code {
+    padding: 0.15em 0.4em;
+    border-radius: $radius-sm;
+    background-color: #f3f4f6;
+    border: 1px solid $border-color;
+    color: #db2777;
+    font-size: 0.875em;
+}
+
+pre {
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $radius-md;
+    background-color: #111827;
+    color: #e5e7eb;
+    font-size: $font-size-sm;
+    line-height: 1.7;
+    overflow-x: auto;
+
+    // El code dentro de pre hereda el estilo del bloque
+    code {
+        padding: 0;
+        border: none;
+        background: none;
+        color: inherit;
+        font-size: inherit;
+    }
+}
+
+// 4. Clases de utilidad para tamaños de texto
+.text-xs {
+    font-size: $font-size-xs;
+}
+
+.text-sm {
+    font-size: $font-size-sm;
+}
+
+.text-base {
+    font-size: $font-size-base;
+}
+
+.text-lg {
+    font-size: $font-size-lg;
+}
+
+.text-xl {
+    font-size: $font-size-xl;
+}
+
+.text-2xl {
+    font-size: $font-size-2xl;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: $text-light;
+}
+
+// Tema oscuro
+body.dark {
+    ul,
+    ol {
+        color: #d1d5db;
+    }
+
+    blockquote {
+        background-color: #111827;
+        color: #d1d5db;
+    }
+
+    code {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f9a8d4;
+    }
+
+    pre {
+        background-color: #030712;
+        border: 1px solid #374151;
+
+        code {
+            background: none;
+            border: none;
+            color: inherit;
+        }
+    }
+}

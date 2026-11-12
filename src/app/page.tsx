@@ -43,6 +43,7 @@ export default function Home() {
                 date={post.date}
                 category={post.category}
                 readTime={post.readTime}
+                author={post.author}
               />
             ))}
           </div>

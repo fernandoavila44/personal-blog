@@ -1,0 +1,129 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.postPage {
+  min-height: 100vh;
+  padding: $spacing-3xl 0;
+  background: $background-gray;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-2xl;
+  padding: $spacing-sm $spacing-md;
+  color: $primary-color;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $secondary-color;
+    background: $background-light;
+  }
+}
+
+.header {
+  max-width: 900px;
+  margin: 0 auto $spacing-2xl;
+  padding: $spacing-3xl;
+  text-align: center;
+  background: $background-light;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+
+  h1 {
+    max-width: 800px;
+    margin: $spacing-xl auto;
+    color: $text-primary;
+    font-size: $font-size-4xl;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
+
+.category {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  background: $background-gray;
+  color: $primary-color;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metadata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $border-color;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+
+  > * + *::before {
+    content: "•";
+    margin-right: $spacing-md;
+    color: $text-light;
+  }
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $spacing-3xl;
+  background: $background-light;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+
+  color: $text-primary;
+  font-size: $font-size-lg;
+  line-height: 1.9;
+
+  p {
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+}
+
+@include respond-to("md") {
+  .header,
+  .content {
+    padding: $spacing-2xl;
+  }
+
+  .header h1 {
+    font-size: $font-size-3xl;
+  }
+}
+
+@media (max-width: 480px) {
+  .postPage {
+    padding: $spacing-xl 0;
+  }
+
+  .header,
+  .content {
+    padding: $spacing-lg;
+  }
+
+  .header h1 {
+    font-size: $font-size-2xl;
+  }
+
+  .metadata {
+    gap: $spacing-sm;
+
+    > * + *::before {
+      margin-right: $spacing-sm;
+    }
+  }
+}

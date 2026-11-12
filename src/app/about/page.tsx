@@ -1,82 +1,105 @@
-// import authorData from '@/data/author.json';
-// import styles from './page.module.scss';
+import Image from "next/image";
+import authorData from "@/data/author.json";
+import styles from "./page.module.scss";
+import { FaEnvelope, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
 
-/* 
- * EJERCICIO: Implementar página "Sobre mí" con SSR (Server-Side Rendering)
- * 
- * CONCEPTOS A APRENDER:
- * - Server Components: Componentes que se ejecutan en el servidor
- * - SSR: Renderizado en el servidor en cada request
- * - Data fetching en Server Components
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Importar los datos del autor
- *    - Ya está disponible en @/data/author.json
- *    - En un caso real, esto podría ser un fetch a una API
- * 
- * 2. Crear el JSX para mostrar:
- *    - Foto de perfil (usar next/image)
- *    - Nombre y rol
- *    - Biografía
- *    - Skills/habilidades
- *    - Experiencia y educación
- *    - Enlaces a redes sociales
- * 
- * 3. Crear estilos en page.module.scss
- *    - Layout atractivo (puede ser dos columnas en desktop)
- *    - Cards para skills
- *    - Botones para redes sociales
- * 
- * 4. BONUS: Agregar metadata dinámica
- *    - Usar generateMetadata() para SEO
- */
-
-// TODO: Descomentar y usar authorData
-// const author = authorData;
+export const dynamic = "force-dynamic";
 
 export default function AboutPage() {
-    // TODO: Implementar la página
+  return (
+    <main className={styles.aboutPage}>
+      <div className="container">
+        <section className={styles.hero}>
+          <div className={styles.profileImage}>
+            <Image
+              src={authorData.avatar}
+              alt={`Foto de perfil de ${authorData.name}`}
+              width={280}
+              height={280}
+              priority
+            />
+          </div>
 
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+          <div className={styles.intro}>
+            <span className={styles.eyebrow}>Conóceme</span>
+            <h1>{authorData.name}</h1>
+            <p className={styles.role}>{authorData.role}</p>
+            <p className={styles.location}>{authorData.location}</p>
+          </div>
+        </section>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
+        <div className={styles.contentGrid}>
+          <section className={styles.contentCard}>
+            <h2>Sobre mí</h2>
+            <p>{authorData.bio}</p>
+          </section>
+
+          <section className={styles.contentCard}>
+            <h2>Habilidades</h2>
+            <div className={styles.skillList}>
+              {authorData.skills.map((skill) => (
+                <span className={styles.skill} key={skill}>
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          <section className={styles.contentCard}>
+            <h2>Experiencia</h2>
+            <p>{authorData.experience}</p>
+          </section>
+
+          <section className={styles.contentCard}>
+            <h2>Educación</h2>
+            <p>{authorData.education}</p>
+          </section>
         </div>
-    );
-}
 
-/* PREGUNTAS PARA REFLEXIONAR:
- * 
- * 1. ¿Por qué usar SSR para esta página en lugar de SSG?
- *    Respuesta: En este ejemplo, podríamos usar SSG también. Pero SSR es útil
- *    si los datos cambian frecuentemente o necesitas datos en tiempo real.
- *    Esta página es un ejercicio para practicar SSR.
- * 
- * 2. ¿Cuál es la diferencia entre un Server Component y un Client Component?
- *    Respuesta: Server Components se ejecutan en el servidor, no envían JS al cliente,
- *    y pueden acceder directamente a bases de datos. Client Components ('use client')
- *    se ejecutan en el navegador y permiten interactividad (hooks, eventos).
- * 
- * 3. ¿Puedes usar hooks como useState en este componente?
- *    Respuesta: No, porque es un Server Component. Para usar hooks necesitas
- *    agregar 'use client' al inicio del archivo.
- */
+        <section className={styles.social}>
+          <h2>Contacto y Redes Sociales</h2>
 
-/* BONUS: Implementar generateMetadata
-export async function generateMetadata() {
-  return {
-    title: `Sobre ${authorData.name} | Mi Blog Personal`,
-    description: authorData.bio,
-  };
+          <div className={styles.socialLinks}>
+            <a
+              href={`mailto:${authorData.email}`}
+              aria-label="Correo electrónico"
+              title="Correo electrónico"
+            >
+              <FaEnvelope />
+            </a>
+
+            <a
+              href={authorData.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              title="GitHub"
+            >
+              <FaGithub />
+            </a>
+
+            <a
+              href={authorData.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
+              <FaLinkedin />
+            </a>
+
+            <a
+              href={authorData.social.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+            >
+              <FaWhatsapp />
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  );
 }
-*/

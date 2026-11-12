@@ -1,0 +1,217 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.aboutPage {
+  min-height: 100vh;
+  padding: $spacing-3xl 0;
+  background: $background-gray;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-3xl;
+  padding: $spacing-3xl;
+  margin-bottom: $spacing-2xl;
+  background: $background-light;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+}
+
+.profileImage {
+  flex-shrink: 0;
+  width: 260px;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md;
+  }
+}
+
+.intro {
+  max-width: 550px;
+
+  h1 {
+    margin: $spacing-md 0;
+    color: $text-primary;
+    font-size: $font-size-4xl;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
+
+.eyebrow {
+  color: $primary-color;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.role {
+  margin-bottom: $spacing-md;
+  color: $secondary-color;
+  font-size: $font-size-xl;
+  font-weight: 600;
+}
+
+.location {
+  color: $text-secondary;
+  font-size: $font-size-sm;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+}
+
+.contentCard {
+  min-width: 0;
+  padding: $spacing-2xl;
+  background: $background-light;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+
+  h2 {
+    margin: 0 0 $spacing-lg;
+    color: $text-primary;
+    font-size: $font-size-xl;
+    font-weight: 700;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.8;
+  }
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.skill {
+  padding: $spacing-sm $spacing-lg;
+  color: $primary-color;
+  background: $background-gray;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $background-light;
+    background: $primary-color;
+    border-color: $primary-color;
+  }
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2xl;
+  padding: $spacing-lg 0;
+  border-top: 1px solid $border-color;
+
+  h2 {
+    margin: 0;
+    color: $text-primary;
+    font-size: $font-size-xl;
+    font-weight: 700;
+  }
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: $text-secondary;
+    background: $background-light;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all $transition-fast;
+
+    svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      color: $background-light;
+      background: $primary-color;
+      border-color: $primary-color;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+@include respond-to("md") {
+  .hero {
+    flex-direction: column;
+    gap: $spacing-xl;
+    text-align: center;
+  }
+
+  .intro h1 {
+    font-size: $font-size-3xl;
+  }
+}
+
+@media (max-width: 600px) {
+  .aboutPage {
+    padding: $spacing-xl 0;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  .hero,
+  .contentCard {
+    padding: $spacing-lg;
+  }
+
+  .profileImage {
+    width: 200px;
+  }
+
+  .intro h1 {
+    font-size: $font-size-2xl;
+  }
+
+  .social {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+
+  .socialLinks {
+    gap: $spacing-sm;
+
+    a {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

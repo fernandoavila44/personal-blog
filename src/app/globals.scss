@@ -75,8 +75,35 @@ body {
     }
 }
 
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
+/* Tema oscuro: se activa cuando ThemeToggle agrega la clase 'dark' al body */
+body {
+    transition: background-color $transition-base, color $transition-base;
+}
+
+body.dark {
+    background-color: $dark-bg;
+    color: $dark-text;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $dark-text;
+    }
+
+    p {
+        color: #d1d5db;
+    }
+
+    .card {
+        background-color: #111827;
+    }
+}
+
+/* TODO para estudiantes:
+ * 1. (Hecho) Agregar estilos para tema oscuro
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
  * 3. Mejorar los estilos de los botones con más variantes
  */

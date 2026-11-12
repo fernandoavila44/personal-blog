@@ -1,63 +1,87 @@
-// import { useState, useEffect } from 'react';
+'use client';
 
-/* 
- * EJERCICIO: Crear custom hook useLocalStorage
- * 
- * CONCEPTOS A APRENDER:
- * - Custom Hooks: Reutilizar lógica de hooks
- * - useState y useEffect combinados
- * - localStorage API
- * - Generics en TypeScript
- * 
- * OBJETIVO:
- * Crear un hook que funcione como useState pero que persista
- * el valor en localStorage automáticamente.
- * 
- * PASOS A SEGUIR:
- * 
- * 1. Crear la función useLocalStorage con generics
- *    - Parámetros: key (string), initialValue (T)
- *    - Retorno: [value, setValue] como useState
- * 
- * 2. Implementar useState para el valor
- *    - Valor inicial: leer de localStorage o usar initialValue
- *    - Manejar errores de parsing JSON
- * 
- * 3. Implementar useEffect para guardar en localStorage
- *    - Ejecutar cuando cambie el valor
- *    - Convertir a JSON antes de guardar
- * 
- * 4. Retornar el valor y la función setter
+import { useCallback, useEffect, useState } from 'react';
+
+/*
+ * Custom hook useLocalStorage
+ *
+ * Funciona como useState, pero persiste el valor en localStorage.
+ *
+ * Compatible con SSR (Next.js): en el servidor no existe `window`, así que el
+ * primer render siempre usa `initialValue` (igual en servidor y cliente, sin
+ * errores de hidratación). Después de montar, un useEffect lee el valor
+ * guardado y actualiza el estado.
+ *
+ * Bonus implementados:
+ * - Soporte SSR (typeof window)
+ * - Acepta valor o función updater, como setState
+ * - Sincronización entre pestañas con el evento `storage`
+ * - Función para remover el item
  */
 
-// TODO: Implementar el custom hook
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-    // TODO: Implementar useState con valor inicial desde localStorage
-    // const [storedValue, setStoredValue] = useState<T>(() => {
-    //   try {
-    //     const item = window.localStorage.getItem(key);
-    //     return item ? JSON.parse(item) : initialValue;
-    //   } catch (error) {
-    //     console.error(error);
-    //     return initialValue;
-    //   }
-    // });
+type SetValue<T> = (value: T | ((prev: T) => T)) => void;
 
-    // TODO: Implementar función setValue que también guarde en localStorage
-    // const setValue = (value: T) => {
-    //   try {
-    //     setStoredValue(value);
-    //     window.localStorage.setItem(key, JSON.stringify(value));
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+export function useLocalStorage<T>(
+    key: string,
+    initialValue: T
+): [T, SetValue<T>, () => void] {
+    const [storedValue, setStoredValue] = useState<T>(initialValue);
 
-    // TODO: Retornar el valor y la función setter
-    // return [storedValue, setValue];
+    // Cargar el valor guardado una vez montado en el cliente
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        try {
+            const item = window.localStorage.getItem(key);
+            if (item !== null) {
+                setStoredValue(JSON.parse(item) as T);
+            }
+        } catch (error) {
+            console.error(`Error leyendo localStorage["${key}"]:`, error);
+        }
+    }, [key]);
 
-    // Placeholder temporal
-    throw new Error('TODO: Implementar useLocalStorage');
+    // Sincronizar entre pestañas
+    useEffect(() => {
+        const handleStorage = (event: StorageEvent) => {
+            if (event.key !== key) return;
+            try {
+                setStoredValue(event.newValue !== null ? (JSON.parse(event.newValue) as T) : initialValue);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        window.addEventListener('storage', handleStorage);
+        return () => window.removeEventListener('storage', handleStorage);
+        // initialValue se omite a propósito para no re-suscribir en cada render
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [key]);
+
+    const setValue: SetValue<T> = useCallback(
+        (value) => {
+            setStoredValue((prev) => {
+                const valueToStore = value instanceof Function ? value(prev) : value;
+                try {
+                    window.localStorage.setItem(key, JSON.stringify(valueToStore));
+                } catch (error) {
+                    console.error(`Error guardando localStorage["${key}"]:`, error);
+                }
+                return valueToStore;
+            });
+        },
+        [key]
+    );
+
+    const removeValue = useCallback(() => {
+        try {
+            window.localStorage.removeItem(key);
+        } catch (error) {
+            console.error(error);
+        }
+        setStoredValue(initialValue);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [key]);
+
+    return [storedValue, setValue, removeValue];
 }
 
 /* EJEMPLO DE USO:

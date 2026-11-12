@@ -66,6 +66,10 @@
 
 .aboutPreview {
     background-color: $background-gray;
+
+    :global(body.dark) & {
+        background-color: #111827;
+    }
 }
 
 .aboutContent {

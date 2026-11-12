@@ -8,6 +8,11 @@
     top: 0;
     z-index: 100;
     border-bottom: 1px solid $border-color;
+
+    :global(body.dark) & {
+        background-color: #111827;
+        border-bottom-color: #374151;
+    }
 }
 
 .container {

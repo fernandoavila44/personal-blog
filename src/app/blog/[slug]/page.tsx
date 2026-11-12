@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import postsData from '@/data/posts.json';
+import CommentSection from '@/components/CommentSection';
 import styles from './page.module.scss';
 
 /*
@@ -82,6 +83,8 @@ export default async function PostPage({ params }: PageProps) {
                         <p>{post.content}</p>
                     </div>
                 </article>
+
+                <CommentSection postSlug={post.slug} />
 
                 <div className={styles.footer}>
                     <Link href="/blog" className="btn btn-primary">

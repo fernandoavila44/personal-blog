@@ -1,0 +1,164 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.commentSection {
+    margin-top: $spacing-2xl;
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    padding: $spacing-xl $spacing-lg;
+    box-shadow: $shadow-sm;
+
+    @include respond-to('md') {
+        padding: $spacing-xl $spacing-2xl;
+    }
+
+    :global(body.dark) & {
+        background-color: #111827;
+        border-color: #374151;
+    }
+}
+
+.title {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-lg;
+}
+
+.count {
+    color: $text-light;
+    font-size: $font-size-lg;
+    font-weight: 400;
+}
+
+// Formulario
+.form {
+    @include flex(column);
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-xl;
+    border-bottom: 1px solid $border-color;
+
+    button {
+        align-self: flex-start;
+    }
+
+    :global(body.dark) & {
+        border-bottom-color: #374151;
+    }
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font-family: inherit;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background-color: $background-light;
+    @include transition(border-color, box-shadow);
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    :global(body.dark) & {
+        background-color: #1f2937;
+        border-color: #4b5563;
+        color: $dark-text;
+    }
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.error {
+    color: #dc2626;
+    font-size: $font-size-sm;
+    margin-bottom: 0;
+
+    :global(body.dark) & {
+        color: #f87171;
+    }
+}
+
+// Lista de comentarios
+.list {
+    @include flex(column);
+    gap: $spacing-md;
+}
+
+.empty {
+    text-align: center;
+    color: $text-light;
+    font-style: italic;
+    padding: $spacing-lg 0;
+    margin-bottom: 0;
+}
+
+.comment {
+    padding: $spacing-md $spacing-lg;
+    border-radius: $radius-md;
+    background-color: $background-gray;
+    border-left: 4px solid $primary-color;
+    animation: fadeIn $transition-base;
+
+    :global(body.dark) & {
+        background-color: #1f2937;
+    }
+}
+
+.commentHeader {
+    @include flex(row, flex-start, center);
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+}
+
+.avatar {
+    @include flex-center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    color: white;
+    font-weight: 700;
+}
+
+.author {
+    display: block;
+    color: $text-primary;
+
+    :global(body.dark) & {
+        color: $dark-text;
+    }
+}
+
+.date {
+    display: block;
+    font-size: $font-size-xs;
+    color: $text-light;
+}
+
+.text {
+    margin-bottom: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

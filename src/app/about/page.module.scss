@@ -1,0 +1,163 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.aboutPage {
+    padding-bottom: $spacing-3xl;
+}
+
+// Header con avatar y nombre
+.hero {
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    padding: $spacing-3xl 0;
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+}
+
+.avatar {
+    @include flex-center;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto $spacing-lg;
+    border-radius: 50%;
+    background-color: white;
+    color: $primary-color;
+    font-family: $font-family-heading;
+    font-size: $font-size-4xl;
+    font-weight: 700;
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    box-shadow: $shadow-lg;
+}
+
+.name {
+    color: white;
+    margin-bottom: $spacing-sm;
+
+    :global(body.dark) & {
+        color: white;
+    }
+}
+
+.role {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-xs;
+
+    :global(body.dark) & {
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+.location {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+
+    :global(body.dark) & {
+        color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+// Layout: una columna en móvil, dos en escritorio
+.content {
+    @include grid(1, $spacing-xl);
+
+    @include respond-to('lg') {
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+    }
+}
+
+.mainColumn,
+.sideColumn {
+    @include flex(column);
+    gap: $spacing-xl;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    padding: $spacing-xl;
+    box-shadow: $shadow-sm;
+
+    h3 {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-sm;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    :global(body.dark) & {
+        background-color: #111827;
+        border-color: #374151;
+    }
+}
+
+// Skills como tarjetas
+.skills {
+    list-style: none;
+    @include grid(2, $spacing-md);
+
+    @include respond-to('sm') {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.skill {
+    @include flex-center;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    background-color: $background-gray;
+    border: 1px solid $border-color;
+    color: $text-primary;
+    font-weight: 600;
+    @include hover-lift;
+
+    &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+    }
+
+    :global(body.dark) & {
+        background-color: #1f2937;
+        border-color: #374151;
+        color: $dark-text;
+    }
+}
+
+// Redes sociales
+.email {
+    display: inline-block;
+    margin-bottom: $spacing-md;
+    word-break: break-all;
+}
+
+.social {
+    @include flex(row, flex-start, center);
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+}
+
+.socialButton {
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-md;
+    background-color: $primary-color;
+    color: white;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    @include transition(background-color, transform);
+
+    &:hover {
+        background-color: $secondary-color;
+        color: white;
+        transform: translateY(-2px);
+    }
+}
+
+.renderInfo {
+    text-align: center;
+    margin-top: $spacing-2xl;
+    font-size: $font-size-sm;
+    color: $text-light;
+}

@@ -78,6 +78,10 @@ $transition-slow: 500ms ease-in-out;
     --footer-text: #1f2937;
     --footer-muted-text: #475569;
     --footer-border: #cbd5e1;
+    --error-color: #dc2626;
+    --success-text: #166534;
+    --success-background: #dcfce7;
+    --success-border: #86efac;
   }
 
   body.dark {
@@ -98,5 +102,9 @@ $transition-slow: 500ms ease-in-out;
     --footer-text: #ffffff;
     --footer-muted-text: #d1d5db;
     --footer-border: rgba(255, 255, 255, 0.12);
+    --error-color: #f87171;
+    --success-text: #86efac;
+    --success-background: #052e16;
+    --success-border: #166534;
   }
 }

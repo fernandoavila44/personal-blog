@@ -1,0 +1,163 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.contactPage {
+  min-height: 100vh;
+  padding: $spacing-3xl $spacing-lg;
+  background-color: var(--page-background);
+  color: var(--primary-text);
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: $spacing-2xl;
+  text-align: center;
+
+  h1 {
+    margin-bottom: $spacing-md;
+    color: var(--primary-text);
+    font-size: $font-size-4xl;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--secondary-text);
+    font-size: $font-size-lg;
+    line-height: 1.6;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+  padding: $spacing-2xl;
+  background-color: var(--card-background);
+  border: 1px solid var(--theme-border);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  label {
+    color: var(--primary-text);
+    font-size: $font-size-sm;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: $spacing-md;
+    color: var(--primary-text);
+    background-color: var(--input-background);
+    border: 1px solid var(--theme-border);
+    border-radius: $radius-md;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    @include transition(border-color, box-shadow);
+
+    &::placeholder {
+      color: var(--muted-text);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--interactive-color);
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--interactive-color) 15%, transparent);
+    }
+
+    &[aria-invalid="true"] {
+      border-color: var(--error-color);
+    }
+  }
+
+  textarea {
+    min-height: 150px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+}
+
+.error {
+  color: var(--error-color);
+  font-size: $font-size-sm;
+  line-height: 1.4;
+}
+
+.submitButton {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  color: var(--page-background);
+  background-color: var(--interactive-color);
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  font-weight: 700;
+  cursor: pointer;
+  @include transition(background-color, transform);
+
+  &:hover {
+    background-color: var(--interactive-hover);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--interactive-hover);
+    outline-offset: 3px;
+  }
+}
+
+.success {
+  padding: $spacing-md;
+  color: var(--success-text);
+  background-color: var(--success-background);
+  border: 1px solid var(--success-border);
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .contactPage {
+    padding: $spacing-2xl $spacing-md;
+  }
+
+  .header {
+    margin-bottom: $spacing-xl;
+
+    h1 {
+      font-size: $font-size-3xl;
+    }
+
+    p {
+      font-size: $font-size-base;
+    }
+  }
+
+  .form {
+    gap: $spacing-lg;
+    padding: $spacing-lg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submitButton {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

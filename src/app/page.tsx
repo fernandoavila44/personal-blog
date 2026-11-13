@@ -36,14 +36,17 @@ export default function Home() {
           <div className={styles.postsGrid}>
             {latestPosts.map((post) => (
               <BlogCard
-                key={post.id}
-                title={post.title}
-                excerpt={post.excerpt}
-                slug={post.slug}
-                date={post.date}
-                category={post.category}
-                readTime={post.readTime}
-              />
+            key={post.id}
+            title={post.title}
+            excerpt={post.excerpt}
+            slug={post.slug}
+            date={post.date}
+            category={post.category}
+            readTime={post.readTime}
+            image={post.image}
+            author={post.author}
+            tags={post.tags}
+          />
             ))}
           </div>
           <div className={styles.viewAll}>

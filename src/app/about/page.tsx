@@ -34,7 +34,7 @@
 
 // TODO: Descomentar y usar authorData
 // const author = authorData;
-
+export const dynamic = 'force-dynamic';
 import authorData from '@/data/author.json';
 import styles from './page.module.scss';
 import Image from 'next/image';

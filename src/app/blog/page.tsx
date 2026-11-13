@@ -1,59 +1,107 @@
+'use client';
+
+import { useState } from 'react';
 import BlogCard from '@/components/BlogCard';
 import postsData from '@/data/posts.json';
 import styles from './page.module.scss';
 
+const categories = [
+  'Todos',
+  ...new Set(postsData.map((post) => post.category)),
+];
+
 export default function BlogPage() {
-    // TODO para estudiantes: Implementar filtrado por categoría
-    // Pista: Usar useState para manejar la categoría seleccionada
-    // y filtrar los posts basándose en esa categoría
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [currentPage, setCurrentPage] = useState(1);
+const postsPerPage = 6;
 
-    // TODO para estudiantes: Implementar paginación
-    // Pista: Mostrar solo 6 posts por página y agregar botones de navegación
+  const filteredPosts =
+    selectedCategory === 'Todos'
+      ? postsData
+      : postsData.filter((post) => post.category === selectedCategory);
+const totalPages = Math.max(
+  1,
+  Math.ceil(filteredPosts.length / postsPerPage)
+);
 
-    return (
-        <div className={styles.blogPage}>
-            <div className="container">
-                <header className={styles.header}>
-                    <h1>Blog</h1>
-                    <p>Artículos sobre desarrollo web, Next.js, React y más</p>
-                </header>
+const startIndex = (currentPage - 1) * postsPerPage;
 
-                {/* TODO para estudiantes: Agregar filtros por categoría aquí */}
-                {/* Ejemplo de estructura:
+const currentPosts = filteredPosts.slice(
+  startIndex,
+  startIndex + postsPerPage
+);
+   return (
+    <div className={styles.blogPage}>
+      <div className="container">
+        <header className={styles.header}>
+          <h1>Blog</h1>
+          <p>Artículos sobre desarrollo web, Next.js, React y más</p>
+        </header>
+
         <div className={styles.filters}>
-          <button>Todos</button>
-          <button>Tutorial</button>
-          <button>Conceptos</button>
-          <button>React</button>
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => {
+                setSelectedCategory(category);
+                setCurrentPage(1);
+              }}
+              aria-pressed={selectedCategory === category}
+            >
+              {category}
+            </button>
+          ))}
         </div>
-        */}
 
-                <div className={styles.postsGrid}>
-                    {postsData.map((post) => (
-                        <BlogCard
-                            key={post.id}
-                            title={post.title}
-                            excerpt={post.excerpt}
-                            slug={post.slug}
-                            date={post.date}
-                            category={post.category}
-                            readTime={post.readTime}
-                        />
-                    ))}
-                </div>
+        <p>
+          {filteredPosts.length}{' '}
+          {filteredPosts.length === 1 ? 'publicación' : 'publicaciones'}
+        </p>
 
-                {/* TODO para estudiantes: Agregar paginación aquí */}
-                {/* Ejemplo de estructura:
-        <div className={styles.pagination}>
-          <button>← Anterior</button>
-          <span>Página 1 de 2</span>
-          <button>Siguiente →</button>
+        <div className={styles.postsGrid}>
+          {currentPosts.map((post) => (
+            <BlogCard
+            key={post.id}
+            title={post.title}
+            excerpt={post.excerpt}
+            slug={post.slug}
+            date={post.date}
+            category={post.category}
+            readTime={post.readTime}
+            image={post.image}
+            author={post.author}
+            tags={post.tags}
+          />
+          ))}
         </div>
-        */}
-            </div>
-        </div>
-    );
+
+        <nav className={styles.pagination} aria-label="Páginas del blog">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((page) => page - 1)}
+          >
+            ← Anterior
+          </button>
+
+          <span>
+            Página {currentPage} de {totalPages}
+          </span>
+
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((page) => page + 1)}
+          >
+            Siguiente →
+          </button>
+        </nav>
+      </div>
+    </div>
+  );
 }
+ 
 
 /* EJERCICIO para estudiantes:
  * 

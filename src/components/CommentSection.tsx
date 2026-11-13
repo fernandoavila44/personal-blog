@@ -1,4 +1,4 @@
-'use client';
+
 
 // import { useState } from 'react';
 // import styles from './CommentSection.module.scss';
@@ -36,71 +36,111 @@
  * 5. Crear estilos en CommentSection.module.scss
  */
 
+'use client';
+
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import styles from './CommentSection.module.scss';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 interface Comment {
-    id: number;
-    author: string;
-    text: string;
-    date: string;
+  id: string;
+  author: string;
+  text: string;
+  date?: string;
 }
 
-export default function CommentSection() {
-    // TODO: Implementar useState para comentarios
-    // const [comments, setComments] = useState<Comment[]>([]);
+type CommentSectionProps = {
+  postSlug: string;
+};
 
-    // TODO: Implementar useState para el formulario
-    // const [author, setAuthor] = useState('');
-    // const [text, setText] = useState('');
+export default function CommentSection({
+  postSlug,
+}: CommentSectionProps) {
+  const [comments, setComments] = useLocalStorage<Comment[]>(
+    `blog-comments-${postSlug}`,
+    []
+  );
+  const [author, setAuthor] = useState('');
+  const [text, setText] = useState('');
+  const [error, setError] = useState('');
 
-    // TODO: Implementar función handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   // Validar campos
-    //   // Crear nuevo comentario
-    //   // Agregar a la lista
-    //   // Limpiar formulario
-    // };
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    return (
-        <div>
-            <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
+    if (!author.trim() || !text.trim()) {
+      setError('Escribe tu nombre y un comentario.');
+      return;
+    }
 
-            {/* TODO: Agregar formulario */}
-            {/* 
+    const newComment: Comment = {
+  id: crypto.randomUUID(),
+  author: author.trim(),
+  text: text.trim(),
+  date: new Date().toISOString(),
+};
+    setComments((previous) => [...previous, newComment]);
+    setAuthor('');
+    setText('');
+    setError('');
+  }
+
+  return (
+    <section className={styles.comments}>
+      <h2>Comentarios</h2>
+
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Tu nombre"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <textarea 
-          placeholder="Tu comentario"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button type="submit">Agregar comentario</button>
-      </form>
-      */}
+        <div>
+          <label htmlFor="comment-author">Tu nombre</label>
+          <input
+            id="comment-author"
+            type="text"
+            value={author}
+            onChange={(event) => setAuthor(event.target.value)}
+          />
+        </div>
 
-            {/* TODO: Mostrar lista de comentarios */}
-            {/* 
+        <div>
+          <label htmlFor="comment-text">Tu comentario</label>
+          <textarea
+            id="comment-text"
+            rows={4}
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+          />
+        </div>
+
+        {error && (
+  <p role="alert" className={styles.error}>
+    {error}
+  </p>
+)}
+
+        <button type="submit" className="btn btn-primary">
+          Publicar comentario
+        </button>
+      </form>
+
       <div>
         {comments.length === 0 ? (
-          <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+          <p>Todavía no hay comentarios. ¡Escribe el primero!</p>
         ) : (
-          comments.map(comment => (
-            <div key={comment.id}>
-              <strong>{comment.author}</strong>
+          comments.map((comment) => (
+            <article key={comment.id}>
+              <h3>{comment.author}</h3>
               <p>{comment.text}</p>
-              <small>{comment.date}</small>
-            </div>
+              {comment.date && (
+  <small>
+    <time dateTime={comment.date}>
+      {new Date(comment.date).toLocaleString('es-CO')}
+    </time>
+  </small>
+)}
+            </article>
           ))
         )}
       </div>
-      */}
-        </div>
-    );
+    </section>
+  );
 }
 
 /* PREGUNTAS PARA REFLEXIONAR:

@@ -87,3 +87,31 @@
     }
   }
 }
+.aboutPage {
+  h1 {
+    color: var(--link-color);
+  }
+
+  h2 {
+    color: var(--page-text);
+  }
+
+  p {
+    color: var(--muted-text);
+  }
+
+  section {
+    background-color: var(--card-background);
+    border-color: var(--border-color);
+  }
+
+  li {
+    background-color: var(--page-background);
+    color: var(--link-color);
+    border: 1px solid var(--border-color);
+  }
+}
+
+.avatar {
+  border-color: var(--link-color);
+}

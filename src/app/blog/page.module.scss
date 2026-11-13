@@ -34,3 +34,95 @@
 }
 
 /* TODO para estudiantes: Agregar estilos para filtros y paginación */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+
+  button {
+    padding: 0.65rem 1.2rem;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    background-color: white;
+    color: #2563eb;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dbeafe;
+    }
+
+    &[aria-pressed='true'] {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 3px;
+    }
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    padding: 0.65rem 1rem;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 3px;
+    }
+  }
+}
+.header {
+  h1 {
+    color: var(--page-text);
+  }
+
+  p {
+    color: var(--muted-text);
+  }
+}
+
+.blogPage > div > p {
+  color: var(--muted-text);
+}
+
+.filters button {
+  background-color: var(--card-background);
+  color: var(--link-color);
+  border-color: var(--link-color);
+
+  &:hover {
+    background-color: var(--border-color);
+  }
+
+  &[aria-pressed='true'] {
+    background-color: #2563eb;
+    color: white;
+  }
+}
+
+.pagination span {
+  color: var(--page-text);
+}

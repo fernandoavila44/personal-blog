@@ -71,7 +71,30 @@
         padding: 0 $spacing-xl;
     }
 }
+.header {
+  background-color: var(--card-background);
+  border-color: var(--border-color);
+}
 
+.logo h1 {
+  color: var(--link-color);
+
+  &:hover {
+    color: var(--page-text);
+  }
+}
+
+.navLink {
+  color: var(--muted-text);
+
+  &:hover {
+    color: var(--link-color);
+  }
+
+  &::after {
+    background-color: var(--link-color);
+  }
+}
 /* TODO para estudiantes:
  * 1. Agregar un menú hamburguesa para móviles
  * 2. Implementar un indicador de página activa

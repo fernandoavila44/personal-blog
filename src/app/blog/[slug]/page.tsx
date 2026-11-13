@@ -1,6 +1,62 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import postsData from '@/data/posts.json';
-// import styles from './page.module.scss';
+import styles from './page.module.scss';
+import CommentSection from '@/components/CommentSection';
+
+export function generateStaticParams() {
+  return postsData.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+type PostPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
+
+  const post = postsData.find((post) => post.slug === slug);
+
+  if (!post) {
+    notFound();
+  }
+
+   return (
+    <article className={styles.article}>
+      <Link href="/blog" className={styles.backLink}>
+        ← Volver al blog
+      </Link>
+
+      <h1>{post.title}</h1>
+
+      <p className={styles.meta}>
+        {post.category} · {post.readTime} de lectura
+      </p>
+
+      <p className={styles.meta}>
+        Por {post.author} ·{' '}
+        <time dateTime={post.date}>
+          {new Date(post.date).toLocaleDateString('es-CO', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC',
+          })}
+        </time>
+      </p>
+
+            <section className={styles.content}>
+        <p>{post.content}</p>
+      </section>
+
+      <CommentSection key={post.slug} postSlug={post.slug} />
+
+
+    </article>
+  );
+}
 
 /* 
  * EJERCICIO: Implementar página de post individual con SSG (Static Site Generation)
@@ -43,7 +99,7 @@ import postsData from '@/data/posts.json';
 // }
 
 // TODO: Implementar el componente de la página
-export default function PostPage({ params }: { params: { slug: string } }) {
+
     // TODO: Buscar el post usando params.slug
     // const post = postsData.find(p => p.slug === params.slug);
 
@@ -52,14 +108,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
     //   notFound();
     // }
 
-    return (
-        <div>
-            <h1>TODO: Implementar página de post</h1>
-            <p>Slug: {params.slug}</p>
-            {/* TODO: Agregar el contenido del post aquí */}
-        </div>
-    );
-}
+    
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

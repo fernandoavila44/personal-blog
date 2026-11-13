@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import postsData from "@/data/posts.json";
+import CommentSection from "@/components/CommentSection";
 import styles from "./page.module.scss";
 
 export function generateStaticParams() {
@@ -46,6 +47,8 @@ export default async function PostPage({
         <div className={styles.content}>
           <p>{post.content}</p>
         </div>
+
+        <CommentSection />
       </div>
     </article>
   );

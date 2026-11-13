@@ -1,0 +1,125 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.commentSection {
+  max-width: 900px;
+  margin: $spacing-2xl auto 0;
+  padding: $spacing-3xl;
+  background: $background-light;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+
+  h2 {
+    margin: 0 0 $spacing-xl;
+    color: $text-primary;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  button {
+    align-self: flex-start;
+    padding: $spacing-md $spacing-xl;
+    color: $background-light;
+    background: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $secondary-color;
+      border-color: $secondary-color;
+    }
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  label {
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: $spacing-md;
+    color: $text-primary;
+    background: $background-light;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    font: inherit;
+    transition: border-color $transition-fast;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-top: $spacing-2xl;
+}
+
+.emptyMessage {
+  color: $text-secondary;
+  font-size: $font-size-base;
+}
+
+.comment {
+  padding: $spacing-lg;
+  background: $background-gray;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+
+  h3 {
+    margin: 0 0 $spacing-sm;
+    color: $text-primary;
+    font-size: $font-size-base;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0 0 $spacing-md;
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.7;
+    overflow-wrap: break-word;
+  }
+
+  time {
+    color: $text-light;
+    font-size: $font-size-sm;
+  }
+}
+
+@media (max-width: 600px) {
+  .commentSection {
+    padding: $spacing-lg;
+  }
+
+  .form button {
+    width: 100%;
+  }
+}

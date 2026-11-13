@@ -35,26 +35,77 @@
 // TODO: Descomentar y usar authorData
 // const author = authorData;
 
+import authorData from '@/data/author.json';
+import styles from './page.module.scss';
+import Image from 'next/image';
+
 export default function AboutPage() {
-    // TODO: Implementar la página
+  return (
+    <div className={styles.aboutPage}>
+      <header className={styles.profile}>
+  <Image
+    src={authorData.avatar}
+    alt={`Foto de ${authorData.name}`}
+    width={160}
+    height={160}
+    className={styles.avatar}
+  />
 
-    return (
-        <div className="container" style={{ padding: '4rem 1.5rem' }}>
-            <h1>Sobre Mí</h1>
-            <p>TODO: Implementar página "Sobre mí"</p>
+  <div>
+    <h1>{authorData.name}</h1>
+    <p>{authorData.role}</p>
+  </div>
+</header>
 
-            {/* TODO: Agregar secciones:
-       * - Header con foto y nombre
-       * - Biografía
-       * - Skills
-       * - Experiencia
-       * - Educación
-       * - Redes sociales
-       */}
-        </div>
-    );
+      <section>
+        <h2>Sobre mí</h2>
+        <p>{authorData.bio}</p>
+      </section>
+
+      <section>
+        <h2>Habilidades en formación</h2>
+        <ul>
+          {authorData.skills.map((skill) => (
+            <li key={skill}>{skill}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Experiencia</h2>
+        <p>{authorData.experience}</p>
+      </section>
+
+      <section>
+        <h2>Educación</h2>
+        <p>{authorData.education}</p>
+      </section>
+
+      <section>
+  <h2>Mis redes</h2>
+
+  <div className={styles.social}>
+    {Object.entries(authorData.social).map(([network, url]) =>
+      url ? (
+        <a
+          key={network}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {network === 'github'
+            ? 'GitHub'
+            : network === 'linkedin'
+              ? 'LinkedIn'
+              : 'Twitter'}
+        </a>
+      ) : null
+    )}
+  </div>
+</section>
+    </div>
+  );
 }
-
 /* PREGUNTAS PARA REFLEXIONAR:
  * 
  * 1. ¿Por qué usar SSR para esta página en lugar de SSG?

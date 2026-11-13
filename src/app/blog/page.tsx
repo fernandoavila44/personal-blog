@@ -68,6 +68,9 @@ export default function BlogPage() {
               date={post.date}
               category={post.category}
               readTime={post.readTime}
+              image={post.image}
+              author={post.author}
+              tags={post.tags}
             />
           ))}
         </div>

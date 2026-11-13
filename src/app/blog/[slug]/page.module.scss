@@ -4,7 +4,7 @@
 .postPage {
   min-height: 100vh;
   padding: $spacing-3xl 0;
-  background: $background-gray;
+  background: var(--surface-background);
 }
 
 .backLink {
@@ -13,7 +13,7 @@
   gap: $spacing-xs;
   margin-bottom: $spacing-2xl;
   padding: $spacing-sm $spacing-md;
-  color: $primary-color;
+  color: var(--interactive-color);
   font-size: $font-size-sm;
   font-weight: 600;
   text-decoration: none;
@@ -21,8 +21,8 @@
   transition: all $transition-fast;
 
   &:hover {
-    color: $secondary-color;
-    background: $background-light;
+    color: var(--interactive-hover);
+    background: var(--card-background);
   }
 }
 
@@ -31,14 +31,14 @@
   margin: 0 auto $spacing-2xl;
   padding: $spacing-3xl;
   text-align: center;
-  background: $background-light;
-  border: 1px solid $border-color;
+  background: var(--card-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
 
   h1 {
     max-width: 800px;
     margin: $spacing-xl auto;
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-4xl;
     line-height: 1.2;
     font-weight: 700;
@@ -49,8 +49,8 @@
   display: inline-block;
   padding: $spacing-sm $spacing-lg;
   border-radius: $radius-md;
-  background: $background-gray;
-  color: $primary-color;
+  background: var(--surface-background);
+  color: var(--interactive-color);
   font-size: $font-size-sm;
   font-weight: 600;
   text-transform: uppercase;
@@ -65,14 +65,14 @@
   gap: $spacing-md;
   margin-top: $spacing-xl;
   padding-top: $spacing-lg;
-  border-top: 1px solid $border-color;
-  color: $text-secondary;
+  border-top: 1px solid var(--theme-border);
+  color: var(--secondary-text);
   font-size: $font-size-sm;
 
   > * + *::before {
     content: "•";
     margin-right: $spacing-md;
-    color: $text-light;
+    color: var(--muted-text);
   }
 }
 
@@ -80,11 +80,10 @@
   max-width: 900px;
   margin: 0 auto;
   padding: $spacing-3xl;
-  background: $background-light;
-  border: 1px solid $border-color;
+  background: var(--card-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
-
-  color: $text-primary;
+  color: var(--primary-text);
   font-size: $font-size-lg;
   line-height: 1.9;
 

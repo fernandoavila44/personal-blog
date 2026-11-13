@@ -9,7 +9,8 @@
     "date": "2024-01-15",
     "category": "Tutorial",
     "readTime": "5 min",
-    "image": "/images/nextjs-intro.jpg"
+    "image": "/images/blog-cover.png",
+    "tags": ["Next.js", "App Router", "React"]
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "date": "2024-01-20",
     "category": "Conceptos",
     "readTime": "7 min",
-    "image": "/images/components.jpg"
+    "image": "/images/blog-cover.png",
+    "tags": ["React", "Server Components", "Client Components"]
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "date": "2024-01-25",
     "category": "Tutorial",
     "readTime": "10 min",
-    "image": "/images/data-fetching.jpg"
+    "image": "/images/blog-cover.png",
+    "tags": ["Next.js", "SSG", "SSR", "ISR", "CSR"]
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "date": "2024-02-01",
     "category": "React",
     "readTime": "8 min",
-    "image": "/images/hooks.jpg"
+    "image": "/images/blog-cover.png",
+    "tags": ["React", "Hooks", "useState", "useEffect"]
   },
   {
     "id": 5,
@@ -57,7 +61,8 @@
     "date": "2024-02-05",
     "category": "Performance",
     "readTime": "12 min",
-    "image": "/images/performance.jpg"
+    "image": "/images/blog-cover.png",
+    "tags": ["Next.js", "Performance", "Optimización"]
   },
   {
     "id": 6,
@@ -69,6 +74,7 @@
     "date": "2024-02-08",
     "category": "Tutorial",
     "readTime": "9 min",
-    "image": "/images/routing.jpg"
+    "image": "/images/blog-cover.png",
+    "tags": ["Next.js", "Routing", "App Router"]
   }
 ]

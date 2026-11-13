@@ -14,26 +14,28 @@ $dark-bg: #1f2937;
 $dark-text: #f9fafb;
 
 // Tipografía
-$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-$font-family-heading: 'Georgia', serif;
+$font-family-base:
+  -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+  "Cantarell", sans-serif;
+$font-family-heading: "Georgia", serif;
 
-$font-size-xs: 0.75rem;    // 12px
-$font-size-sm: 0.875rem;   // 14px
-$font-size-base: 1rem;     // 16px
-$font-size-lg: 1.125rem;   // 18px
-$font-size-xl: 1.25rem;    // 20px
-$font-size-2xl: 1.5rem;    // 24px
-$font-size-3xl: 1.875rem;  // 30px
-$font-size-4xl: 2.25rem;   // 36px
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
 
 // Espaciados
-$spacing-xs: 0.25rem;   // 4px
-$spacing-sm: 0.5rem;    // 8px
-$spacing-md: 1rem;      // 16px
-$spacing-lg: 1.5rem;    // 24px
-$spacing-xl: 2rem;      // 32px
-$spacing-2xl: 3rem;     // 48px
-$spacing-3xl: 4rem;     // 64px
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
 
 // Breakpoints responsive
 $breakpoint-sm: 640px;
@@ -55,3 +57,46 @@ $shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 $transition-fast: 150ms ease-in-out;
 $transition-base: 300ms ease-in-out;
 $transition-slow: 500ms ease-in-out;
+
+// Centralización de colores
+@mixin theme-colors {
+  :root {
+    --page-background: #{$background-light};
+    --surface-background: #{$background-gray};
+    --card-background: #{$background-light};
+    --primary-text: #{$text-primary};
+    --secondary-text: #{$text-secondary};
+    --muted-text: #{$text-light};
+    --theme-border: #{$border-color};
+    --input-background: #{$background-light};
+    --header-background: #{$background-light};
+    --header-text: #{$text-secondary};
+    --interactive-color: #{$primary-color};
+    --interactive-hover: #{$secondary-color};
+    --role-color: #{$secondary-color};
+    --footer-background: #e2e8f0;
+    --footer-text: #1f2937;
+    --footer-muted-text: #475569;
+    --footer-border: #cbd5e1;
+  }
+
+  body.dark {
+    --page-background: #{$dark-bg};
+    --surface-background: #0f172a;
+    --card-background: #111827;
+    --primary-text: #{$dark-text};
+    --secondary-text: #d1d5db;
+    --muted-text: #9ca3af;
+    --theme-border: #374151;
+    --input-background: #1f2937;
+    --header-background: #111827;
+    --header-text: #d1d5db;
+    --interactive-color: #93c5fd;
+    --interactive-hover: #bfdbfe;
+    --role-color: #c4b5fd;
+    --footer-background: #020617;
+    --footer-text: #ffffff;
+    --footer-muted-text: #d1d5db;
+    --footer-border: rgba(255, 255, 255, 0.12);
+  }
+}

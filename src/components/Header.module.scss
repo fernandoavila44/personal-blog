@@ -1,79 +1,172 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import "../styles/variables";
+@import "../styles/mixins";
 
 .header {
-    background-color: white;
-    box-shadow: $shadow-sm;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid $border-color;
+  background-color: var(--header-background);
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--theme-border);
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 $spacing-lg;
-    @include flex(row, space-between, center);
-    height: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  @include flex(row, space-between, center);
+  height: 70px;
 }
 
 .logo {
-    h1 {
-        font-size: $font-size-xl;
-        color: $primary-color;
-        margin: 0;
-        font-family: $font-family-heading;
-        @include transition(color);
+  h1 {
+    font-size: $font-size-xl;
+    color: var(--interactive-color);
+    margin: 0;
+    font-family: $font-family-heading;
+    @include transition(color);
 
-        &:hover {
-            color: $secondary-color;
-        }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--interactive-hover);
+      }
     }
+  }
 }
 
 .nav {
-    @include flex(row, flex-end, center);
-    gap: $spacing-xl;
+  @include flex(row, flex-end, center);
+  gap: $spacing-xl;
 }
 
 .navLink {
-    color: $text-secondary;
-    font-weight: 500;
-    font-size: $font-size-base;
-    position: relative;
-    @include transition(color);
+  color: var(--header-text);
+  font-weight: 500;
+  font-size: $font-size-base;
+  position: relative;
+  @include transition(color);
 
+  &.active {
+    color: var(--interactive-color);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--interactive-color);
+    transition:
+      width $transition-base,
+      background-color $transition-base;
+  }
+
+  &.active::after {
+    width: 100%;
+    background-color: var(--interactive-color);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
-        color: $primary-color;
-    }
-
-    // Efecto de subrayado animado
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: $primary-color;
-        transition: width $transition-base;
+      color: var(--interactive-hover);
     }
 
     &:hover::after {
-        width: 100%;
+      width: 100%;
+      background-color: var(--interactive-hover);
     }
+  }
 }
 
-// Responsive
-@include respond-to('md') {
-    .container {
-        padding: 0 $spacing-xl;
-    }
+@media (hover: hover) and (pointer: fine) {
+  :global(body.dark) .logo h1:hover {
+    color: $accent-color;
+  }
+
+  :global(body.dark) .navLink:hover {
+    color: $accent-color;
+  }
+
+  :global(body.dark) .navLink:hover::after {
+    background-color: $accent-color;
+  }
 }
 
-/* TODO para estudiantes:
- * 1. Agregar un menú hamburguesa para móviles
- * 2. Implementar un indicador de página activa
- * 3. Agregar animación de entrada al hacer scroll
- */
+.menuToggle {
+  display: none;
+  padding: $spacing-sm;
+  color: var(--header-text);
+  background-color: transparent;
+  border: 1px solid var(--theme-border);
+  border-radius: $radius-sm;
+  cursor: pointer;
+}
+
+@include respond-to("md") {
+  .container {
+    padding: 0 $spacing-xl;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    position: relative;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: $spacing-md;
+    background-color: var(--header-background);
+    border-bottom: 1px solid var(--theme-border);
+    box-shadow: $shadow-md;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .navLink {
+    padding: $spacing-md $spacing-lg;
+    margin-bottom: $spacing-sm;
+    align-self: center;
+    width: fit-content;
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 2px;
+    }
+  }
+
+  .nav > button {
+    align-self: center;
+    width: fit-content;
+    margin-top: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    color: var(--header-text);
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+
+    &:hover {
+      color: var(--interactive-color);
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+}

@@ -5,13 +5,13 @@
   max-width: 900px;
   margin: $spacing-2xl auto 0;
   padding: $spacing-3xl;
-  background: $background-light;
-  border: 1px solid $border-color;
+  background: var(--card-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
 
   h2 {
     margin: 0 0 $spacing-xl;
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-2xl;
     font-weight: 700;
   }
@@ -25,7 +25,7 @@
   button {
     align-self: flex-start;
     padding: $spacing-md $spacing-xl;
-    color: $background-light;
+    color: #ffffff;
     background: $primary-color;
     border: 1px solid $primary-color;
     border-radius: $radius-md;
@@ -47,7 +47,7 @@
   gap: $spacing-sm;
 
   label {
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-sm;
     font-weight: 600;
   }
@@ -56,16 +56,16 @@
   textarea {
     width: 100%;
     padding: $spacing-md;
-    color: $text-primary;
-    background: $background-light;
-    border: 1px solid $border-color;
+    color: var(--primary-text);
+    background: var(--input-background);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-md;
     font: inherit;
     transition: border-color $transition-fast;
 
     &:focus {
       outline: none;
-      border-color: $primary-color;
+      border-color: var(--interactive-color);
     }
   }
 
@@ -83,33 +83,33 @@
 }
 
 .emptyMessage {
-  color: $text-secondary;
+  color: var(--secondary-text);
   font-size: $font-size-base;
 }
 
 .comment {
   padding: $spacing-lg;
-  background: $background-gray;
-  border: 1px solid $border-color;
+  background: var(--surface-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
 
   h3 {
     margin: 0 0 $spacing-sm;
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-base;
     font-weight: 700;
   }
 
   p {
     margin: 0 0 $spacing-md;
-    color: $text-secondary;
+    color: var(--secondary-text);
     font-size: $font-size-base;
     line-height: 1.7;
     overflow-wrap: break-word;
   }
 
   time {
-    color: $text-light;
+    color: var(--muted-text);
     font-size: $font-size-sm;
   }
 }

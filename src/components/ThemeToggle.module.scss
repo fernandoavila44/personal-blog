@@ -1,0 +1,23 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  color: var(--primary-text);
+  background-color: var(--surface-background);
+  border: 1px solid var(--theme-border);
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  cursor: pointer;
+  @include transition(background-color, color, border-color);
+
+  &:hover {
+    background-color: var(--card-background);
+    border-color: var(--interactive-color);
+  }
+}

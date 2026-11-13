@@ -16,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mi Blog Personal | Next.js",
-  description: "Blog personal educativo sobre Next.js, React y desarrollo web moderno",
+  description:
+    "Blog personal educativo sobre Next.js, React y desarrollo web moderno",
 };
 
 export default function RootLayout({
@@ -28,12 +29,10 @@ export default function RootLayout({
     <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
-        style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
+        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
         <Header />
-        <main style={{ flex: 1 }}>
-          {children}
-        </main>
+        <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </body>
     </html>

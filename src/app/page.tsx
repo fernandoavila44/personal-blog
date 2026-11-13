@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import BlogCard from '@/components/BlogCard';
-import postsData from '@/data/posts.json';
-import styles from './page.module.scss';
+import Link from "next/link";
+import BlogCard from "@/components/BlogCard";
+import postsData from "@/data/posts.json";
+import styles from "./page.module.scss";
 
 export default function Home() {
   // Obtener los últimos 3 posts
@@ -12,11 +12,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className="container">
-          <h1 className={styles.heroTitle}>
-            Bienvenido a Mi Blog Personal
-          </h1>
+          <h1 className={styles.heroTitle}>Bienvenido a Mi Blog Personal</h1>
           <p className={styles.heroSubtitle}>
-            Explorando el mundo del desarrollo web con Next.js, React y tecnologías modernas
+            Explorando el mundo del desarrollo web con Next.js, React y
+            tecnologías modernas
           </p>
           <div className={styles.heroButtons}>
             <Link href="/blog" className="btn btn-primary">
@@ -43,6 +42,9 @@ export default function Home() {
                 date={post.date}
                 category={post.category}
                 readTime={post.readTime}
+                image={post.image}
+                author={post.author}
+                tags={post.tags}
               />
             ))}
           </div>
@@ -60,8 +62,9 @@ export default function Home() {
           <div className={styles.aboutContent}>
             <h2>¿Quién soy?</h2>
             <p>
-              Soy un desarrollador apasionado por crear experiencias web increíbles.
-              Me encanta compartir conocimiento y ayudar a otros a crecer en el mundo del desarrollo.
+              Soy un desarrollador apasionado por crear experiencias web
+              increíbles. Me encanta compartir conocimiento y ayudar a otros a
+              crecer en el mundo del desarrollo.
             </p>
             <Link href="/about" className="btn btn-secondary">
               Conoce más sobre mí

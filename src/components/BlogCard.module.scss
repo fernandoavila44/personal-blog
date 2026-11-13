@@ -1,88 +1,254 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import "../styles/variables";
+@import "../styles/mixins";
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .card {
-    background-color: white;
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-    @include transition(transform, box-shadow);
-    border: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--card-background);
+  color: var(--primary-text);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid var(--theme-border);
+  animation: cardEntrance 0.5s ease both;
+  @include transition(transform, box-shadow, border-color);
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: $shadow-lg;
-    }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.imageContainer {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  text-decoration: none;
+}
+
+.coverImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  @include transition(transform);
+
+  .imageContainer:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: $spacing-lg;
 }
 
 .header {
-    @include flex(row, space-between, center);
-    margin-bottom: $spacing-md;
+  @include flex(row, space-between, center);
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
 }
 
 .category {
-    background-color: $primary-color;
-    color: white;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $radius-sm;
-    font-size: $font-size-xs;
-    font-weight: 600;
-    text-transform: uppercase;
+  background-color: var(--interactive-color);
+  color: var(--card-background);
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .readTime {
-    color: $text-light;
-    font-size: $font-size-sm;
+  color: var(--muted-text);
+  font-size: $font-size-sm;
 }
 
 .title {
-    margin-bottom: $spacing-md;
+  margin-bottom: $spacing-md;
 
-    a {
-        color: $text-primary;
-        font-size: $font-size-xl;
-        font-weight: 700;
-        @include transition(color);
+  a {
+    color: var(--primary-text);
+    font-size: $font-size-xl;
+    font-weight: 700;
+    @include transition(color);
 
-        &:hover {
-            color: $primary-color;
-        }
+    &:hover {
+      color: var(--interactive-color);
     }
+  }
 }
 
 .excerpt {
-    color: $text-secondary;
-    line-height: 1.6;
-    margin-bottom: $spacing-lg;
-    @include line-clamp(3);
+  color: var(--secondary-text);
+  line-height: 1.6;
+  margin-bottom: $spacing-lg;
+  @include line-clamp(3);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-lg;
+}
+
+.tag {
+  padding: $spacing-xs $spacing-sm;
+  color: var(--secondary-text);
+  background-color: var(--surface-background);
+  border: 1px solid var(--theme-border);
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
 }
 
 .footer {
-    @include flex(row, space-between, center);
-    padding-top: $spacing-md;
-    border-top: 1px solid $border-color;
+  @include flex(row, space-between, center);
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding-top: $spacing-md;
+  margin-top: auto;
+  border-top: 1px solid var(--theme-border);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  min-width: 0;
+
+  span {
+    color: var(--secondary-text);
+    font-size: $font-size-sm;
+  }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--theme-border);
 }
 
 .date {
-    color: $text-light;
-    font-size: $font-size-sm;
+  color: var(--muted-text);
+  font-size: $font-size-sm;
 }
 
 .readMore {
-    color: $primary-color;
-    font-weight: 600;
-    font-size: $font-size-sm;
-    @include transition(color, transform);
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: $spacing-md;
+  color: var(--interactive-color);
+  font-weight: 600;
+  font-size: $font-size-sm;
+  @include transition(color, transform);
 
-    &:hover {
-        color: $secondary-color;
-        transform: translateX(4px);
-    }
+  &:hover {
+    color: var(--interactive-hover);
+    transform: translateX(4px);
+  }
 }
 
-/* TODO para estudiantes:
- * 1. Agregar estilos para la imagen del post
- * 2. Mejorar la animación con keyframes
- * 3. Agregar estilos para tags
- * 4. Crear variantes de card (featured, compact, etc.)
- */
+.featured {
+  .imageContainer {
+    aspect-ratio: 16 / 9;
+  }
+
+  .title a {
+    font-size: $font-size-2xl;
+  }
+
+  .excerpt {
+    @include line-clamp(5);
+  }
+}
+
+.compact {
+  flex-direction: row;
+
+  .imageContainer {
+    width: 35%;
+    flex-shrink: 0;
+    aspect-ratio: auto;
+    min-height: 140px;
+  }
+
+  .coverImage {
+    height: 100%;
+  }
+
+  .content {
+    padding: $spacing-md;
+  }
+
+  .title a {
+    font-size: $font-size-lg;
+  }
+
+  .excerpt {
+    @include line-clamp(2);
+    margin-bottom: $spacing-sm;
+  }
+
+  .tags {
+    margin-bottom: $spacing-sm;
+  }
+
+  .footer {
+    padding-top: $spacing-sm;
+  }
+
+  .readMore {
+    margin-top: $spacing-sm;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .compact {
+    flex-direction: column;
+
+    .imageContainer {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: auto;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .coverImage,
+  .readMore {
+    transition: none;
+  }
+}

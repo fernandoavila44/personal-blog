@@ -4,7 +4,7 @@
 .aboutPage {
   min-height: 100vh;
   padding: $spacing-3xl 0;
-  background: $background-gray;
+  background: var(--surface-background);
 }
 
 .hero {
@@ -14,8 +14,8 @@
   gap: $spacing-3xl;
   padding: $spacing-3xl;
   margin-bottom: $spacing-2xl;
-  background: $background-light;
-  border: 1px solid $border-color;
+  background: var(--card-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
 }
 
@@ -38,7 +38,7 @@
 
   h1 {
     margin: $spacing-md 0;
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-4xl;
     line-height: 1.2;
     font-weight: 700;
@@ -46,7 +46,7 @@
 }
 
 .eyebrow {
-  color: $primary-color;
+  color: var(--interactive-color);
   font-size: $font-size-sm;
   font-weight: 700;
   text-transform: uppercase;
@@ -55,13 +55,13 @@
 
 .role {
   margin-bottom: $spacing-md;
-  color: $secondary-color;
+  color: var(--role-color);
   font-size: $font-size-xl;
   font-weight: 600;
 }
 
 .location {
-  color: $text-secondary;
+  color: var(--secondary-text);
   font-size: $font-size-sm;
 }
 
@@ -75,19 +75,19 @@
 .contentCard {
   min-width: 0;
   padding: $spacing-2xl;
-  background: $background-light;
-  border: 1px solid $border-color;
+  background: var(--card-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
 
   h2 {
     margin: 0 0 $spacing-lg;
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-xl;
     font-weight: 700;
   }
 
   p {
-    color: $text-secondary;
+    color: var(--secondary-text);
     font-size: $font-size-base;
     line-height: 1.8;
   }
@@ -101,18 +101,18 @@
 
 .skill {
   padding: $spacing-sm $spacing-lg;
-  color: $primary-color;
-  background: $background-gray;
-  border: 1px solid $border-color;
+  color: var(--interactive-color);
+  background: var(--surface-background);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-md;
   font-size: $font-size-sm;
   font-weight: 600;
   transition: all $transition-fast;
 
   &:hover {
-    color: $background-light;
-    background: $primary-color;
-    border-color: $primary-color;
+    color: #ffffff;
+    background: var(--interactive-color);
+    border-color: var(--interactive-color);
   }
 }
 
@@ -121,11 +121,11 @@
   align-items: center;
   gap: $spacing-2xl;
   padding: $spacing-lg 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--theme-border);
 
   h2 {
     margin: 0;
-    color: $text-primary;
+    color: var(--primary-text);
     font-size: $font-size-xl;
     font-weight: 700;
   }
@@ -142,9 +142,9 @@
     justify-content: center;
     width: 42px;
     height: 42px;
-    color: $text-secondary;
-    background: $background-light;
-    border: 1px solid $border-color;
+    color: var(--secondary-text);
+    background: var(--card-background);
+    border: 1px solid var(--theme-border);
     border-radius: 50%;
     text-decoration: none;
     transition: all $transition-fast;
@@ -156,9 +156,9 @@
     }
 
     &:hover {
-      color: $background-light;
-      background: $primary-color;
-      border-color: $primary-color;
+      color: #ffffff;
+      background: var(--interactive-color);
+      border-color: var(--interactive-color);
       transform: translateY(-2px);
     }
   }
@@ -181,22 +181,43 @@
     padding: $spacing-xl 0;
   }
 
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xl;
+    padding: $spacing-lg;
+    text-align: center;
+  }
+
+  .profileImage {
+    width: 200px;
+    max-width: 100%;
+  }
+
+  .profileImage img {
+    width: 100%;
+    height: auto;
+  }
+
+  .intro {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+
+    h1 {
+      font-size: $font-size-2xl;
+      overflow-wrap: break-word;
+    }
+  }
+
   .contentGrid {
     grid-template-columns: 1fr;
     gap: $spacing-md;
   }
 
-  .hero,
   .contentCard {
     padding: $spacing-lg;
-  }
-
-  .profileImage {
-    width: 200px;
-  }
-
-  .intro h1 {
-    font-size: $font-size-2xl;
   }
 
   .social {

@@ -1,82 +1,131 @@
-@import '../styles/variables';
-@import '../styles/mixins';
-@import '../styles/typography';
+@import "../styles/variables";
+@import "../styles/mixins";
+@import "../styles/typography";
+@include theme-colors;
 
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    background-color: $background-light;
-    min-height: 100vh;
+  background-color: var(--page-background);
+  color: var(--primary-text);
+  min-height: 100vh;
 }
 
 /* Utilidades globales */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
 }
 
 .section {
-    padding: $spacing-3xl 0;
+  padding: $spacing-3xl 0;
 }
 
 /* Botones base */
 .btn {
-    display: inline-block;
-    padding: $spacing-sm $spacing-lg;
-    border-radius: $radius-md;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    @include transition(background-color, transform);
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  @include transition(background-color, transform);
 
-    &:hover {
-        transform: translateY(-1px);
-    }
+  &:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .btn-primary {
-    background-color: $primary-color;
-    color: white;
+  background-color: $primary-color;
+  color: #ffffff;
 
-    &:hover {
-        background-color: darken($primary-color, 10%);
-    }
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    color: #ffffff;
+  }
 }
 
 .btn-secondary {
-    background-color: $secondary-color;
-    color: white;
+  background-color: $secondary-color;
+  color: #ffffff;
 
-    &:hover {
-        background-color: darken($secondary-color, 10%);
-    }
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+    color: #ffffff;
+  }
 }
 
 /* Cards base */
 .card {
-    background-color: white;
-    border-radius: $radius-lg;
-    padding: $spacing-lg;
-    box-shadow: $shadow-sm;
-    @include transition(box-shadow);
+  background-color: var(--card-background);
+  color: var(--primary-text);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-sm;
+  @include transition(box-shadow);
 
-    &:hover {
-        box-shadow: $shadow-md;
-    }
+  &:hover {
+    box-shadow: $shadow-md;
+  }
 }
 
-/* TODO para estudiantes: 
- * 1. Agregar estilos para tema oscuro usando CSS variables
- * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
- * 3. Mejorar los estilos de los botones con más variantes
- */
+body {
+  transition:
+    background-color $transition-base,
+    color $transition-base;
+}
+
+body.dark {
+  background-color: var(--page-background);
+  color: var(--primary-text);
+
+  header:not([class]) {
+    background-color: var(--header-background);
+    border-color: var(--theme-border);
+    color: var(--primary-text);
+
+    h1 {
+      color: var(--primary-text);
+    }
+
+    a {
+      color: var(--header-text);
+
+      &:hover {
+        color: $accent-color;
+      }
+    }
+
+    button {
+      color: var(--primary-text);
+      background-color: var(--surface-background);
+      border-color: var(--theme-border);
+
+      &:hover {
+        background-color: var(--card-background);
+      }
+    }
+  }
+
+  main {
+    color: var(--primary-text);
+
+    input,
+    textarea {
+      color: var(--primary-text);
+      background-color: var(--input-background);
+      border-color: var(--theme-border);
+    }
+  }
+}

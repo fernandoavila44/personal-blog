@@ -74,7 +74,38 @@ body {
         box-shadow: $shadow-md;
     }
 }
+:root {
+  --page-background: #ffffff;
+  --page-text: #1f2937;
+}
 
+body.dark {
+  --page-background: #111827;
+  --page-text: #f3f4f6;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--page-background);
+  color: var(--page-text);
+  transition: background-color 0.2s, color 0.2s;
+}
+:root {
+  --card-background: #ffffff;
+  --muted-text: #6b7280;
+  --border-color: #e5e7eb;
+  --link-color: #2563eb;
+}
+
+body.dark {
+  --card-background: #1f2937;
+  --muted-text: #cbd5e1;
+  --border-color: #475569;
+  --link-color: #93c5fd;
+}
+body.dark {
+  --error-color: #fca5a5;
+}
 /* TODO para estudiantes: 
  * 1. Agregar estilos para tema oscuro usando CSS variables
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)

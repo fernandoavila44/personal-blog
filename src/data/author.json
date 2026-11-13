@@ -1,14 +1,14 @@
 {
-    "name": "Tu Nombre",
-    "role": "Desarrollador Full Stack",
-    "bio": "Apasionado por crear experiencias web increíbles con Next.js y React. Me encanta compartir conocimiento y ayudar a otros desarrolladores a crecer.",
+    "name": "Oscar Andres suarez",
+    "role": "Estudiante de Desarrollo de Software",
+    "bio": "Soy estudiante de desarrollo de software. Estoy aprendiendo a crear aplicaciones web con React, Next.js y TypeScript. En este blog comparto mis conocimientos y avances durante mi formación.",
     "email": "tu.email@ejemplo.com",
     "location": "Tu Ciudad, País",
-    "avatar": "/images/avatar.jpg",
+    "avatar": "/imagenes/avatar.jpg",
     "social": {
-        "github": "https://github.com/tuusuario",
-        "linkedin": "https://linkedin.com/in/tuusuario",
-        "twitter": "https://twitter.com/tuusuario"
+        "github": "https://github.com/Andrufit",
+        "linkedin": "",
+        "twitter": ""
     },
     "skills": [
         "Next.js",
@@ -18,6 +18,6 @@
         "SCSS",
         "PostgreSQL"
     ],
-    "experience": "3+ años de experiencia en desarrollo web",
-    "education": "Ingeniería en Sistemas"
+    "experience": "Desarrollo de proyectos académicos y ejercicios prácticos de programación.",
+    "education": "En formación en desarrollo de software"
 }

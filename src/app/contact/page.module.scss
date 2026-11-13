@@ -1,0 +1,100 @@
+.contactPage {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+
+  form {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background-color: #f9fafb;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+    background-color: white;
+    color: #1f2937;
+
+    &:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+
+    &[aria-invalid='true'] {
+      border-color: #b91c1c;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  button {
+    justify-self: start;
+  }
+
+  [role='alert'] {
+    color: #b91c1c;
+    margin: 0.5rem 0 0;
+  }
+
+  [role='status'] {
+    padding: 1rem;
+    color: #166534;
+    background-color: #dcfce7;
+    border-radius: 8px;
+    margin: 0;
+  }
+}
+.contactPage {
+  h1 {
+    color: var(--page-text);
+  }
+
+  > p {
+    color: var(--muted-text);
+  }
+
+  form {
+    background-color: var(--card-background);
+    border-color: var(--border-color);
+  }
+
+  label {
+    color: var(--page-text);
+  }
+
+  input,
+  textarea {
+    background-color: var(--page-background);
+    color: var(--page-text);
+    border-color: var(--border-color);
+
+    &:focus-visible {
+      outline-color: var(--link-color);
+    }
+
+    &[aria-invalid='true'] {
+      border-color: var(--error-color, #b91c1c);
+    }
+  }
+
+  [role='alert'] {
+    color: var(--error-color, #b91c1c);
+  }
+}

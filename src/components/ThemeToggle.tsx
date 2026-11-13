@@ -1,7 +1,38 @@
 'use client';
 
-// import { useState, useEffect } from 'react';
-// import styles from './ThemeToggle.module.scss';
+import { useEffect } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+
+export default function ThemeToggle() {
+  const [theme, setTheme] = useLocalStorage<'light' | 'dark'>(
+    'blog-theme',
+    'light'
+  );
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((currentTheme) =>
+      currentTheme === 'light' ? 'dark' : 'light'
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-pressed={theme === 'dark'}
+      className="btn btn-secondary"
+    >
+      <span aria-hidden="true">
+        {theme === 'light' ? '🌙' : '☀️'}
+      </span>{' '}
+      {theme === 'light' ? 'Tema oscuro' : 'Tema claro'}
+    </button>
+  );
+}
 
 /* 
  * EJERCICIO: Implementar toggle de tema claro/oscuro con React Hooks
@@ -33,7 +64,7 @@
  * 5. Crear estilos en ThemeToggle.module.scss (opcional)
  */
 
-export default function ThemeToggle() {
+
     // TODO: Implementar useState para el tema
     // const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -61,14 +92,6 @@ export default function ThemeToggle() {
     //   localStorage.setItem('theme', newTheme);
     // };
 
-    return (
-        <button>
-            TODO: Implementar toggle de tema
-            {/* TODO: Mostrar icono según el tema */}
-            {/* {theme === 'light' ? '🌙' : '☀️'} */}
-        </button>
-    );
-}
 
 /* PREGUNTAS PARA REFLEXIONAR:
  * 

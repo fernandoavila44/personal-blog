@@ -82,3 +82,20 @@
         margin-bottom: $spacing-xl;
     }
 }
+.sectionTitle {
+  color: var(--page-text);
+}
+
+.aboutPreview {
+  background-color: var(--card-background);
+}
+
+.aboutContent {
+  h2 {
+    color: var(--page-text);
+  }
+
+  p {
+    color: var(--muted-text);
+  }
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './Header.module.scss';
-
+import ThemeToggle from './ThemeToggle';
 export default function Header() {
   return (
     <header className={styles.header}>
@@ -19,9 +19,13 @@ export default function Header() {
           <Link href="/about" className={styles.navLink}>
             Sobre Mí
           </Link>
-          <Link href="/contact" className={styles.navLink}>
+          
+          
+                <Link href="/contact" className={styles.navLink}>
             Contacto
           </Link>
+
+          <ThemeToggle />
         </nav>
       </div>
     </header>

@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import styles from "./ThemeToggle.module.scss";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setTheme(savedTheme);
-    }
-  }, []);
+  const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
 
   useEffect(() => {
     if (theme === "dark") {
@@ -23,10 +16,7 @@ export default function ThemeToggle() {
   }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
   };
 
   return (
@@ -37,7 +27,7 @@ export default function ThemeToggle() {
       aria-label={`Cambiar a tema ${theme === "light" ? "oscuro" : "claro"}`}
     >
       <span>{theme === "light" ? "🌙" : "☀️"}</span>
-      <span>{theme === "light" ? "Tema oscuro" : "Tema claro"}</span>
+      <span>{theme === "light" ? "Tema Oscuro" : "Tema Claro"}</span>
     </button>
   );
 }

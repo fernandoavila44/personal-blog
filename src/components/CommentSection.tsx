@@ -1,7 +1,7 @@
 'use client';
 
-// import { useState } from 'react';
-// import styles from './CommentSection.module.scss';
+import { useState } from 'react';
+import styles from './CommentSection.module.scss';
 
 /* 
  * EJERCICIO: Implementar sección de comentarios con React Hooks
@@ -44,61 +44,69 @@ interface Comment {
 }
 
 export default function CommentSection() {
-    // TODO: Implementar useState para comentarios
-    // const [comments, setComments] = useState<Comment[]>([]);
+    // 1. Estado para los comentarios
+    const [comments, setComments] = useState<Comment[]>([]);
 
-    // TODO: Implementar useState para el formulario
-    // const [author, setAuthor] = useState('');
-    // const [text, setText] = useState('');
+    // 2. Estado para el formulario
+    const [author, setAuthor] = useState('');
+    const [text, setText] = useState('');
 
-    // TODO: Implementar función handleSubmit
-    // const handleSubmit = (e: React.FormEvent) => {
-    //   e.preventDefault();
-    //   // Validar campos
-    //   // Crear nuevo comentario
-    //   // Agregar a la lista
-    //   // Limpiar formulario
-    // };
+    // 3. Función para agregar comentario
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
 
+        // Validar que los campos no estén vacíos
+        if (!author || !text) return;
+
+        // Crear nuevo comentario con ID único
+        const newComment: Comment = {
+            id: Date.now(),
+            author,
+            text,
+            date: new Date().toISOString(),
+        };
+
+        // Agregar a la lista
+        setComments([...comments, newComment]);
+
+        // Limpiar formulario
+        setAuthor('');
+        setText('');
+    };
+
+    // 4. JSX: formulario, lista y mensaje si no hay comentarios
     return (
-        <div>
+        <div className={styles.commentSection}>
             <h3>Comentarios</h3>
-            <p>TODO: Implementar sección de comentarios</p>
 
-            {/* TODO: Agregar formulario */}
-            {/* 
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Tu nombre"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <textarea 
-          placeholder="Tu comentario"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button type="submit">Agregar comentario</button>
-      </form>
-      */}
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <input
+                    type="text"
+                    placeholder="Tu nombre"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                />
+                <textarea
+                    placeholder="Tu comentario"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+                <button type="submit">Agregar comentario</button>
+            </form>
 
-            {/* TODO: Mostrar lista de comentarios */}
-            {/* 
-      <div>
-        {comments.length === 0 ? (
-          <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-        ) : (
-          comments.map(comment => (
-            <div key={comment.id}>
-              <strong>{comment.author}</strong>
-              <p>{comment.text}</p>
-              <small>{comment.date}</small>
+            <div>
+                {comments.length === 0 ? (
+                    <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+                ) : (
+                    comments.map(comment => (
+                        <div key={comment.id} className={styles.comment}>
+                            <strong>{comment.author}</strong>
+                            <p>{comment.text}</p>
+                            <small>{comment.date}</small>
+                        </div>
+                    ))
+                )}
             </div>
-          ))
-        )}
-      </div>
-      */}
         </div>
     );
 }

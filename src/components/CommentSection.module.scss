@@ -1,0 +1,90 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.commentSection {
+    margin-top: $spacing-2xl;
+    padding-top: $spacing-xl;
+    border-top: 1px solid $border-color;
+
+    h3 {
+        font-size: $font-size-2xl;
+        margin-bottom: $spacing-md;
+    }
+}
+
+// Formulario para agregar comentario
+.form {
+    @include flex(column);
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xl;
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+    background-color: $background-gray;
+
+    input,
+    textarea {
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        font-family: $font-family-base;
+        font-size: $font-size-base;
+        @include transition(border-color, box-shadow);
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    button {
+        padding: $spacing-sm $spacing-lg;
+        border: none;
+        border-radius: $radius-md;
+        background: $primary-color;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        @include transition(background-color);
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    // Responsive: en pantallas medianas el botón no ocupa todo el ancho
+    @include respond-to('md') {
+        button {
+            align-self: flex-start;
+        }
+    }
+}
+
+// Cada comentario de la lista
+.comment {
+    padding: $spacing-md;
+    border: 1px solid $border-color;
+    border-left: 4px solid $primary-color;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-md;
+    background-color: $background-light;
+    box-shadow: $shadow-sm;
+
+    strong {
+        color: $text-primary;
+    }
+
+    p {
+        margin: $spacing-xs 0;
+    }
+
+    small {
+        color: $text-light;
+        font-size: $font-size-xs;
+    }
+}

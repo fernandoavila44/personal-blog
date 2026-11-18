@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 /* 
  * EJERCICIO: Crear custom hook useLocalStorage
@@ -30,34 +30,35 @@
  * 4. Retornar el valor y la función setter
  */
 
-// TODO: Implementar el custom hook
+// Custom hook: funciona como useState, pero guarda el valor en localStorage
 export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-    // TODO: Implementar useState con valor inicial desde localStorage
-    // const [storedValue, setStoredValue] = useState<T>(() => {
-    //   try {
-    //     const item = window.localStorage.getItem(key);
-    //     return item ? JSON.parse(item) : initialValue;
-    //   } catch (error) {
-    //     console.error(error);
-    //     return initialValue;
-    //   }
-    // });
+    // Valor inicial: initialValue (igual en el servidor y en el navegador)
+    const [storedValue, setStoredValue] = useState<T>(initialValue);
 
-    // TODO: Implementar función setValue que también guarde en localStorage
-    // const setValue = (value: T) => {
-    //   try {
-    //     setStoredValue(value);
-    //     window.localStorage.setItem(key, JSON.stringify(value));
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+    // Al montar en el navegador: leer el valor guardado en localStorage
+    useEffect(() => {
+        try {
+            const item = window.localStorage.getItem(key);
+            if (item) {
+                setStoredValue(JSON.parse(item));
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }, [key]);
 
-    // TODO: Retornar el valor y la función setter
-    // return [storedValue, setValue];
+    // setValue: actualiza el estado y también lo guarda en localStorage
+    const setValue = (value: T) => {
+        try {
+            setStoredValue(value);
+            window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    // Placeholder temporal
-    throw new Error('TODO: Implementar useLocalStorage');
+    // Retornar el valor y la función setter (igual que useState)
+    return [storedValue, setValue];
 }
 
 /* EJEMPLO DE USO:

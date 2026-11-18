@@ -64,6 +64,51 @@ a {
     }
 }
 
+// Listas
+ul,
+ol {
+    padding-left: $spacing-lg;
+    margin-bottom: $spacing-md;
+    color: $text-secondary;
+}
+
+li {
+    margin-bottom: $spacing-xs;
+}
+
+// Blockquotes
+blockquote {
+    border-left: 4px solid $primary-color;
+    padding: $spacing-sm $spacing-md;
+    margin-bottom: $spacing-md;
+    background-color: $background-gray;
+    color: $text-secondary;
+    font-style: italic;
+}
+
+// Code
+code {
+    font-family: monospace;
+    font-size: $font-size-sm;
+    background-color: $background-gray;
+    padding: 2px $spacing-xs;
+    border-radius: $radius-sm;
+}
+
+pre {
+    background-color: $dark-bg;
+    color: $dark-text;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    overflow-x: auto;
+    margin-bottom: $spacing-md;
+
+    code {
+        background-color: transparent;
+        padding: 0;
+    }
+}
+
 // TODO para estudiantes:
 // 1. Agregar estilos para listas (ul, ol)
 // 2. Agregar estilos para blockquotes

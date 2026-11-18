@@ -1,0 +1,81 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.aboutPage {
+    padding: $spacing-3xl 0;
+}
+
+// Layout: una columna en móvil, dos columnas en desktop
+.layout {
+    @include grid(1, $spacing-2xl);
+
+    @include respond-to('md') {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+// Foto, nombre y rol
+.hero {
+    text-align: center;
+
+    h1 {
+        font-size: $font-size-3xl;
+        margin-top: $spacing-md;
+    }
+
+    p {
+        color: $text-secondary;
+    }
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+// Secciones de texto
+.bio {
+    margin-bottom: $spacing-xl;
+
+    h2 {
+        font-size: $font-size-2xl;
+        margin-bottom: $spacing-sm;
+    }
+}
+
+// Cards para skills
+.skills {
+    margin-bottom: $spacing-xl;
+
+    h2 {
+        font-size: $font-size-2xl;
+        margin-bottom: $spacing-sm;
+    }
+
+    ul {
+        @include flex(row, flex-start, center);
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        box-shadow: $shadow-sm;
+    }
+}
+
+// Botones para redes sociales
+.social {
+    @include flex(row, flex-start, center);
+    gap: $spacing-md;
+
+    a {
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $radius-md;
+        background: $primary-color;
+        color: white;
+    }
+}

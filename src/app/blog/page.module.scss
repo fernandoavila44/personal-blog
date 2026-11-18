@@ -34,3 +34,45 @@
 }
 
 /* TODO para estudiantes: Agregar estilos para filtros y paginación */
+
+// Filtros por categoría
+.filters {
+    @include flex(row, center, center);
+    gap: $spacing-sm;
+    margin-bottom: $spacing-2xl;
+
+    button {
+        padding: $spacing-sm $spacing-lg;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        background: $background-light;
+        color: $text-secondary;
+        cursor: pointer;
+    }
+
+    .active {
+        background: $primary-color;
+        color: white;
+    }
+}
+
+// Paginación
+.pagination {
+    @include flex(row, center, center);
+    gap: $spacing-lg;
+    margin-top: $spacing-2xl;
+
+    button {
+        padding: $spacing-sm $spacing-lg;
+        border: none;
+        border-radius: $radius-md;
+        background: $primary-color;
+        color: white;
+        cursor: pointer;
+
+        &:disabled {
+            background: $border-color;
+            color: $text-light;
+        }
+    }
+}

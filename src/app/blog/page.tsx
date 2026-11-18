@@ -1,14 +1,32 @@
+'use client';
+
+import { useState } from 'react';
 import BlogCard from '@/components/BlogCard';
 import postsData from '@/data/posts.json';
 import styles from './page.module.scss';
 
 export default function BlogPage() {
-    // TODO para estudiantes: Implementar filtrado por categoría
-    // Pista: Usar useState para manejar la categoría seleccionada
-    // y filtrar los posts basándose en esa categoría
+    // Filtrado por categoría
+    const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
 
-    // TODO para estudiantes: Implementar paginación
-    // Pista: Mostrar solo 6 posts por página y agregar botones de navegación
+    const filteredPosts = selectedCategory === 'Todos'
+        ? postsData
+        : postsData.filter(post => post.category === selectedCategory);
+
+    // Paginación
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 6;
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+    // Al cambiar de categoría se vuelve a la página 1
+    const changeCategory = (category: string) => {
+        setSelectedCategory(category);
+        setCurrentPage(1);
+    };
 
     return (
         <div className={styles.blogPage}>
@@ -18,18 +36,41 @@ export default function BlogPage() {
                     <p>Artículos sobre desarrollo web, Next.js, React y más</p>
                 </header>
 
-                {/* TODO para estudiantes: Agregar filtros por categoría aquí */}
-                {/* Ejemplo de estructura:
-        <div className={styles.filters}>
-          <button>Todos</button>
-          <button>Tutorial</button>
-          <button>Conceptos</button>
-          <button>React</button>
-        </div>
-        */}
+                <div className={styles.filters}>
+                    <button
+                        onClick={() => changeCategory('Todos')}
+                        className={selectedCategory === 'Todos' ? styles.active : ''}
+                    >
+                        Todos
+                    </button>
+                    <button
+                        onClick={() => changeCategory('Tutorial')}
+                        className={selectedCategory === 'Tutorial' ? styles.active : ''}
+                    >
+                        Tutorial
+                    </button>
+                    <button
+                        onClick={() => changeCategory('Conceptos')}
+                        className={selectedCategory === 'Conceptos' ? styles.active : ''}
+                    >
+                        Conceptos
+                    </button>
+                    <button
+                        onClick={() => changeCategory('React')}
+                        className={selectedCategory === 'React' ? styles.active : ''}
+                    >
+                        React
+                    </button>
+                    <button
+                        onClick={() => changeCategory('Performance')}
+                        className={selectedCategory === 'Performance' ? styles.active : ''}
+                    >
+                        Performance
+                    </button>
+                </div>
 
                 <div className={styles.postsGrid}>
-                    {postsData.map((post) => (
+                    {currentPosts.map((post) => (
                         <BlogCard
                             key={post.id}
                             title={post.title}
@@ -42,35 +83,22 @@ export default function BlogPage() {
                     ))}
                 </div>
 
-                {/* TODO para estudiantes: Agregar paginación aquí */}
-                {/* Ejemplo de estructura:
-        <div className={styles.pagination}>
-          <button>← Anterior</button>
-          <span>Página 1 de 2</span>
-          <button>Siguiente →</button>
-        </div>
-        */}
+                <div className={styles.pagination}>
+                    <button
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        ← Anterior
+                    </button>
+                    <span>Página {currentPage} de {totalPages}</span>
+                    <button
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Siguiente →
+                    </button>
+                </div>
             </div>
         </div>
     );
 }
-
-/* EJERCICIO para estudiantes:
- * 
- * 1. FILTRADO POR CATEGORÍA (Client Component)
- *    - Convertir este componente a Client Component ('use client')
- *    - Usar useState para manejar la categoría seleccionada
- *    - Filtrar postsData basándose en la categoría
- *    - Agregar botones de filtro con estilos activos
- * 
- * 2. PAGINACIÓN
- *    - Implementar lógica de paginación (6 posts por página)
- *    - Usar useState para el número de página actual
- *    - Calcular el total de páginas
- *    - Mostrar solo los posts de la página actual
- * 
- * 3. BÚSQUEDA (Opcional - Avanzado)
- *    - Agregar un input de búsqueda
- *    - Filtrar posts por título o excerpt
- *    - Combinar búsqueda con filtros de categoría
- */

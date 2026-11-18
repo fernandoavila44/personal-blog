@@ -75,6 +75,21 @@ body {
     }
 }
 
+/* Tema oscuro: se activa cuando ThemeToggle agrega la clase 'dark' al body */
+body.dark {
+    background-color: $dark-bg;
+    color: $dark-text;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+    color: $dark-text;
+}
+
 /* TODO para estudiantes: 
  * 1. Agregar estilos para tema oscuro usando CSS variables
  * 2. Agregar más clases de utilidad (text-center, mt-*, mb-*, etc.)
